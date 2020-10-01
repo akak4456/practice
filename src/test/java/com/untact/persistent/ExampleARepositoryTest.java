@@ -41,9 +41,13 @@ public class ExampleARepositoryTest {
 		repo.save(aspecial1_2);
 		repo.save(aspecial2_1);
 		repo.save(aspecial2_2);
-		List<ExampleA> generalList = repo.getAllThing();
+		List<?> generalList = repo.getAllThing(ExampleA.class);
 		assertEquals(generalList.size(),4);
-		List<ExampleASpecial1> special1List = repo.getSpeical1();
+		List<? extends ExampleA> special1List = repo.getAllThing(ExampleASpecial1.class);
 		assertEquals(special1List.size(),2);
+		if(special1List.get(0) instanceof ExampleASpecial1) {
+			ExampleASpecial1 example = (ExampleASpecial1) special1List.get(0);
+			System.out.println(example.getSpecial1());
+		}
 	}
 }

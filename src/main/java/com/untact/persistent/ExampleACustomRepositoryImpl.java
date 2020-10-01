@@ -10,25 +10,21 @@ import com.untact.domain.QExampleA;
 import com.untact.domain.QExampleASpecial1;
 
 public class ExampleACustomRepositoryImpl extends QuerydslRepositorySupport implements ExampleACustomRepository {
-	private QExampleA exampleA = QExampleA.exampleA;
-	
-	private QExampleASpecial1 exampleASpecial1 = QExampleASpecial1.exampleASpecial1;
 	
 	public ExampleACustomRepositoryImpl() {
 		super(ExampleA.class);
 		// TODO Auto-generated constructor stub
 	}
-
 	@Override
-	public List<ExampleA> getAllThing() {
+	public List<? extends ExampleA> getAllThing(Class<? extends ExampleA> clazz) {
 		// TODO Auto-generated method stub
-		return from(exampleA).fetch();
+		if(clazz == ExampleA.class) {
+			QExampleA exampleA = QExampleA.exampleA;
+			return from(exampleA).fetch();
+		}else if(clazz == ExampleASpecial1.class) {
+			QExampleASpecial1 exampleA = QExampleASpecial1.exampleASpecial1;
+			return from(exampleA).fetch();
+		}
+		return null;
 	}
-
-	@Override
-	public List<ExampleASpecial1> getSpeical1() {
-		// TODO Auto-generated method stub
-		return from(exampleASpecial1).fetch();
-	}
-
 }
