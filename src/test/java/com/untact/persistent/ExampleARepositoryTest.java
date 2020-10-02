@@ -18,12 +18,15 @@ import com.untact.domain.ExampleA;
 import com.untact.domain.ExampleASpecial1;
 import com.untact.domain.ExampleASpecial2;
 
+import lombok.extern.java.Log;
+
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = UntactenglishstudyApplication.class)
 @Transactional
 @Commit
+@Log
 public class ExampleARepositoryTest {
 	@Autowired
 	private ExampleARepository repo;
@@ -43,11 +46,19 @@ public class ExampleARepositoryTest {
 		repo.save(aspecial2_2);
 		List<?> generalList = repo.getAllThing(ExampleA.class);
 		assertEquals(generalList.size(),4);
-		List<? extends ExampleA> special1List = repo.getAllThing(ExampleASpecial1.class);
+		@SuppressWarnings("unchecked")
+		/*
+		 이렇게 막은 이유 주석으로 남기기
+		 getAllThing에 ExampleASpecial1.class를 넘겼다.
+		 그러면 이게 fetch를 하는데 이것은 List<ExampleASpecial1>과 같다.
+		 그래서 아래와 같이 캐스트를 하였다.
+		 */
+		List<ExampleASpecial1> special1List = (List<ExampleASpecial1>) repo.getAllThing(ExampleASpecial1.class);
 		assertEquals(special1List.size(),2);
+		log.info(special1List.get(0).getCommon());
 		if(special1List.get(0) instanceof ExampleASpecial1) {
 			ExampleASpecial1 example = (ExampleASpecial1) special1List.get(0);
-			System.out.println(example.getSpecial1());
+			log.info(example.getSpecial1());
 		}
 	}
 }
