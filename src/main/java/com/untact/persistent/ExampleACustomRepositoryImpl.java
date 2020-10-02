@@ -11,10 +11,8 @@ import com.untact.domain.QExampleA;
 import com.untact.domain.QExampleASpecial1;
 
 public class ExampleACustomRepositoryImpl extends QuerydslRepositorySupport implements ExampleACustomRepository {
-	
 	public ExampleACustomRepositoryImpl() {
 		super(ExampleA.class);
-		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public List<? extends ExampleA> getAllThing(Class<? extends ExampleA> clazz) {
