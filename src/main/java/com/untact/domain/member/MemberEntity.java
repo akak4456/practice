@@ -42,10 +42,6 @@ public class MemberEntity {
 	private Role role;//사용자인가 관리자인가?
 	
 	
-	@Enumerated(EnumType.STRING)
-	@NotNull
-	private GroupPosition groupPosition;//그룹에서 어떤 직위를 차지하는가?
-	
 	private Long recentQuizScore;//최근 퀴즈 성적
 	
 	private Long recentRankScore;//최근 랭킹 성적
