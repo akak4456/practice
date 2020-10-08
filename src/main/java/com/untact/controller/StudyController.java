@@ -24,7 +24,7 @@ public class StudyController {
 	private GroupService groupService;
 	@GetMapping("/")
 	public ResponseEntity<PageMaker<GroupEntity>> getAllStudy(PageVO pageVO){
-		return new ResponseEntity<>(new PageMaker<GroupEntity>(groupService.getListWithPaging(pageVO)),HttpStatus.OK);
+		return new ResponseEntity<>(new PageMaker<GroupEntity>(groupService.getListWithPaging(pageVO),pageVO),HttpStatus.OK);
 	}
 	@PostMapping("/")
 	public ResponseEntity<String> addStudy(@RequestBody GroupEntity group){

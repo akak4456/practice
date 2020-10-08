@@ -23,7 +23,9 @@ public class PageMaker <T> {
 	
 	private boolean accessible;
 	
-	public PageMaker(Page<T> result) {
+	private PageVO pageVO;
+	
+	public PageMaker(Page<T> result,PageVO pageVO) {
 		this.result = result;
 		this.currentPage = result.getPageable();
 		this.currentPageNumber = currentPage.getPageNumber() + 1;
@@ -32,13 +34,14 @@ public class PageMaker <T> {
 		this.prevPage = null;
 		this.nextPage = null;
 		this.accessible = currentPageNumber <= totalPages;
+		this.pageVO = pageVO;
 		calcPage();
 	}
 	private void calcPage() {
-		int rangeNum = (this.currentPageNumber % PageVO.DEFAULT_PAGE_SIZE == 0?this.currentPageNumber/PageVO.DEFAULT_PAGE_SIZE-1
-							:this.currentPageNumber/PageVO.DEFAULT_PAGE_SIZE);
-		int startNum = rangeNum * PageVO.DEFAULT_PAGE_SIZE + 1;
-		int endNum = (rangeNum+1)*PageVO.DEFAULT_PAGE_SIZE;
+		int rangeNum = (this.currentPageNumber % pageVO.getSize() == 0?this.currentPageNumber/pageVO.getSize()-1
+							:this.currentPageNumber/pageVO.getSize());
+		int startNum = rangeNum * pageVO.getSize() + 1;
+		int endNum = (rangeNum+1)*pageVO.getSize();
 		Pageable startPage = this.currentPage;
 		for(int i = startNum; i < this.currentPageNumber;i++) {
 			startPage = startPage.previousOrFirst();

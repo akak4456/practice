@@ -19,13 +19,12 @@ public class GroupServiceImplTest {
 	@Mock
 	private GroupEntityRepository groupRepo;
 	
-	@InjectMocks
 	private GroupServiceImpl groupService;
 	
 	@Before
 	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
-		//groupService = new GroupServiceImpl(groupRepo);
+		groupService = new GroupServiceImpl(groupRepo);
 	}
 	
 	@Test

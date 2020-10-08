@@ -24,7 +24,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
-@DiscriminatorColumn(name="DTYPE")
 @SequenceGenerator(name="m_seq", initialValue=1, allocationSize=1)
 @EqualsAndHashCode(of="mno")
 public class MemberEntity {
