@@ -14,10 +14,12 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.untact.domain.group.GroupEntity;
+import com.untact.domain.groupinclude.GroupInclude;
 import com.untact.domain.groupwaiting.GroupWaiting;
 import com.untact.domain.groupwaiting.GroupWaitingStatus;
 import com.untact.domain.member.MemberEntity;
 import com.untact.persistent.group.GroupEntityRepository;
+import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.groupwaiting.GroupWaitingRepository;
 import com.untact.persistent.member.MemberEntityRepository;
 import com.untact.vo.GroupWaitingVO;
@@ -30,13 +32,15 @@ public class GroupWaitingServiceImplTest {
 	private GroupEntityRepository groupRepo;
 	@Mock
 	private GroupWaitingRepository groupWaitingRepo;
+	@Mock
+	private GroupIncludeRepository groupIncludeRepo;
 	
 	private GroupWaitingServiceImpl groupWaitingService;
 	
 	@Before
 	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
-		groupWaitingService = new GroupWaitingServiceImpl(memberRepo,groupRepo,groupWaitingRepo);
+		groupWaitingService = new GroupWaitingServiceImpl(memberRepo,groupRepo,groupWaitingRepo,groupIncludeRepo);
 	}
 	
 	@Test
@@ -55,8 +59,14 @@ public class GroupWaitingServiceImplTest {
 	
 	@Test
 	public void acceptJoinTest() {
+		GroupEntity groupEntity = GroupEntity.builder().title("title").build();
+		MemberEntity memberEntity = MemberEntity.builder().email("email").password("password").build();
+		Optional<GroupWaiting> groupWaitingEntity = Optional.of(GroupWaiting.builder().gwno(1L).group(groupEntity).member(memberEntity).build());
+		when(groupWaitingRepo.findById(1L)).thenReturn(groupWaitingEntity);
 		groupWaitingService.acceptJoin(1L);
 		verify(groupWaitingRepo,times(1)).changeStatus(GroupWaitingStatus.ACCEPT, 1L);
+		GroupInclude groupIncludeEntity = GroupInclude.builder().group(groupEntity).member(memberEntity).build();
+		verify(groupIncludeRepo,times(1)).save(groupIncludeEntity);
 	}
 	
 	@Test

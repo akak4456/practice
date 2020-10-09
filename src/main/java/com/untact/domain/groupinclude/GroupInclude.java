@@ -1,8 +1,6 @@
-package com.untact.domain.groupwaiting;
+package com.untact.domain.groupinclude;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,8 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
-import com.sun.istack.NotNull;
 import com.untact.domain.group.GroupEntity;
+import com.untact.domain.groupwaiting.GroupWaiting;
+import com.untact.domain.groupwaiting.GroupWaitingStatus;
 import com.untact.domain.member.MemberEntity;
 
 import lombok.EqualsAndHashCode;
@@ -23,27 +22,23 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
-@SequenceGenerator(name="gw_seq", initialValue=1, allocationSize=1)
-@EqualsAndHashCode(of="gwno")
-public class GroupWaiting {
+@SequenceGenerator(name="gi_seq", initialValue=1, allocationSize=1)
+@EqualsAndHashCode(of="gino")
+public class GroupInclude {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO,generator="gw_seq")
-	private Long gwno;//그룹 웨이팅 번호
-	
-	@Enumerated(EnumType.ORDINAL)
-	@NotNull
-	private GroupWaitingStatus status;//그룹 웨이팅 상태
+	@GeneratedValue(strategy=GenerationType.AUTO,generator="gi_seq")
+	private Long gino;//그룹 포함 번호
 	
 	@ManyToOne
 	@JoinColumn
-	private GroupEntity group;//그룹 웨이팅과 그룹과의 관계
+	private GroupEntity group;//그룹 포함과 그룹과의 관계
 	public void setGroup(GroupEntity group) {
 		this.group = group;
 	}
 	
 	@ManyToOne
 	@JoinColumn
-	private MemberEntity member;//사용자와 그룹 웨이팅과의 관계
+	private MemberEntity member;//사용자와 그룹 포함과의 관계
 	public void setMember(MemberEntity member) {
 		this.member = member;
 	}

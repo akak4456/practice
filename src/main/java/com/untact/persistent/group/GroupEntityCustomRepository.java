@@ -7,4 +7,6 @@ import com.untact.domain.group.GroupEntity;
 
 public interface GroupEntityCustomRepository {
 	public Page<GroupEntity> getPage(Pageable pageable);
+	
+	public Page<GroupEntity> getPageWithUserNumber(Pageable pageable, Long mno);
 }

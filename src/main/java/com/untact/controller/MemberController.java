@@ -16,17 +16,16 @@ import com.untact.vo.MemberVO;
 import lombok.extern.java.Log;
 
 @RestController
-@RequestMapping("/member/**")
 @Log
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-	@PostMapping("/sign_up")
+	@PostMapping("/member/sign_up")
 	public ResponseEntity<String> addMember(@RequestBody MemberVO memberVO){
 		memberService.addMember(memberVO);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
-	@PostMapping("/login")
+	@PostMapping("/member/login")
 	public ResponseEntity<MemberEntity> login(@RequestBody MemberVO memberVO){
 		try {
 			MemberEntity entity = memberService.login(memberVO);

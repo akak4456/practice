@@ -16,25 +16,24 @@ import com.untact.vo.GroupWaitingVO;
 import lombok.extern.java.Log;
 
 @RestController
-@RequestMapping("/waiting/**")
 @Log
 public class GroupWaitingController {
 	@Autowired
 	private GroupWaitingService groupWaitingService;
 	
-	@PostMapping("/")
+	@PostMapping("/waiting")
 	public ResponseEntity<String> requestJoin(@RequestBody GroupWaitingVO groupWaitingVO	){
 		groupWaitingService.requestJoin(groupWaitingVO);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
 	
-	@PutMapping("/{gwno}/accept")
+	@PutMapping("/waiting/{gwno}/accept")
 	public ResponseEntity<String> acceptJoin(@PathVariable("gwno")Long gwno){
 		groupWaitingService.acceptJoin(gwno);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
 	
-	@PutMapping("/{gwno}/reject")
+	@PutMapping("/waiting/{gwno}/reject")
 	public ResponseEntity<String> rejectJoin(@PathVariable("gwno")Long gwno){
 		groupWaitingService.rejectJoin(gwno);
 		return new ResponseEntity<>("success",HttpStatus.OK);

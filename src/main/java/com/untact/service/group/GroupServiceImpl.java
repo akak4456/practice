@@ -30,4 +30,10 @@ public class GroupServiceImpl implements GroupService {
 		repo.save(group);
 	}
 
+	@Override
+	public Page<GroupEntity> getListWithPagingAndUserNumber(PageVO pageVO, Long mno) {
+		// TODO Auto-generated method stub
+		return repo.getPageWithUserNumber(pageVO.makePageable(0, "gno"), mno);
+	}
+
 }

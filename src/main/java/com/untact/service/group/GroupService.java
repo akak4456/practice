@@ -7,5 +7,6 @@ import com.untact.vo.PageVO;
 
 public interface GroupService {
 	public Page<GroupEntity> getListWithPaging(PageVO pageVO);
+	public Page<GroupEntity> getListWithPagingAndUserNumber(PageVO pageVO,Long mno);
 	public void addGroup(GroupEntity group);
 }

@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.untact.domain.group.GroupEntity;
+import com.untact.domain.groupinclude.GroupInclude;
 import com.untact.domain.groupwaiting.GroupWaiting;
 import com.untact.domain.groupwaiting.GroupWaitingStatus;
 import com.untact.domain.member.MemberEntity;
 import com.untact.persistent.group.GroupEntityRepository;
+import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.groupwaiting.GroupWaitingRepository;
 import com.untact.persistent.member.MemberEntityRepository;
 import com.untact.vo.GroupWaitingVO;
@@ -26,6 +28,8 @@ public class GroupWaitingServiceImpl implements GroupWaitingService {
 	private GroupEntityRepository groupRepo;
 	@Autowired
 	private GroupWaitingRepository groupWaitingRepo;
+	@Autowired
+	private GroupIncludeRepository groupIncludeRepo;
 	@Override
 	public void requestJoin(GroupWaitingVO groupWaitingVO) {
 		Optional<GroupEntity> groupEntity = groupRepo.findById(groupWaitingVO.getGno());
@@ -37,6 +41,9 @@ public class GroupWaitingServiceImpl implements GroupWaitingService {
 	@Override
 	public void acceptJoin(Long gwno) {
 		groupWaitingRepo.changeStatus(GroupWaitingStatus.ACCEPT, gwno);
+		GroupWaiting waitingEntity = groupWaitingRepo.findById(gwno).get();
+		GroupInclude includeEntity = GroupInclude.builder().group(waitingEntity.getGroup()).member(waitingEntity.getMember()).build();
+		groupIncludeRepo.save(includeEntity);
 	}
 
 	@Override
