@@ -1,4 +1,6 @@
-package com.untact.persistent.incorrectanswernote;
+package com.untact.persistent.englishspelling;
+
+import javax.transaction.Transactional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,11 +16,12 @@ import lombok.extern.java.Log;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = UntactenglishstudyApplication.class)
-@Log
+@Transactional
 @Commit
-public class IncorrectAnswerNoteRepositoryTest {
+@Log
+public class EnglishSpellingRepositoryTest {
 	@Autowired
-	private IncorrectAnswerNoteRepository repo;
+	private EnglishSpellingRepository repo;
 	
 	@Before
 	public void setUp() {

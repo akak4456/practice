@@ -14,6 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.untact.domain.board.Board;
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
 
@@ -55,5 +56,12 @@ public class Reply {
 	private MemberEntity member;//이 답글은 어떤 사용자가 썻는가?
 	public void setMember(MemberEntity member) {
 		this.member = member;	
+	}
+	
+	@ManyToOne
+	@JoinColumn
+	private Board board;//어느 board에 속하는가?
+	public void setBoard(Board board) {
+		this.board = board;
 	}
 }

@@ -1,4 +1,6 @@
-package com.untact.persistent.incorrectanswernote;
+package com.untact.persistent.wordincorrectanswernote;
+
+import javax.transaction.Transactional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,16 +11,18 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.untact.demo.UntactenglishstudyApplication;
+import com.untact.persistent.wordincorrectanswernote.WordIncorrectAnswerNoteRepository;
 
 import lombok.extern.java.Log;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = UntactenglishstudyApplication.class)
-@Log
+@Transactional
 @Commit
-public class IncorrectAnswerNoteRepositoryTest {
+@Log
+public class WordIncorrectAnswerNoteRepositoryTest {
 	@Autowired
-	private IncorrectAnswerNoteRepository repo;
+	private WordIncorrectAnswerNoteRepository repo;
 	
 	@Before
 	public void setUp() {

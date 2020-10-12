@@ -1,4 +1,4 @@
-package com.untact.persistent.vocabulary;
+package com.untact.persistent.englishmeaning;
 
 import javax.transaction.Transactional;
 
@@ -19,9 +19,9 @@ import lombok.extern.java.Log;
 @Transactional
 @Commit
 @Log
-public class BasicVocabularyRepositoryTest {
+public class EnglishMeaningRepositoryTest {
 	@Autowired
-	private BasicVocabularyRepository repo;
+	private EnglishMeaningRepository repo;
 	
 	@Before
 	public void setUp() {

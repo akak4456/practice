@@ -39,16 +39,4 @@ public class MemberEntity {
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	private Role role;//사용자인가 관리자인가?
-	
-	
-	private Long recentQuizScore;//최근 퀴즈 성적
-	
-	private Long recentRankScore;//최근 랭킹 성적
-
-	@ManyToOne
-	@JoinColumn
-	private GroupEntity group;//이 사용자는 어느 그룹에 속하는가?
-	public void setGroup(GroupEntity group) {
-		this.group = group;
-	}
 }

@@ -14,6 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.untact.domain.englishspelling.EnglishSpelling;
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
 
@@ -56,5 +57,12 @@ public class Vocabulary {
 	private MemberEntity member;//이 단어장은 누가 썻는가?
 	public void setMember(MemberEntity member) {
 		this.member = member;
+	}
+	
+	@ManyToOne
+	@JoinColumn
+	private EnglishSpelling englishSpelling;
+	public void setEnglishSpelling(EnglishSpelling englishSpelling) {
+		this.englishSpelling = englishSpelling;
 	}
 }
