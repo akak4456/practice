@@ -65,4 +65,10 @@ public class Board {
 	public void setMember(MemberEntity member) {
 		this.member = member;	
 	}
+	
+	public Board modifyThisToTargetBoard(Board targetBoard) {
+		this.title = targetBoard.title;
+		this.content = targetBoard.content;
+		return this;
+	}
 }

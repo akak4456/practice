@@ -1,19 +1,14 @@
 package com.untact.persistent.reply;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -25,7 +20,6 @@ import com.untact.persistent.board.BoardRepository;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.groupwaiting.GroupWaitingRepository;
-import com.untact.vo.PageVO;
 
 import lombok.extern.java.Log;
 
@@ -34,7 +28,7 @@ import lombok.extern.java.Log;
 @Transactional
 @Commit
 @Log
-public class ReplyRepositoryTest {
+public class GenerateReplyData {
 	@Autowired
 	private GroupEntityRepository groupRepo;
 	
@@ -57,8 +51,8 @@ public class ReplyRepositoryTest {
 	private static final int MAX_ENTITY_COUNT = 105;
 	private static final int EXPECTED_PAGE_COUNT = 11;
 	
-	@Before
-	public void setUp() {
+	@Test
+	public void generateReplyData() {
 		repo.deleteAllInBatch();
 		
 		boardRepo.deleteAllInBatch();
@@ -72,47 +66,12 @@ public class ReplyRepositoryTest {
 		
 		board1 = new Board().builder().title("title").content("content").build();
 		boardRepo.save(board1);
-	}
-	
-	
-	@Test
-	public void initTest() {
 		
-	}
-	@Test
-	public void getPageWithBoardNumberTest() {
-		List<Reply> list = generateReplyList(group1,board1);
-		specificPageTest(list,board1,1,10);
-		specificPageTest(list,board1,11,5);
-	}
-	
-	private List<Reply> generateReplyList(GroupEntity group,Board board){
 		List<Reply> list = new ArrayList<>();
 		for(int i=0;i<MAX_ENTITY_COUNT;i++) {
-			Reply entity = generateReply("message"+i,group,board);
+			Reply entity = new Reply().builder().message("message"+i).group(group1).board(board1).build();
 			list.add(entity);
 		}
 		repo.saveAll(list);
-		return list;
-	}
-	private Reply generateReply(String message,GroupEntity group,Board board) {
-		return new Reply().builder().message(message).group(group).board(board).build();
-	}
-	
-	private void specificPageTest(List<Reply> list,Board board,int pageNum,int expectedPageSize) {
-		PageVO pageVO = new PageVO(pageNum);
-		Page<Reply> page = repo.getPageWithBoardNumber(pageVO.makePageable(0, "rno"),board.getBno());
-		List<Reply> result = page.getContent();
-		assertEquals(page.getTotalElements(),MAX_ENTITY_COUNT);
-		assertEquals(page.getTotalPages(),EXPECTED_PAGE_COUNT);
-		assertEquals(result.size(),expectedPageSize);
-		assertEquals(page.getNumber(),pageNum-1);
-		int resultIdx = 0;
-		for(int i = list.size()-1-pageVO.getSize()*(pageNum-1);i>Math.max(-1,list.size()-1-pageVO.getSize()*pageNum);i--) {
-			//list의 첫번째 원소는 가장 처음에, list의 마지막 원소는 가장 나중에 들어옴
-			//내림차순으로 정렬되었는지 확인하기 위함
-			assertTrue(result.get(resultIdx).getMessage().equals(list.get(i).getMessage()));
-			resultIdx++;
-		}
 	}
 }

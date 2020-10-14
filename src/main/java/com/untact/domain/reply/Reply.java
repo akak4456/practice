@@ -64,4 +64,9 @@ public class Reply {
 	public void setBoard(Board board) {
 		this.board = board;
 	}
+	
+	public Reply modifyThisToTargetReply(Reply targetReply) {
+		this.message=targetReply.message;
+		return this;
+	}
 }
