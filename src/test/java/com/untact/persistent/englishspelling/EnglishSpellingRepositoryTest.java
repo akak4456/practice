@@ -1,5 +1,10 @@
 package com.untact.persistent.englishspelling;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.junit.Before;
@@ -11,6 +16,7 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.untact.demo.UntactenglishstudyApplication;
+import com.untact.domain.englishspelling.EnglishSpelling;
 
 import lombok.extern.java.Log;
 
@@ -26,10 +32,32 @@ public class EnglishSpellingRepositoryTest {
 	@Before
 	public void setUp() {
 		repo.deleteAllInBatch();
+		List<EnglishSpelling> spellingList = new ArrayList<>();
+		EnglishSpelling entity1 = new EnglishSpelling().builder().spelling("a").build();
+		spellingList.add(entity1);
+		EnglishSpelling entity2 = new EnglishSpelling().builder().spelling("b").build();
+		spellingList.add(entity2);
+		EnglishSpelling entity3 = new EnglishSpelling().builder().spelling("c").build();
+		spellingList.add(entity3);
+		EnglishSpelling entity4 = new EnglishSpelling().builder().spelling("d").build();
+		spellingList.add(entity4);
+		EnglishSpelling entity5 = new EnglishSpelling().builder().spelling("e").build();
+		spellingList.add(entity5);
+		repo.saveAll(spellingList);
 	}
 	
 	@Test
 	public void initTest() {
-		
+	}
+	@Test
+	public void EnglishSpellingListNotExistInDBTest() {
+		List<String> targetSpellings = new ArrayList<>();
+		targetSpellings.add("a");
+		targetSpellings.add("b");
+		targetSpellings.add("f");
+		List<EnglishSpelling> result = repo.EnglishSpellingListAlreadyExistInDBAmongTargetSpellingList(targetSpellings);
+		assertEquals(result.get(0).getSpelling(),"a");
+		assertEquals(result.get(1).getSpelling(),"b");
+		assertEquals(result.size(),2);
 	}
 }
