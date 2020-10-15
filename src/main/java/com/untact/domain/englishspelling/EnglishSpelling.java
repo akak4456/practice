@@ -15,12 +15,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
-@EqualsAndHashCode(of="esno")
+@EqualsAndHashCode(of="spelling")
 public class EnglishSpelling {
 	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long esno;//영어 철자 번호
-	
-	@Column(name="spelling",unique=true)
 	private String spelling;//영어 철자
 }
