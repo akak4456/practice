@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.untact.domain.board.Board;
+import com.untact.domain.member.MemberEntity;
 import com.untact.persistent.board.BoardRepository;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.vo.PageVO;
@@ -32,8 +33,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void addBoard(Board board,Long gno) {
+	public void addBoard(Board board,Long gno,MemberEntity member) {
 		board.setGroup(groupEntityRepo.findById(gno).get());
+		board.setMember(member);
 		boardRepo.save(board);
 	}
 

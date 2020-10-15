@@ -53,14 +53,14 @@ public class Board {
 	private LocalDateTime updatedate;//게시판 수정 시간
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="gno")
 	private GroupEntity group;//어떤 그룹이 이 글을 썻는지 나타냄
 	public void setGroup(GroupEntity group) {
 		this.group = group;
 	}
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="mno")
 	private MemberEntity member;//어떤 사용자가 이 글을 썻는지 나타냄
 	public void setMember(MemberEntity member) {
 		this.member = member;	

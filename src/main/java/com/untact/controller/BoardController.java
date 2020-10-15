@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.untact.domain.board.Board;
+import com.untact.domain.member.MemberEntity;
+import com.untact.security.AuthenticationFacade;
 import com.untact.service.board.BoardService;
 import com.untact.vo.PageMaker;
 import com.untact.vo.PageVO;
@@ -32,17 +34,26 @@ public class BoardController {
 	
 	@PostMapping("/board/{groupid}")
 	public ResponseEntity<String> addBoard(@RequestBody Board board,@PathVariable("groupid")Long gno){
-		boardService.addBoard(board,gno);
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		boardService.addBoard(board,gno,member);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
 	
-	@PutMapping("/board/{boardid}")
-	public ResponseEntity<String> modifyBoard(@RequestBody Board targetBoard,@PathVariable("boardid")Long bno){
+	@PutMapping("/board/{boardid}/{memberid}")
+	public ResponseEntity<String> modifyBoard(@RequestBody Board targetBoard,@PathVariable("boardid")Long bno,@PathVariable("memberid")Long mno){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		if(member.getMno() != mno) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
 		boardService.modifyBoard(targetBoard, bno);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
-	@DeleteMapping("/board/{boardid}")
-	public ResponseEntity<String> deleteBoard(@PathVariable("boardid")Long bno){
+	@DeleteMapping("/board/{boardid}/{memberid}")
+	public ResponseEntity<String> deleteBoard(@PathVariable("boardid")Long bno,@PathVariable("memberid")Long mno){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		if(member.getMno() != mno) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
 		boardService.deleteBoard(bno);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}

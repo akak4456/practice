@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.untact.domain.member.MemberEntity;
 import com.untact.domain.reply.Reply;
 import com.untact.persistent.board.BoardRepository;
 import com.untact.persistent.group.GroupEntityRepository;
@@ -32,9 +33,10 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public void addReply(Reply reply,Long gno,Long bno) {
+	public void addReply(Reply reply,Long gno,Long bno,MemberEntity member) {
 		reply.setGroup(groupEntityRepo.findById(gno).get());
 		reply.setBoard(boardRepo.findById(bno).get());
+		reply.setMember(member);
 		replyRepo.save(reply);
 	}
 

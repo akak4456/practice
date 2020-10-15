@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.untact.domain.member.MemberEntity;
 import com.untact.domain.reply.Reply;
+import com.untact.security.AuthenticationFacade;
 import com.untact.service.reply.ReplyService;
 import com.untact.vo.PageMaker;
 import com.untact.vo.PageVO;
@@ -33,16 +35,25 @@ public class ReplyController {
 	}
 	@PostMapping("/reply/{groupid}/{boardid}")
 	public ResponseEntity<String> addReply(@RequestBody Reply reply,@PathVariable("groupid")Long gno,@PathVariable("boardid")Long bno){
-		replyService.addReply(reply, gno, bno);
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		replyService.addReply(reply, gno, bno,member);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
-	@PutMapping("/reply/{replyid}")
-	public ResponseEntity<String> modifyReply(@RequestBody Reply targetReply,@PathVariable("replyid")Long rno){
+	@PutMapping("/reply/{replyid}/{memberid}")
+	public ResponseEntity<String> modifyReply(@RequestBody Reply targetReply,@PathVariable("replyid")Long rno,@PathVariable("memberid")Long mno){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		if(member.getMno() != mno) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
 		replyService.modifyReply(targetReply, rno);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
-	@DeleteMapping("/reply/{replyid}")
-	public ResponseEntity<String> deleteReply(@PathVariable("replyid")Long rno){
+	@DeleteMapping("/reply/{replyid}/{memberid}")
+	public ResponseEntity<String> deleteReply(@PathVariable("replyid")Long rno,@PathVariable("memberid")Long mno){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		if(member.getMno() != mno) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
 		replyService.deleteReply(rno);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}

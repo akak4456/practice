@@ -34,10 +34,6 @@ public class Vocabulary {
 	@GeneratedValue(strategy=GenerationType.AUTO,generator="v_seq")
 	private Long vno;//단어장 번호
 	
-	private String spelling;//단어장 스펠링
-	
-	private String meaning;//단어장 뜻
-	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@CreationTimestamp
 	private LocalDateTime regdate;//단어장 생성 시간
