@@ -23,6 +23,7 @@ import com.untact.domain.group.GroupEntity;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.groupwaiting.GroupWaitingRepository;
+import com.untact.persistent.reply.ReplyRepository;
 import com.untact.vo.PageVO;
 
 import lombok.extern.java.Log;
@@ -42,6 +43,8 @@ public class BoardRepositoryTest {
 	@Autowired
 	private GroupIncludeRepository groupIncludeRepo;
 	
+	@Autowired ReplyRepository replyRepo;
+	
 	@Autowired
 	private BoardRepository repo;
 	
@@ -52,6 +55,8 @@ public class BoardRepositoryTest {
 	
 	@Before
 	public void setUp() {
+		replyRepo.deleteAllInBatch();
+		
 		repo.deleteAllInBatch();
 		
 		groupWaitingRepo.deleteAllInBatch();

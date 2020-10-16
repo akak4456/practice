@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.untact.demo.UntactenglishstudyApplication;
 import com.untact.domain.englishspelling.EnglishSpelling;
+import com.untact.persistent.englishdictionary.EnglishDictionaryRepository;
 
 import lombok.extern.java.Log;
 
@@ -27,10 +28,14 @@ import lombok.extern.java.Log;
 @Log
 public class EnglishSpellingRepositoryTest {
 	@Autowired
+	private EnglishDictionaryRepository englishDictionaryRepo;
+	
+	@Autowired
 	private EnglishSpellingRepository repo;
 	
 	@Before
 	public void setUp() {
+		englishDictionaryRepo.deleteAllInBatch();
 		repo.deleteAllInBatch();
 		List<EnglishSpelling> spellingList = new ArrayList<>();
 		EnglishSpelling entity1 = new EnglishSpelling().builder().spelling("a").build();

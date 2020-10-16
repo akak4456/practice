@@ -31,7 +31,7 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(of="vno")
 public class Vocabulary {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO,generator="v_seq")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="v_seq")
 	private Long vno;//단어장 번호
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

@@ -11,6 +11,7 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.untact.demo.UntactenglishstudyApplication;
+import com.untact.persistent.groupwaiting.GroupWaitingRepository;
 
 import lombok.extern.java.Log;
 
@@ -21,10 +22,14 @@ import lombok.extern.java.Log;
 @Log
 public class MemberEntityRepositoryTest {
 	@Autowired
+	private GroupWaitingRepository groupWaitingRepo;
+	
+	@Autowired
 	private MemberEntityRepository repo;
 	
 	@Before
 	public void setUp() {
+		groupWaitingRepo.deleteAllInBatch();
 		repo.deleteAllInBatch();
 	}
 	
