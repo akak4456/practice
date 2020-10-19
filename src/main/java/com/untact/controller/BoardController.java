@@ -32,6 +32,11 @@ public class BoardController {
 		return new ResponseEntity<>(new PageMaker<Board>(boardService.getListWithPagingAndGroupNumber(pageVO, gno),pageVO),HttpStatus.OK);
 	}
 	
+	@GetMapping("/board/{groupid}/{boardid}")
+	public ResponseEntity<Board> getBoard(@PathVariable("groupid")Long gno,@PathVariable("boardid")Long bno){
+		return new ResponseEntity<>(boardService.getOne(bno),HttpStatus.OK);
+	}
+	
 	@PostMapping("/board/{groupid}")
 	public ResponseEntity<String> addBoard(@RequestBody Board board,@PathVariable("groupid")Long gno){
 		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();

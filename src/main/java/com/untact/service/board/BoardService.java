@@ -8,6 +8,7 @@ import com.untact.vo.PageVO;
 
 public interface BoardService {
 	public Page<Board> getListWithPagingAndGroupNumber(PageVO pageVO,Long gno);
+	public Board getOne(Long bno);
 	public void addBoard(Board board,Long gno,MemberEntity member);
 	public void modifyBoard(Board targetBoard,Long bno);
 	public void deleteBoard(Long bno);

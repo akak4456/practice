@@ -51,4 +51,10 @@ public class BoardServiceImpl implements BoardService{
 		//연관관계에 있는 나머지 것들도 삭제 또는 변경 해야 함
 		boardRepo.deleteById(bno);
 	}
+
+	@Override
+	public Board getOne(Long bno) {
+		// TODO Auto-generated method stub
+		return boardRepo.findById(bno).get();
+	}
 }
