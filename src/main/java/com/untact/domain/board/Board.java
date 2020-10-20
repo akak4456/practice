@@ -1,22 +1,30 @@
 package com.untact.domain.board;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
+import com.untact.domain.file.FileEntity;
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
 
@@ -38,6 +46,8 @@ public class Board {
 	
 	private String title;//게시판 글 제목
 	
+	
+	@Column(columnDefinition = "LONGTEXT")
 	private String content;//게시판 글 내용
 	
 	@Enumerated(EnumType.ORDINAL)
@@ -70,5 +80,20 @@ public class Board {
 		this.title = targetBoard.title;
 		this.content = targetBoard.content;
 		return this;
+	}
+	
+	@OneToMany(cascade=CascadeType.ALL,orphanRemoval=true,fetch = FetchType.LAZY)
+	@JoinColumn(name="bno")
+	@JsonIgnore
+	private List<FileEntity> fileEntity;
+	
+	@JsonIgnore
+	public List<FileEntity> getFileEntity(){
+		return this.fileEntity;
+	}
+	
+	@JsonProperty
+	public void setFileEntity(List<FileEntity> fileEntity) {
+		this.fileEntity = fileEntity;
 	}
 }
