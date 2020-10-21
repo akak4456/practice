@@ -11,7 +11,6 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.untact.demo.UntactenglishstudyApplication;
-import com.untact.persistent.groupwaiting.GroupWaitingRepository;
 import com.untact.persistent.util.DeleteAllUtil;
 
 import lombok.extern.java.Log;

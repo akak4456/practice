@@ -1,33 +1,19 @@
 package com.untact.service.group;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
-
-import java.util.Optional;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.untact.domain.group.GroupEntity;
-import com.untact.domain.member.MemberEntity;
-import com.untact.domain.position.PositionEntity;
-import com.untact.domain.position.WhichPosition;
 import com.untact.persistent.group.GroupEntityRepository;
-import com.untact.persistent.position.PositionEntityRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GroupServiceImplTest {
 	@Mock
 	private GroupEntityRepository groupRepo;
-	@Mock
-	private PositionEntityRepository positionRepo;
 	@InjectMocks
 	private GroupServiceImpl groupService;
 	

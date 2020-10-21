@@ -21,9 +21,6 @@ import com.untact.demo.UntactenglishstudyApplication;
 import com.untact.domain.board.Board;
 import com.untact.domain.group.GroupEntity;
 import com.untact.persistent.group.GroupEntityRepository;
-import com.untact.persistent.groupinclude.GroupIncludeRepository;
-import com.untact.persistent.groupwaiting.GroupWaitingRepository;
-import com.untact.persistent.reply.ReplyRepository;
 import com.untact.persistent.util.DeleteAllUtil;
 import com.untact.vo.PageVO;
 

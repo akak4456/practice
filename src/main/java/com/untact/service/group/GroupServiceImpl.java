@@ -9,11 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.untact.domain.group.GroupEntity;
+import com.untact.domain.groupinclude.GroupInclude;
+import com.untact.domain.groupinclude.WhichStatus;
 import com.untact.domain.member.MemberEntity;
-import com.untact.domain.position.PositionEntity;
-import com.untact.domain.position.WhichPosition;
 import com.untact.persistent.group.GroupEntityRepository;
-import com.untact.persistent.position.PositionEntityRepository;
+import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.vo.PageVO;
 
 import lombok.AllArgsConstructor;
@@ -25,7 +25,7 @@ public class GroupServiceImpl implements GroupService {
 	@Autowired
 	private GroupEntityRepository groupRepo;
 	@Autowired
-	private PositionEntityRepository positionRepo;
+	private GroupIncludeRepository groupIncludeRepo;
 	
 	@Transactional
 	@Override
@@ -38,7 +38,7 @@ public class GroupServiceImpl implements GroupService {
 	public void addGroup(GroupEntity group,MemberEntity member) {
 		// group add를 신청한 member는 자동으로 group leader가 된다.
 		groupRepo.save(group);
-		positionRepo.save(new PositionEntity().builder().group(group).member(member).whichPosition(WhichPosition.Leader).build());
+		groupIncludeRepo.save(new GroupInclude().builder().group(group).member(member).whichStatus(WhichStatus.LEADER).build());
 	}
 
 	@Transactional
@@ -51,8 +51,8 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public boolean dismissGroupManual(Long gno, MemberEntity member) {
 		GroupEntity group = groupRepo.findById(gno).get();
-		Optional<PositionEntity> position = positionRepo.findByGroupAndMemberAndWhichPosition(group,member,WhichPosition.Leader);
-		if(position.isEmpty()) {
+		Optional<GroupInclude> include = groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group,member,WhichStatus.LEADER);
+		if(include.isEmpty()) {
 			//리더가 아니라면
 			return false;
 		}

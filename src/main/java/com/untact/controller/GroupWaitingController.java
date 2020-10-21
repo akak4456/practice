@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.untact.service.groupwaiting.GroupWaitingService;
+import com.untact.service.groupinclude.GroupIncludeService;
 import com.untact.vo.GroupWaitingVO;
 
 import lombok.extern.java.Log;
@@ -19,23 +18,23 @@ import lombok.extern.java.Log;
 @Log
 public class GroupWaitingController {
 	@Autowired
-	private GroupWaitingService groupWaitingService;
+	private GroupIncludeService groupIncludeService;
 	
 	@PostMapping("/waiting")
 	public ResponseEntity<String> requestJoin(@RequestBody GroupWaitingVO groupWaitingVO	){
-		groupWaitingService.requestJoin(groupWaitingVO);
+		groupIncludeService.requestJoin(groupWaitingVO);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
 	
-	@PutMapping("/waiting/{gwno}/accept")
-	public ResponseEntity<String> acceptJoin(@PathVariable("gwno")Long gwno){
-		groupWaitingService.acceptJoin(gwno);
+	@PutMapping("/waiting/{gino}/accept")
+	public ResponseEntity<String> acceptJoin(@PathVariable("gino")Long gino){
+		groupIncludeService.acceptJoin(gino);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
 	
-	@PutMapping("/waiting/{gwno}/reject")
-	public ResponseEntity<String> rejectJoin(@PathVariable("gwno")Long gwno){
-		groupWaitingService.rejectJoin(gwno);
+	@PutMapping("/waiting/{gino}/reject")
+	public ResponseEntity<String> rejectJoin(@PathVariable("gino")Long gino){
+		groupIncludeService.rejectJoin(gino);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
 }

@@ -1,7 +1,5 @@
 package com.untact.domain.score;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +11,6 @@ import javax.persistence.SequenceGenerator;
 
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
-import com.untact.domain.position.PositionEntity;
-import com.untact.domain.position.WhichPosition;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
