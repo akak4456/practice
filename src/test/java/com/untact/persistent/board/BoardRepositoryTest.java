@@ -24,6 +24,7 @@ import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.groupwaiting.GroupWaitingRepository;
 import com.untact.persistent.reply.ReplyRepository;
+import com.untact.persistent.util.DeleteAllUtil;
 import com.untact.vo.PageVO;
 
 import lombok.extern.java.Log;
@@ -35,18 +36,12 @@ import lombok.extern.java.Log;
 @Log
 public class BoardRepositoryTest {
 	@Autowired
+	private DeleteAllUtil deleteAllUtil;
+	@Autowired
 	private GroupEntityRepository groupRepo;
 	
 	@Autowired
-	private GroupWaitingRepository groupWaitingRepo;
-	
-	@Autowired
-	private GroupIncludeRepository groupIncludeRepo;
-	
-	@Autowired ReplyRepository replyRepo;
-	
-	@Autowired
-	private BoardRepository repo;
+	private BoardRepository boardRepo;
 	
 	private static final int MAX_ENTITY_COUNT = 105;
 	private static final int EXPECTED_PAGE_COUNT = 11;
@@ -55,13 +50,7 @@ public class BoardRepositoryTest {
 	
 	@Before
 	public void setUp() {
-		replyRepo.deleteAllInBatch();
-		
-		repo.deleteAllInBatch();
-		
-		groupWaitingRepo.deleteAllInBatch();
-		groupIncludeRepo.deleteAllInBatch();
-		groupRepo.deleteAllInBatch();
+		deleteAllUtil.deleteAllRepo();
 		group1 = new GroupEntity().builder().title("title").build();
 		groupRepo.save(group1);
 	}
@@ -82,7 +71,7 @@ public class BoardRepositoryTest {
 			Board entity = generateBoard("title"+i,"content"+i,group);
 			list.add(entity);
 		}
-		repo.saveAll(list);
+		boardRepo.saveAll(list);
 		return list;
 	}
 	private Board generateBoard(String title,String content,GroupEntity group) {
@@ -91,7 +80,7 @@ public class BoardRepositoryTest {
 	
 	private void specificPageTest(List<Board> list,GroupEntity group,int pageNum,int expectedPageSize) {
 		PageVO pageVO = new PageVO(pageNum);
-		Page<Board> page = repo.getPageWithGroupNumber(pageVO.makePageable(0, "bno"),group.getGno());
+		Page<Board> page = boardRepo.getPageWithGroupNumber(pageVO.makePageable(0, "bno"),group.getGno());
 		List<Board> result = page.getContent();
 		assertEquals(page.getTotalElements(),MAX_ENTITY_COUNT);
 		assertEquals(page.getTotalPages(),EXPECTED_PAGE_COUNT);

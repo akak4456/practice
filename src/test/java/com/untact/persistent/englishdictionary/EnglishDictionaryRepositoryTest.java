@@ -17,6 +17,7 @@ import com.untact.domain.englishdictionary.EnglishDictionary;
 import com.untact.domain.englishdictionary.EnglishDictionaryId;
 import com.untact.domain.englishspelling.EnglishSpelling;
 import com.untact.persistent.englishspelling.EnglishSpellingRepository;
+import com.untact.persistent.util.DeleteAllUtil;
 
 import lombok.extern.java.Log;
 
@@ -27,16 +28,16 @@ import lombok.extern.java.Log;
 @Log
 public class EnglishDictionaryRepositoryTest {
 	@Autowired
-	private EnglishSpellingRepository englishSpellingRepo;
+	private DeleteAllUtil deleteAllUtil;
 	
 	@Autowired
-	private EnglishDictionaryRepository repo;
+	private EnglishDictionaryRepository englishDictionaryRepo;
 	
+	@Autowired
+	private EnglishSpellingRepository englishSpellingRepo;
 	@Before
 	public void setUp() {
-		repo.deleteAllInBatch();
-		
-		englishSpellingRepo.deleteAllInBatch();
+		deleteAllUtil.deleteAllRepo();
 	}
 	
 	@Test
@@ -51,9 +52,9 @@ public class EnglishDictionaryRepositoryTest {
 		
 		EnglishDictionaryId id1 = new EnglishDictionaryId(spell.getSpelling(),"가나다");
 		EnglishDictionaryId id2 = new EnglishDictionaryId(spell.getSpelling(),"마바사");
-		repo.save(new EnglishDictionary().builder().id(id1).englishSpelling(spell).build());
-		repo.save(new EnglishDictionary().builder().id(id2).englishSpelling(spell).build());
-		assertEquals(repo.count(),2L);
+		englishDictionaryRepo.save(new EnglishDictionary().builder().id(id1).englishSpelling(spell).build());
+		englishDictionaryRepo.save(new EnglishDictionary().builder().id(id2).englishSpelling(spell).build());
+		assertEquals(englishDictionaryRepo.count(),2L);
 	}
 	
 	@Test
@@ -62,9 +63,9 @@ public class EnglishDictionaryRepositoryTest {
 		englishSpellingRepo.save(spell);
 		
 		EnglishDictionaryId id1 = new EnglishDictionaryId(spell.getSpelling(),"가나다");
-		repo.save(new EnglishDictionary().builder().id(id1).englishSpelling(spell).build());
-		repo.save(new EnglishDictionary().builder().id(id1).englishSpelling(spell).build());
-		repo.save(new EnglishDictionary().builder().id(id1).englishSpelling(spell).build());
-		assertEquals(repo.count(),1L);
+		englishDictionaryRepo.save(new EnglishDictionary().builder().id(id1).englishSpelling(spell).build());
+		englishDictionaryRepo.save(new EnglishDictionary().builder().id(id1).englishSpelling(spell).build());
+		englishDictionaryRepo.save(new EnglishDictionary().builder().id(id1).englishSpelling(spell).build());
+		assertEquals(englishDictionaryRepo.count(),1L);
 	}
 }

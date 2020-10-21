@@ -39,7 +39,7 @@ public class PositionEntity {
 	
 	@Enumerated(EnumType.STRING)
 	@NotNull
-	private WhcihPosition whichPosition;//어떤 직위인가?
+	private WhichPosition whichPosition;//어떤 직위인가?
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@CreationTimestamp

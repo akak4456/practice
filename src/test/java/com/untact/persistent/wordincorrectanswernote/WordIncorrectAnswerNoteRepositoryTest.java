@@ -11,6 +11,7 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.untact.demo.UntactenglishstudyApplication;
+import com.untact.persistent.util.DeleteAllUtil;
 import com.untact.persistent.wordincorrectanswernote.WordIncorrectAnswerNoteRepository;
 
 import lombok.extern.java.Log;
@@ -22,11 +23,11 @@ import lombok.extern.java.Log;
 @Log
 public class WordIncorrectAnswerNoteRepositoryTest {
 	@Autowired
-	private WordIncorrectAnswerNoteRepository repo;
+	private DeleteAllUtil deleteAllUtil;
 	
 	@Before
 	public void setUp() {
-		repo.deleteAllInBatch();
+		deleteAllUtil.deleteAllRepo();
 	}
 	
 	@Test

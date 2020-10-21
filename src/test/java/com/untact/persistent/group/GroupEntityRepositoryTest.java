@@ -25,6 +25,7 @@ import com.untact.domain.member.Role;
 import com.untact.persistent.board.BoardRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.member.MemberEntityRepository;
+import com.untact.persistent.util.DeleteAllUtil;
 import com.untact.vo.PageVO;
 
 import lombok.extern.java.Log;
@@ -54,7 +55,7 @@ class Range{
 @Log
 public class GroupEntityRepositoryTest {
 	@Autowired
-	private BoardRepository boardRepo;
+	private DeleteAllUtil deleteAllUtil;
 	
 	@Autowired
 	private MemberEntityRepository memberRepo;
@@ -63,14 +64,12 @@ public class GroupEntityRepositoryTest {
 	private GroupIncludeRepository groupIncludeRepo;
 	
 	@Autowired
-	private GroupEntityRepository repo;
+	private GroupEntityRepository groupRepo;
 	
 	@Before
 	public void setUp() {
-		groupIncludeRepo.deleteAllInBatch();
-		memberRepo.deleteAllInBatch();
-		boardRepo.deleteAllInBatch();
-		repo.deleteAllInBatch();
+		deleteAllUtil.deleteAllRepo();
+		groupRepo.deleteAllInBatch();
 	}
 	
 	@Test
@@ -95,7 +94,7 @@ public class GroupEntityRepositoryTest {
 			GroupEntity entity = generateGroupEntity("title"+i);
 			list.add(entity);
 		}
-		repo.saveAll(list);
+		groupRepo.saveAll(list);
 		return list;
 	}
 	private GroupEntity generateGroupEntity(String title) {
@@ -103,7 +102,7 @@ public class GroupEntityRepositoryTest {
 	}
 	private void specificPageTest(List<GroupEntity> list,int pageNum,int expectedPageSize) {
 		PageVO pageVO = new PageVO(pageNum);
-		Page<GroupEntity> page = repo.getPage(pageVO.makePageable(0, "gno"));
+		Page<GroupEntity> page = groupRepo.getPage(pageVO.makePageable(0, "gno"));
 		List<GroupEntity> result = page.getContent();
 		assertEquals(page.getTotalElements(),MAX_ENTITY_COUNT);
 		assertEquals(page.getTotalPages(),EXPECTED_PAGE_COUNT);
@@ -180,7 +179,7 @@ public class GroupEntityRepositoryTest {
 			int expectedPageSize,
 			Range range) {
 		PageVO pageVO = new PageVO(pageNum);
-		Page<GroupEntity> page = repo.getPageWithUserNumber(pageVO.makePageable(0, "gno"), member.getMno());
+		Page<GroupEntity> page = groupRepo.getPageWithUserNumber(pageVO.makePageable(0, "gno"), member.getMno());
 		List<GroupEntity> result = page.getContent();
 		assertEquals(page.getTotalElements(),expectedTotalElementsCount);
 		assertEquals(page.getTotalPages(),expectedTotalPages);

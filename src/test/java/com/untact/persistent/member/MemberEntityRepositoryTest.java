@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.untact.demo.UntactenglishstudyApplication;
 import com.untact.persistent.groupwaiting.GroupWaitingRepository;
+import com.untact.persistent.util.DeleteAllUtil;
 
 import lombok.extern.java.Log;
 
@@ -22,15 +23,11 @@ import lombok.extern.java.Log;
 @Log
 public class MemberEntityRepositoryTest {
 	@Autowired
-	private GroupWaitingRepository groupWaitingRepo;
-	
-	@Autowired
-	private MemberEntityRepository repo;
+	private DeleteAllUtil deleteAllUtil;
 	
 	@Before
 	public void setUp() {
-		groupWaitingRepo.deleteAllInBatch();
-		repo.deleteAllInBatch();
+		deleteAllUtil.deleteAllRepo();
 	}
 	
 	@Test

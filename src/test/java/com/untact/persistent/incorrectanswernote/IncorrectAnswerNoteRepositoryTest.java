@@ -9,6 +9,7 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.untact.demo.UntactenglishstudyApplication;
+import com.untact.persistent.util.DeleteAllUtil;
 
 import lombok.extern.java.Log;
 
@@ -18,11 +19,11 @@ import lombok.extern.java.Log;
 @Commit
 public class IncorrectAnswerNoteRepositoryTest {
 	@Autowired
-	private IncorrectAnswerNoteRepository repo;
+	private DeleteAllUtil deleteAllUtil;
 	
 	@Before
 	public void setUp() {
-		repo.deleteAllInBatch();
+		deleteAllUtil.deleteAllRepo();
 	}
 	
 	@Test

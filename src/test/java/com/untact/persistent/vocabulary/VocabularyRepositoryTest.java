@@ -26,6 +26,8 @@ import com.untact.persistent.englishspelling.EnglishSpellingRepository;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.member.MemberEntityRepository;
+import com.untact.persistent.util.DefaultEnglishSpellingAndDictionaryUtil;
+import com.untact.persistent.util.DeleteAllUtil;
 
 import lombok.extern.java.Log;
 
@@ -36,13 +38,17 @@ import lombok.extern.java.Log;
 @Log
 public class VocabularyRepositoryTest {
 	@Autowired
+	private DeleteAllUtil deleteAllUtil;
+	@Autowired
+	private DefaultEnglishSpellingAndDictionaryUtil dictionaryUtil;
+	@Autowired
 	private GroupEntityRepository groupEntityRepo;
 	@Autowired
 	private MemberEntityRepository memberEntityRepo;
 	@Autowired
 	private GroupIncludeRepository groupIncludeRepo;
 	@Autowired
-	private VocabularyRepository repo;
+	private VocabularyRepository vocabularyRepo;
 	@Autowired
 	private EnglishSpellingRepository spellingRepo;
 	
@@ -50,10 +56,9 @@ public class VocabularyRepositoryTest {
 	private GroupEntity group;
 	@Before
 	public void setUp() {
-		repo.deleteAllInBatch();
-		groupIncludeRepo.deleteAllInBatch();
-		groupEntityRepo.deleteAllInBatch();
-		memberEntityRepo.deleteAllInBatch();
+		deleteAllUtil.deleteAllRepo();
+		
+		dictionaryUtil.setUpDefaultDictionary();
 		
 		member = new MemberEntity().builder().email("email").password("password").role(Role.MEMBER).build();
 		group = new GroupEntity().builder().title("title").build();
@@ -93,15 +98,15 @@ public class VocabularyRepositoryTest {
 		words.add("apple");
 		words.add("banana");
 		for(String word:words) {
-			repo.save(new Vocabulary().builder().englishSpelling(spellingRepo.findById(word).get()).group(group).member(member).build());
+			vocabularyRepo.save(new Vocabulary().builder().englishSpelling(spellingRepo.findById(word).get()).group(group).member(member).build());
 		}
-		assertEquals(repo.count(),3L);
+		assertEquals(vocabularyRepo.count(),3L);
 		List<String> deleted = new ArrayList<>();
 		deleted.add("angry");
 		deleted.add("apple");
-		repo.deleteByGroupNumberAndMemberNumberAndWordList(group.getGno(), member.getMno(), deleted);
-		assertEquals(repo.count(),1L);
-		List<Vocabulary> result = repo.findAll();
+		vocabularyRepo.deleteByGroupNumberAndMemberNumberAndWordList(group.getGno(), member.getMno(), deleted);
+		assertEquals(vocabularyRepo.count(),1L);
+		List<Vocabulary> result = vocabularyRepo.findAll();
 		assertEquals(result.get(0).getEnglishSpelling().getSpelling(),"banana");//banana만 남아야 함
 	}
 	@Test
@@ -111,16 +116,16 @@ public class VocabularyRepositoryTest {
 		words.add("apple");
 		words.add("banana");
 		for(String word:words) {
-			repo.save(new Vocabulary().builder().englishSpelling(spellingRepo.findById(word).get()).group(group).member(member).build());
+			vocabularyRepo.save(new Vocabulary().builder().englishSpelling(spellingRepo.findById(word).get()).group(group).member(member).build());
 		}
-		assertEquals(repo.count(),3L);
+		assertEquals(vocabularyRepo.count(),3L);
 		List<String> deleted = new ArrayList<>();
 		deleted.add("angry");
 		deleted.add("abcde");//단어장에 없는 단어를 삭제하려고 한다면?
-		repo.deleteByGroupNumberAndMemberNumberAndWordList(group.getGno(), member.getMno(), deleted);
-		assertEquals(repo.count(),2L);//angry apple banana중에서 angry만 삭제되어야 함
+		vocabularyRepo.deleteByGroupNumberAndMemberNumberAndWordList(group.getGno(), member.getMno(), deleted);
+		assertEquals(vocabularyRepo.count(),2L);//angry apple banana중에서 angry만 삭제되어야 함
 		List<String> result = new ArrayList<>();
-		for(Vocabulary voca:repo.findAll()) {
+		for(Vocabulary voca:vocabularyRepo.findAll()) {
 			result.add(voca.getEnglishSpelling().getSpelling());
 		}
 		Collections.sort(result);

@@ -1,5 +1,5 @@
 package com.untact.domain.position;
 
-public enum WhcihPosition {
+public enum WhichPosition {
 	Leader,Follower
 }

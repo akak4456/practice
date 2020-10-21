@@ -3,8 +3,7 @@ package com.untact.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,8 +34,17 @@ public class StudyController {
 	}
 	@PostMapping("/study")
 	public ResponseEntity<String> addStudy(@RequestBody GroupEntity group){
-		log.info(AuthenticationFacade.getMemberEntityFromAuthentication().getMno()+"");
-		groupService.addGroup(group);
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		groupService.addGroup(group,member);
 		return new ResponseEntity<>("success",HttpStatus.OK);
+	}
+	@DeleteMapping("/study/{groupid}")
+	public ResponseEntity<String> dismissStudyManual(@PathVariable("groupid")Long gno){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		if(groupService.dismissGroupManual(gno, member)) {
+			return new ResponseEntity<>("success",HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 }

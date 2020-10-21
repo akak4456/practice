@@ -36,7 +36,6 @@ public class GroupEntityInsert {
 		List<GroupEntity> list = new ArrayList<>();
 		for(int i=0;i<200;i++) {
 			GroupEntity entity = GroupEntity.builder().title("title"+i).build();
-			groupService.addGroup(entity);
 		}
 	}
 }

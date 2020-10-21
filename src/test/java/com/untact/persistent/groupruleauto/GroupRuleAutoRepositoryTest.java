@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.untact.demo.UntactenglishstudyApplication;
 import com.untact.persistent.groupruleauto.GroupRuleAutoRepository;
+import com.untact.persistent.util.DeleteAllUtil;
 
 import lombok.extern.java.Log;
 
@@ -22,11 +23,11 @@ import lombok.extern.java.Log;
 @Log
 public class GroupRuleAutoRepositoryTest {
 	@Autowired
-	private GroupRuleAutoRepository repo;
+	private DeleteAllUtil deleteAllUtil;
 	
 	@Before
 	public void setUp() {
-		repo.deleteAllInBatch();
+		deleteAllUtil.deleteAllRepo();
 	}
 	
 	@Test

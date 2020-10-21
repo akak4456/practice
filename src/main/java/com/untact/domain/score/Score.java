@@ -14,7 +14,7 @@ import javax.persistence.SequenceGenerator;
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
 import com.untact.domain.position.PositionEntity;
-import com.untact.domain.position.WhcihPosition;
+import com.untact.domain.position.WhichPosition;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

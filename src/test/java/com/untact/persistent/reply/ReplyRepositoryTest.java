@@ -25,6 +25,7 @@ import com.untact.persistent.board.BoardRepository;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.groupwaiting.GroupWaitingRepository;
+import com.untact.persistent.util.DeleteAllUtil;
 import com.untact.vo.PageVO;
 
 import lombok.extern.java.Log;
@@ -36,19 +37,15 @@ import lombok.extern.java.Log;
 @Log
 public class ReplyRepositoryTest {
 	@Autowired
+	private DeleteAllUtil deleteAllUtil;
+	@Autowired
 	private GroupEntityRepository groupRepo;
-	
-	@Autowired
-	private GroupWaitingRepository groupWaitingRepo;
-	
-	@Autowired
-	private GroupIncludeRepository groupIncludeRepo;
 	
 	@Autowired
 	private BoardRepository boardRepo;
 	
 	@Autowired
-	private ReplyRepository repo;
+	private ReplyRepository replyRepo;
 	
 	private GroupEntity group1;
 	
@@ -59,13 +56,7 @@ public class ReplyRepositoryTest {
 	
 	@Before
 	public void setUp() {
-		repo.deleteAllInBatch();
-		
-		boardRepo.deleteAllInBatch();
-		
-		groupWaitingRepo.deleteAllInBatch();
-		groupIncludeRepo.deleteAllInBatch();
-		groupRepo.deleteAllInBatch();
+		deleteAllUtil.deleteAllRepo();
 		
 		group1 = new GroupEntity().builder().title("title").build();
 		groupRepo.save(group1);
@@ -92,7 +83,7 @@ public class ReplyRepositoryTest {
 			Reply entity = generateReply("message"+i,group,board);
 			list.add(entity);
 		}
-		repo.saveAll(list);
+		replyRepo.saveAll(list);
 		return list;
 	}
 	private Reply generateReply(String message,GroupEntity group,Board board) {
@@ -101,7 +92,7 @@ public class ReplyRepositoryTest {
 	
 	private void specificPageTest(List<Reply> list,Board board,int pageNum,int expectedPageSize) {
 		PageVO pageVO = new PageVO(pageNum);
-		Page<Reply> page = repo.getPageWithBoardNumber(pageVO.makePageable(0, "rno"),board.getBno());
+		Page<Reply> page = replyRepo.getPageWithBoardNumber(pageVO.makePageable(0, "rno"),board.getBno());
 		List<Reply> result = page.getContent();
 		assertEquals(page.getTotalElements(),MAX_ENTITY_COUNT);
 		assertEquals(page.getTotalPages(),EXPECTED_PAGE_COUNT);

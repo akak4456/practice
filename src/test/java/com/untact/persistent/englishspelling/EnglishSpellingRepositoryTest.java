@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.untact.demo.UntactenglishstudyApplication;
 import com.untact.domain.englishspelling.EnglishSpelling;
 import com.untact.persistent.englishdictionary.EnglishDictionaryRepository;
+import com.untact.persistent.util.DeleteAllUtil;
 
 import lombok.extern.java.Log;
 
@@ -28,15 +29,16 @@ import lombok.extern.java.Log;
 @Log
 public class EnglishSpellingRepositoryTest {
 	@Autowired
+	private DeleteAllUtil deleteAllUtil;
+	@Autowired
 	private EnglishDictionaryRepository englishDictionaryRepo;
 	
 	@Autowired
-	private EnglishSpellingRepository repo;
+	private EnglishSpellingRepository englishSpellingRepo;
 	
 	@Before
 	public void setUp() {
-		englishDictionaryRepo.deleteAllInBatch();
-		repo.deleteAllInBatch();
+		deleteAllUtil.deleteAllRepo();
 		List<EnglishSpelling> spellingList = new ArrayList<>();
 		EnglishSpelling entity1 = new EnglishSpelling().builder().spelling("a").build();
 		spellingList.add(entity1);
@@ -48,7 +50,7 @@ public class EnglishSpellingRepositoryTest {
 		spellingList.add(entity4);
 		EnglishSpelling entity5 = new EnglishSpelling().builder().spelling("e").build();
 		spellingList.add(entity5);
-		repo.saveAll(spellingList);
+		englishSpellingRepo.saveAll(spellingList);
 	}
 	
 	@Test
@@ -60,7 +62,7 @@ public class EnglishSpellingRepositoryTest {
 		targetSpellings.add("a");
 		targetSpellings.add("b");
 		targetSpellings.add("f");
-		List<EnglishSpelling> result = repo.EnglishSpellingListAlreadyExistInDBAmongTargetSpellingList(targetSpellings);
+		List<EnglishSpelling> result = englishSpellingRepo.EnglishSpellingListAlreadyExistInDBAmongTargetSpellingList(targetSpellings);
 		assertEquals(result.get(0).getSpelling(),"a");
 		assertEquals(result.get(1).getSpelling(),"b");
 		assertEquals(result.size(),2);

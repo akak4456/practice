@@ -19,6 +19,7 @@ import com.untact.domain.groupwaiting.GroupWaitingStatus;
 import com.untact.domain.member.MemberEntity;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.member.MemberEntityRepository;
+import com.untact.persistent.util.DeleteAllUtil;
 
 import lombok.extern.java.Log;
 
@@ -28,17 +29,17 @@ import lombok.extern.java.Log;
 @Commit
 public class GroupWaitingRepositoryTest {
 	@Autowired
+	private DeleteAllUtil deleteAllUtil;
+	@Autowired
 	private MemberEntityRepository memberRepo;
 	@Autowired
 	private GroupEntityRepository groupRepo;
 	@Autowired
-	private GroupWaitingRepository repo;
+	private GroupWaitingRepository groupWaitingRepo;
 	
 	@Before
 	public void setUp() {
-		repo.deleteAllInBatch();
-		memberRepo.deleteAllInBatch();
-		groupRepo.deleteAllInBatch();
+		deleteAllUtil.deleteAllRepo();
 	}
 	
 	@Test
@@ -52,12 +53,12 @@ public class GroupWaitingRepositoryTest {
 		GroupEntity group = GroupEntity.builder().title("title").build();
 		groupRepo.save(group);
 		GroupWaiting waiting = GroupWaiting.builder().group(group).member(member).status(GroupWaitingStatus.WAIT).build();
-		repo.save(waiting);
+		groupWaitingRepo.save(waiting);
 		Long gwno = waiting.getGwno();
-		assertEquals(repo.findById(gwno).get().getStatus(),GroupWaitingStatus.WAIT);
-		repo.changeStatus(GroupWaitingStatus.ACCEPT, gwno);
-		assertEquals(repo.findById(gwno).get().getStatus(),GroupWaitingStatus.ACCEPT);
-		repo.changeStatus(GroupWaitingStatus.REJECT, gwno);
-		assertEquals(repo.findById(gwno).get().getStatus(),GroupWaitingStatus.REJECT);
+		assertEquals(groupWaitingRepo.findById(gwno).get().getStatus(),GroupWaitingStatus.WAIT);
+		groupWaitingRepo.changeStatus(GroupWaitingStatus.ACCEPT, gwno);
+		assertEquals(groupWaitingRepo.findById(gwno).get().getStatus(),GroupWaitingStatus.ACCEPT);
+		groupWaitingRepo.changeStatus(GroupWaitingStatus.REJECT, gwno);
+		assertEquals(groupWaitingRepo.findById(gwno).get().getStatus(),GroupWaitingStatus.REJECT);
 	}
 }
