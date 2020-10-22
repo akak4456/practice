@@ -18,9 +18,9 @@ public interface GroupIncludeRepository extends GroupIncludeCustomRepository, Jp
 	@Modifying
 	@Transactional
 	@Query("update GroupInclude g set g.whichStatus = :whichStatus WHERE g.gino=:gino")
-	public int changeStatus(@Param("whichStatus")WhichStatus whichStatus,@Param("gino")Long gino);
+	public int updateStatusByGroupIncludeNumber(@Param("whichStatus")WhichStatus whichStatus,@Param("gino")Long gino);
 	
-	@Query("select groupInclude from GroupInclude groupInclude where groupInclude.group=:group and groupInclude.member=:member and groupInclude.whichStatus=:whichStatus")
-	public Optional<GroupInclude> findByGroupAndMemberAndWhichStatus(@Param("group")GroupEntity group,@Param("member")MemberEntity member,@Param("whichStatus")WhichStatus whichStatus);
+	@Query("select groupInclude from GroupInclude groupInclude where groupInclude.group.gno=:gno and groupInclude.member.mno=:mno and groupInclude.whichStatus=:whichStatus")
+	public Optional<GroupInclude> findByGroupNumberAndMemberNumberAndWhichStatus(@Param("gno")Long gno,@Param("mno")Long mno,@Param("whichStatus")WhichStatus whichStatus);
 
 }

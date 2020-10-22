@@ -28,7 +28,7 @@ public class VocabularyServiceImpl implements VocabularyService {
 	private VocabularyRepository vocabularyRepo;
 	@Override
 	public NumberOfSuccessesOrFailures addVocabulary(List<String> words,Long gno,MemberEntity member) {
-		List<EnglishSpelling> alreadyWords = spellingRepo.EnglishSpellingListAlreadyExistInDBAmongTargetSpellingList(words);
+		List<EnglishSpelling> alreadyWords = spellingRepo.findByTargetSpellingList(words);
 		List<Vocabulary> vocabularyList = new ArrayList<>();
 		for(EnglishSpelling alreadyWord:alreadyWords) {
 			vocabularyList.add(new Vocabulary().builder().englishSpelling(alreadyWord).group(groupEntityRepo.findById(gno).get()).member(member).build());

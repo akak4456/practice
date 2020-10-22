@@ -11,9 +11,4 @@ public class GroupIncludeCustomRepositoryImpl extends QuerydslRepositorySupport
 	public GroupIncludeCustomRepositoryImpl() {
 		super(GroupInclude.class);
 	}
-
-	@Override
-	public void deleteGroupIncludeAndChangeGroupWaitingByGroupAndMember(GroupEntity group, MemberEntity member) {
-		
-	}
 }

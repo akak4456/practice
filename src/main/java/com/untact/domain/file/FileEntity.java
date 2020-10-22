@@ -1,16 +1,14 @@
 package com.untact.domain.file;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
-import com.untact.domain.deposit.Deposit;
-import com.untact.domain.group.GroupEntity;
-import com.untact.domain.member.MemberEntity;
+import com.untact.domain.board.Board;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -29,4 +27,11 @@ public class FileEntity {
 	private Long fileno;//파일 번호
 	
 	private String path;//파일 경로
+	
+	@ManyToOne
+	@JoinColumn
+	private Board board;
+	public void setBoard(Board board) {
+		this.board = board;
+	}
 }

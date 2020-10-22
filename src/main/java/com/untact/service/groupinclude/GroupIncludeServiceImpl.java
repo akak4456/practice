@@ -42,11 +42,11 @@ public class GroupIncludeServiceImpl implements GroupIncludeService {
 	}
 	@Override
 	public void acceptJoin(Long gino) {
-		groupIncludeRepo.changeStatus(WhichStatus.FOLLOWER, gino);
+		groupIncludeRepo.updateStatusByGroupIncludeNumber(WhichStatus.FOLLOWER, gino);
 	}
 	@Override
 	public void rejectJoin(Long gino) {
-		groupIncludeRepo.changeStatus(WhichStatus.REJECT, gino);
+		groupIncludeRepo.updateStatusByGroupIncludeNumber(WhichStatus.REJECT, gino);
 	}
 
 }

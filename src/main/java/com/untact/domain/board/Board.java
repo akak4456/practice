@@ -81,19 +81,4 @@ public class Board {
 		this.content = targetBoard.content;
 		return this;
 	}
-	
-	@OneToMany(cascade=CascadeType.ALL,orphanRemoval=true,fetch = FetchType.LAZY)
-	@JoinColumn(name="bno")
-	@JsonIgnore
-	private List<FileEntity> fileEntity;
-	
-	@JsonIgnore
-	public List<FileEntity> getFileEntity(){
-		return this.fileEntity;
-	}
-	
-	@JsonProperty
-	public void setFileEntity(List<FileEntity> fileEntity) {
-		this.fileEntity = fileEntity;
-	}
 }

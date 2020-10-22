@@ -11,6 +11,6 @@ import com.untact.domain.englishspelling.EnglishSpelling;
 public interface EnglishSpellingRepository
 		extends JpaRepository<EnglishSpelling, String>, EnglishSpellingCustomRepository {
 	@Query("SELECT spell FROM EnglishSpelling spell WHERE spell.spelling in :newSpellings")
-	public List<EnglishSpelling> EnglishSpellingListAlreadyExistInDBAmongTargetSpellingList(@Param("newSpellings")List<String> targetSpellings);
+	public List<EnglishSpelling> findByTargetSpellingList(@Param("newSpellings")List<String> targetSpellings);
 
 }

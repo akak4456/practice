@@ -70,9 +70,9 @@ public class GroupIncludeRepositoryTest {
 		groupIncludeRepo.save(include);
 		Long gino = include.getGino();
 		assertEquals(groupIncludeRepo.findById(gino).get().getWhichStatus(),WhichStatus.WAITING);
-		groupIncludeRepo.changeStatus(WhichStatus.FOLLOWER, gino);
+		groupIncludeRepo.updateStatusByGroupIncludeNumber(WhichStatus.FOLLOWER, gino);
 		assertEquals(groupIncludeRepo.findById(gino).get().getWhichStatus(),WhichStatus.FOLLOWER);
-		groupIncludeRepo.changeStatus(WhichStatus.REJECT, gino);
+		groupIncludeRepo.updateStatusByGroupIncludeNumber(WhichStatus.REJECT, gino);
 		assertEquals(groupIncludeRepo.findById(gino).get().getWhichStatus(),WhichStatus.REJECT);
 	}
 	
@@ -87,21 +87,21 @@ public class GroupIncludeRepositoryTest {
 		groupIncludeRepo.save(new GroupInclude().builder().group(group2).member(member2).whichStatus(WhichStatus.LEADER).build());
 		groupIncludeRepo.save(new GroupInclude().builder().group(group2).member(member3).whichStatus(WhichStatus.FOLLOWER).build());
 		
-		assertTrue(groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group1,member1, WhichStatus.LEADER).isPresent());
-		assertFalse(groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group1,member2, WhichStatus.LEADER).isPresent());
-		assertFalse(groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group1,member3, WhichStatus.LEADER).isPresent());
+		assertTrue(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group1.getGno(),member1.getMno(), WhichStatus.LEADER).isPresent());
+		assertFalse(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group1.getGno(),member2.getMno(), WhichStatus.LEADER).isPresent());
+		assertFalse(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group1.getGno(),member3.getMno(), WhichStatus.LEADER).isPresent());
 		
-		assertFalse(groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group2,member1, WhichStatus.LEADER).isPresent());
-		assertTrue(groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group2,member2, WhichStatus.LEADER).isPresent());
-		assertFalse(groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group2,member3, WhichStatus.LEADER).isPresent());
+		assertFalse(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group2.getGno(),member1.getMno(), WhichStatus.LEADER).isPresent());
+		assertTrue(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group2.getGno(),member2.getMno(), WhichStatus.LEADER).isPresent());
+		assertFalse(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group2.getGno(),member3.getMno(), WhichStatus.LEADER).isPresent());
 		
-		assertFalse(groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group1,member1, WhichStatus.FOLLOWER).isPresent());
-		assertTrue(groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group1,member2, WhichStatus.FOLLOWER).isPresent());
-		assertTrue(groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group1,member3, WhichStatus.FOLLOWER).isPresent());
+		assertFalse(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group1.getGno(),member1.getMno(), WhichStatus.FOLLOWER).isPresent());
+		assertTrue(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group1.getGno(),member2.getMno(), WhichStatus.FOLLOWER).isPresent());
+		assertTrue(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group1.getGno(),member3.getMno(), WhichStatus.FOLLOWER).isPresent());
 		
-		assertTrue(groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group2,member1, WhichStatus.FOLLOWER).isPresent());
-		assertFalse(groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group2,member2, WhichStatus.FOLLOWER).isPresent());
-		assertTrue(groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group2,member3, WhichStatus.FOLLOWER).isPresent());
+		assertTrue(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group2.getGno(),member1.getMno(), WhichStatus.FOLLOWER).isPresent());
+		assertFalse(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group2.getGno(),member2.getMno(), WhichStatus.FOLLOWER).isPresent());
+		assertTrue(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group2.getGno(),member3.getMno(), WhichStatus.FOLLOWER).isPresent());
 	}
 	
 }

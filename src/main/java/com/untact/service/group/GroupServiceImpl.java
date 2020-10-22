@@ -51,7 +51,7 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public boolean dismissGroupManual(Long gno, MemberEntity member) {
 		GroupEntity group = groupRepo.findById(gno).get();
-		Optional<GroupInclude> include = groupIncludeRepo.findByGroupAndMemberAndWhichStatus(group,member,WhichStatus.LEADER);
+		Optional<GroupInclude> include = groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, member.getMno(), WhichStatus.LEADER);
 		if(include.isEmpty()) {
 			//리더가 아니라면
 			return false;

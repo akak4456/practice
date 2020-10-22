@@ -13,7 +13,6 @@ import com.untact.persistent.fine.FineRepository;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.grouprule.GroupRuleRepository;
-import com.untact.persistent.groupruleauto.GroupRuleAutoRepository;
 import com.untact.persistent.incorrectanswernote.IncorrectAnswerNoteRepository;
 import com.untact.persistent.member.MemberEntityRepository;
 import com.untact.persistent.reply.ReplyRepository;
@@ -44,8 +43,6 @@ public class DeleteAllUtil {
 	@Autowired
 	private GroupRuleRepository groupRuleRepo;
 	@Autowired
-	private GroupRuleAutoRepository groupRuleAutoRepository;
-	@Autowired
 	private IncorrectAnswerNoteRepository incorrectAnswerNoteRepo;
 	@Autowired
 	private MemberEntityRepository memberRepo;
@@ -61,7 +58,6 @@ public class DeleteAllUtil {
 		connectionRecordRepo.deleteAllInBatch();
 		depositRepo.deleteAllInBatch();
 		groupRuleRepo.deleteAllInBatch();
-		groupRuleAutoRepository.deleteAllInBatch();
 		incorrectAnswerNoteRepo.deleteAllInBatch();
 		wordIncorrectAnswerNoteRepo.deleteAllInBatch();
 		scoreRepo.deleteAllInBatch();

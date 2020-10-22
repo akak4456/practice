@@ -62,7 +62,7 @@ public class EnglishSpellingRepositoryTest {
 		targetSpellings.add("a");
 		targetSpellings.add("b");
 		targetSpellings.add("f");
-		List<EnglishSpelling> result = englishSpellingRepo.EnglishSpellingListAlreadyExistInDBAmongTargetSpellingList(targetSpellings);
+		List<EnglishSpelling> result = englishSpellingRepo.findByTargetSpellingList(targetSpellings);
 		assertEquals(result.get(0).getSpelling(),"a");
 		assertEquals(result.get(1).getSpelling(),"b");
 		assertEquals(result.size(),2);
