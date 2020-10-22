@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.untact.domain.board.Board;
+import com.untact.domain.file.FileEntity;
 import com.untact.domain.member.MemberEntity;
 import com.untact.security.AuthenticationFacade;
 import com.untact.service.board.BoardService;

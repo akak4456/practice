@@ -81,4 +81,11 @@ public class Board {
 		this.content = targetBoard.content;
 		return this;
 	}
+	
+	@OneToMany(mappedBy="fileno")
+	private List<FileEntity> files;
+	public void setFiles(List<FileEntity> files) {
+		this.files = files;
+	}
+	
 }

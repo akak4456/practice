@@ -1,12 +1,17 @@
 package com.untact.service.board;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.untact.domain.board.Board;
+import com.untact.domain.file.FileEntity;
 import com.untact.domain.member.MemberEntity;
 import com.untact.persistent.board.BoardRepository;
+import com.untact.persistent.file.FileEntityRepository;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.vo.PageVO;
 
@@ -27,6 +32,8 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	private GroupEntityRepository groupEntityRepo;
 
+	@Autowired
+	private FileEntityRepository fileEntityRepo;
 	@Override
 	public Page<Board> getListWithPagingAndGroupNumber(PageVO pageVO, Long gno) {
 		return boardRepo.getPageWithGroupNumber(pageVO.makePageable(0, "bno"), gno);
@@ -37,6 +44,12 @@ public class BoardServiceImpl implements BoardService{
 		board.setGroup(groupEntityRepo.findById(gno).get());
 		board.setMember(member);
 		boardRepo.save(board);
+		List<FileEntity> list = new ArrayList<>();
+		for(FileEntity entity:board.getFiles()) {
+			entity.setBoard(board);
+			list.add(entity);
+		}
+		fileEntityRepo.saveAll(list);
 	}
 
 	@Override
