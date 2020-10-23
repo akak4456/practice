@@ -1,9 +1,12 @@
 package com.untact.service.fine;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.untact.domain.fine.Fine;
+import com.untact.domain.groupinclude.GroupInclude;
 import com.untact.domain.groupinclude.WhichStatus;
 import com.untact.domain.member.MemberEntity;
 import com.untact.persistent.fine.FineRepository;
@@ -35,7 +38,8 @@ public class FineServiceImpl implements FineService {
 
 	@Override
 	public boolean changeFine(Long oldFineId, Long gno, MemberEntity member, AmountVO amountVO) {
-		if(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, member.getMno(), WhichStatus.LEADER).isEmpty()) {
+		Optional<GroupInclude> groupInclude = groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, member.getMno(), WhichStatus.LEADER);
+		if(groupInclude.isEmpty()) {
 			//벌금 수정을 요청한 자가 스터디장이 아니면 거절한다
 			return false;
 		}
