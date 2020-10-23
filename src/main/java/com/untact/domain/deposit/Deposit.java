@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -26,6 +28,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "gno", "mno" }))
 @SequenceGenerator(name="d_seq", initialValue=1, allocationSize=1)
 @EqualsAndHashCode(of="dno")
 public class Deposit {
@@ -43,16 +46,21 @@ public class Deposit {
 	private LocalDateTime updatedate;//예치금 수정 시간
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="gno")
 	private GroupEntity group;//예치금들은 어떤 그룹에 속했는지 나타냄
 	public void setGroup(GroupEntity group) {
 		this.group = group;
 	}
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="mno")
 	private MemberEntity member;//누가 예치금을 냈는지 나타냄
 	public void setMember(MemberEntity member) {
 		this.member = member;
+	}
+	
+	public Deposit changeDepositAmount(Long newAmount) {
+		this.depositAmount = newAmount;
+		return this;
 	}
 }

@@ -22,31 +22,14 @@ import com.untact.domain.group.GroupEntity;
 import com.untact.domain.groupinclude.GroupInclude;
 import com.untact.domain.member.MemberEntity;
 import com.untact.domain.member.Role;
-import com.untact.persistent.board.BoardRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.member.MemberEntityRepository;
 import com.untact.persistent.util.DeleteAllUtil;
+import com.untact.persistent.util.Range;
 import com.untact.vo.PageVO;
 
 import lombok.extern.java.Log;
 
-class Range{
-	private int start;
-	private int end;
-	private Range(int start,int end) {
-		this.start = start;
-		this.end = end;
-	}
-	public static Range of(int start,int end) {
-		return new Range(start,end);
-	}
-	public int getStart() {
-		return this.start;
-	}
-	public int getEnd() {
-		return this.end;
-	}
-}
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = UntactenglishstudyApplication.class)

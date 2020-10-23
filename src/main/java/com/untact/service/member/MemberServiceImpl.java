@@ -41,5 +41,20 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return entity.get();
 	}
+	@Override
+	public void changeInfo(MemberEntity oldMember,MemberVO memberVO) {
+		MemberEntity newMember = MemberEntity.builder()
+									.mno(oldMember.getMno())
+									.email(oldMember.getEmail())
+									.password(passwordEncoder.encode(memberVO.getPassword()))
+									.role(oldMember.getRole())
+									.build();
+		//이메일, 역할은 변경 불가(역할은 관리자만이 바꿀 수 있음) 나머지는 바꿀수도 있음
+		memberRepo.save(newMember);
+	}
+	@Override
+	public void deleteInfo(Long mno) {
+		memberRepo.deleteById(mno);
+	}
 
 }

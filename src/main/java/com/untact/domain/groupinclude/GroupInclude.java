@@ -9,6 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.sun.istack.NotNull;
 import com.untact.domain.group.GroupEntity;
@@ -23,6 +28,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "gno", "mno" }))
 @SequenceGenerator(name="gi_seq", initialValue=1, allocationSize=1)
 @EqualsAndHashCode(of="gino")
 public class GroupInclude {
@@ -35,14 +41,15 @@ public class GroupInclude {
 	private WhichStatus whichStatus;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="gno")
 	private GroupEntity group;//그룹 포함과 그룹과의 관계
 	public void setGroup(GroupEntity group) {
 		this.group = group;
 	}
 	
 	@ManyToOne
-	@JoinColumn
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn(name="mno")
 	private MemberEntity member;//사용자와 그룹 포함과의 관계
 	public void setMember(MemberEntity member) {
 		this.member = member;

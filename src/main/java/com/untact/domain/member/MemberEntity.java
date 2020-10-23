@@ -42,6 +42,7 @@ public class MemberEntity implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	private Role role;//사용자인가 관리자인가?
+	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

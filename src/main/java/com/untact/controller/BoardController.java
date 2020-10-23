@@ -29,7 +29,6 @@ public class BoardController {
 	
 	@GetMapping("/board/{groupid}")
 	public ResponseEntity<PageMaker<Board>> getBoards(PageVO pageVO,@PathVariable("groupid")Long gno) {
-		log.info(pageVO.getPage()+"");
 		return new ResponseEntity<>(new PageMaker<Board>(boardService.getListWithPagingAndGroupNumber(pageVO, gno),pageVO),HttpStatus.OK);
 	}
 	
