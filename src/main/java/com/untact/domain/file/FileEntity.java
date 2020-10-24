@@ -1,6 +1,7 @@
 package com.untact.domain.file;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,11 +28,4 @@ public class FileEntity {
 	private Long fileno;//파일 번호
 	
 	private String path;//파일 경로
-	
-	@ManyToOne
-	@JoinColumn
-	private Board board;
-	public void setBoard(Board board) {
-		this.board = board;
-	}
 }

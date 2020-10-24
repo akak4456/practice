@@ -82,8 +82,16 @@ public class Board {
 		return this;
 	}
 	
-	@OneToMany(mappedBy="fileno")
+	@OneToMany(cascade=CascadeType.ALL,orphanRemoval=true,fetch = FetchType.LAZY)
+	@JoinColumn(name="bno")
+	@JsonIgnore
 	private List<FileEntity> files;
+	
+	@JsonIgnore
+	public List<FileEntity> getFiles(){
+		return this.files;
+	}
+	@JsonProperty
 	public void setFiles(List<FileEntity> files) {
 		this.files = files;
 	}

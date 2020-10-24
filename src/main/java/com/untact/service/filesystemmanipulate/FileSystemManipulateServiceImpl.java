@@ -7,6 +7,9 @@ import java.nio.file.Paths;
 import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,9 +41,13 @@ public class FileSystemManipulateServiceImpl implements FileSystemManipulateServ
 	}
 
 	@Override
-	public byte[] getFile(String year, String month, String date, String name) throws IOException{
+	public Resource getFile(String year, String month, String date, String name) throws IOException{
 		Path path = Paths.get(rootPath, year, month, date, name);
-		return Files.readAllBytes(path);
+		String contentType = Files.probeContentType(path);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add(HttpHeaders.CONTENT_TYPE, contentType);
+		return new InputStreamResource(Files.newInputStream(path));
 	}
 
 }

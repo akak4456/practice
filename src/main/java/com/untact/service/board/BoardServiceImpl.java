@@ -44,12 +44,6 @@ public class BoardServiceImpl implements BoardService{
 		board.setGroup(groupEntityRepo.findById(gno).get());
 		board.setMember(member);
 		boardRepo.save(board);
-		List<FileEntity> list = new ArrayList<>();
-		for(FileEntity entity:board.getFiles()) {
-			entity.setBoard(board);
-			list.add(entity);
-		}
-		fileEntityRepo.saveAll(list);
 	}
 
 	@Override

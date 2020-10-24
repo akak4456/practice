@@ -3,6 +3,7 @@ package com.untact.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,14 +31,14 @@ public class FileEntityController {
 		}
 	}
 	@GetMapping("/download/{year}/{month}/{date}/{name}")
-	public ResponseEntity<byte[]> getOne(
+	public ResponseEntity<Resource> getOne(
 			@PathVariable("year") String year,
 			@PathVariable("month") String month,
 			@PathVariable("date") String date,
 			@PathVariable("name") String name){
 		try {
-			byte[] bytes = fileSystemManipulateService.getFile(year,month,date,name);
-			return new ResponseEntity<byte[]>(bytes,HttpStatus.OK);
+			Resource resource = fileSystemManipulateService.getFile(year,month,date,name);
+			return new ResponseEntity<>(resource,HttpStatus.OK);
 		}catch(IOException e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
