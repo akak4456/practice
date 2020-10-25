@@ -20,7 +20,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.untact.demo.UntactenglishstudyApplication;
 import com.untact.domain.board.Board;
 import com.untact.domain.group.GroupEntity;
+import com.untact.domain.member.MemberEntity;
+import com.untact.persistent.file.FileEntityRepository;
 import com.untact.persistent.group.GroupEntityRepository;
+import com.untact.persistent.member.MemberEntityRepository;
 import com.untact.persistent.util.DeleteAllUtil;
 import com.untact.vo.PageVO;
 
@@ -40,16 +43,26 @@ public class BoardRepositoryTest {
 	@Autowired
 	private BoardRepository boardRepo;
 	
+	@Autowired
+	private MemberEntityRepository memberRepo;
+	
+	@Autowired
+	private FileEntityRepository fileRepo;
+	
 	private static final int MAX_ENTITY_COUNT = 105;
 	private static final int EXPECTED_PAGE_COUNT = 11;
 	
 	private GroupEntity group1;
+	
+	private MemberEntity member1;
 	
 	@Before
 	public void setUp() {
 		deleteAllUtil.deleteAllRepo();
 		group1 = new GroupEntity().builder().title("title").build();
 		groupRepo.save(group1);
+		member1 = MemberEntity.builder().name("name").build();
+		memberRepo.save(member1);
 	}
 	@Test
 	public void initTest() {
@@ -57,22 +70,22 @@ public class BoardRepositoryTest {
 	
 	@Test
 	public void getPageWithGroupNumberTest() {
-		List<Board> list = generateBoardList(group1);
+		List<Board> list = generateBoardList(group1,member1);
 		specificPageTest(list,group1,1,10);
 		specificPageTest(list,group1,11,5);
 	}
 	
-	private List<Board> generateBoardList(GroupEntity group){
+	private List<Board> generateBoardList(GroupEntity group,MemberEntity member){
 		List<Board> list = new ArrayList<>();
 		for(int i=0;i<MAX_ENTITY_COUNT;i++) {
-			Board entity = generateBoard("title"+i,"content"+i,group);
+			Board entity = generateBoard("title"+i,"content"+i,group,member);
 			list.add(entity);
 		}
 		boardRepo.saveAll(list);
 		return list;
 	}
-	private Board generateBoard(String title,String content,GroupEntity group) {
-		return new Board().builder().title(title).content(content).group(group).build();
+	private Board generateBoard(String title,String content,GroupEntity group,MemberEntity member) {
+		return new Board().builder().title(title).content(content).group(group).member(member).build();
 	}
 	
 	private void specificPageTest(List<Board> list,GroupEntity group,int pageNum,int expectedPageSize) {
@@ -88,6 +101,8 @@ public class BoardRepositoryTest {
 			//list의 첫번째 원소는 가장 처음에, list의 마지막 원소는 가장 나중에 들어옴
 			//내림차순으로 정렬되었는지 확인하기 위함
 			assertTrue(result.get(resultIdx).getTitle().equals(list.get(i).getTitle()));
+			log.info(result.get(resultIdx).getTitle());
+			log.info(result.get(resultIdx).getMember().getName());
 			resultIdx++;
 		}
 	}

@@ -1,15 +1,18 @@
 package com.untact.domain.file;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
-import com.untact.domain.board.Board;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,4 +31,12 @@ public class FileEntity {
 	private Long fileno;//파일 번호
 	
 	private String path;//파일 경로
+	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@CreationTimestamp
+	private LocalDateTime regdate;//파일 등록 시간
+	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@UpdateTimestamp
+	private LocalDateTime updatedate;//파일 수정 시간
 }

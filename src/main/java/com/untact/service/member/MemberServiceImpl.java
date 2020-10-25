@@ -28,6 +28,7 @@ public class MemberServiceImpl implements MemberService {
 		MemberEntity entity = MemberEntity.builder()
 								.email(memberVO.getEmail())
 								.password(passwordEncoder.encode(memberVO.getPassword()))
+								.name(memberVO.getName())
 								.role(Role.MEMBER)
 								.build();
 		memberRepo.save(entity);
@@ -47,6 +48,7 @@ public class MemberServiceImpl implements MemberService {
 									.mno(oldMember.getMno())
 									.email(oldMember.getEmail())
 									.password(passwordEncoder.encode(memberVO.getPassword()))
+									.name(memberVO.getName())
 									.role(oldMember.getRole())
 									.build();
 		//이메일, 역할은 변경 불가(역할은 관리자만이 바꿀 수 있음) 나머지는 바꿀수도 있음

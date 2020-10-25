@@ -1,8 +1,11 @@
 package com.untact.service.board;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import com.untact.domain.board.Board;
+import com.untact.domain.file.FileEntity;
 import com.untact.domain.member.MemberEntity;
 import com.untact.vo.PageVO;
 

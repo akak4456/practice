@@ -61,7 +61,16 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public Board getOne(Long bno) {
-		// TODO Auto-generated method stub
-		return boardRepo.findById(bno).get();
+		Board board = boardRepo.findById(bno).get();
+		Board ret = Board.builder()
+						.bno(board.getBno())
+						.title(board.getTitle())
+						.content(board.getContent())
+						.member(MemberEntity.builder()
+								.mno(board.getMember().getMno())
+								.role(board.getMember().getRole())
+								.build())
+						.build();
+		return ret;
 	}
 }

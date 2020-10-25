@@ -16,6 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 import lombok.EqualsAndHashCode;
@@ -38,6 +39,8 @@ public class MemberEntity implements UserDetails {
 	private String email;//이메일 주소
 	
 	private String password;//비밀 번호
+	
+	private String name;//사용자 이름
 	
 	@Enumerated(EnumType.STRING)
 	@NotNull

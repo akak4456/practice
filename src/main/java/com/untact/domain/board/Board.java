@@ -65,7 +65,7 @@ public class Board {
 	@ManyToOne
 	@JoinColumn(name="gno")
 	private GroupEntity group;//어떤 그룹이 이 글을 썻는지 나타냄
-	public void setGroup(GroupEntity group) {
+	public void setGroup (GroupEntity group) {
 		this.group = group;
 	}
 	
@@ -79,19 +79,14 @@ public class Board {
 	public Board modifyThisToTargetBoard(Board targetBoard) {
 		this.title = targetBoard.title;
 		this.content = targetBoard.content;
+		this.files.clear();
+		this.files.addAll(targetBoard.files);
 		return this;
 	}
 	
 	@OneToMany(cascade=CascadeType.ALL,orphanRemoval=true,fetch = FetchType.LAZY)
 	@JoinColumn(name="bno")
-	@JsonIgnore
 	private List<FileEntity> files;
-	
-	@JsonIgnore
-	public List<FileEntity> getFiles(){
-		return this.files;
-	}
-	@JsonProperty
 	public void setFiles(List<FileEntity> files) {
 		this.files = files;
 	}
