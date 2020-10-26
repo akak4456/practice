@@ -47,4 +47,9 @@ public class StudyController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	@GetMapping("/study/try/{groupid}")
+	public ResponseEntity<String> tryEntrance(@PathVariable("groupid")Long gno){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		return new ResponseEntity<>(groupService.tryEntrance(gno, member),HttpStatus.OK);
+	}
 }

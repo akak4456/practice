@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.untact.domain.member.MemberEntity;
+import com.untact.security.AuthenticationFacade;
 import com.untact.service.groupinclude.GroupIncludeService;
 import com.untact.vo.GroupWaitingVO;
 
@@ -20,8 +22,10 @@ public class GroupWaitingController {
 	@Autowired
 	private GroupIncludeService groupIncludeService;
 	
-	@PostMapping("/waiting")
-	public ResponseEntity<String> requestJoin(@RequestBody GroupWaitingVO groupWaitingVO	){
+	@PostMapping("/waiting/{groupid}")
+	public ResponseEntity<String> requestJoin(@PathVariable("groupid")Long gno){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		GroupWaitingVO groupWaitingVO = new GroupWaitingVO(gno,member.getMno());
 		groupIncludeService.requestJoin(groupWaitingVO);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}

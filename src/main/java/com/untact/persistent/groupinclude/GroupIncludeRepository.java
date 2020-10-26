@@ -23,4 +23,6 @@ public interface GroupIncludeRepository extends GroupIncludeCustomRepository, Jp
 	@Query("select groupInclude from GroupInclude groupInclude where groupInclude.group.gno=:gno and groupInclude.member.mno=:mno and groupInclude.whichStatus=:whichStatus")
 	public Optional<GroupInclude> findByGroupNumberAndMemberNumberAndWhichStatus(@Param("gno")Long gno,@Param("mno")Long mno,@Param("whichStatus")WhichStatus whichStatus);
 
+	@Query("select groupInclude from GroupInclude groupInclude where groupInclude.group.gno=:gno and groupInclude.member.mno=:mno")
+	public Optional<GroupInclude> findByGroupNumberAndMemberNumber(@Param("gno")Long gno,@Param("mno")Long mno);
 }

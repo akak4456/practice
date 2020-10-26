@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.untact.controller.TryEntranceResult;
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.groupinclude.GroupInclude;
 import com.untact.domain.groupinclude.WhichStatus;
@@ -64,6 +65,24 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public void dismissGroupAuto() {
 		
+	}
+
+	@Override
+	public String tryEntrance(Long gno, MemberEntity member) {
+		Optional<GroupInclude> groupIncludeOptional = groupIncludeRepo.findByGroupNumberAndMemberNumber(gno, member.getMno());
+		if(groupIncludeOptional.isEmpty()) {
+			//가입 시도를 한 적이 없다면
+			return TryEntranceResult.first.toString();
+		}
+		GroupInclude groupInclude = groupIncludeOptional.get();
+		if(groupInclude.getWhichStatus().equals(WhichStatus.LEADER)||groupInclude.getWhichStatus().equals(WhichStatus.FOLLOWER)) {
+			//그룹을 가입한 적이 있다면
+			return TryEntranceResult.success.toString();
+		}
+		if(groupInclude.getWhichStatus().equals(WhichStatus.WAITING)) {
+			return TryEntranceResult.wait.toString();
+		}
+		return TryEntranceResult.denied.toString();
 	}
 
 }
