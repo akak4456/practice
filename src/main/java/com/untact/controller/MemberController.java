@@ -11,6 +11,7 @@ import com.untact.domain.member.MemberEntity;
 import com.untact.security.JwtTokenProvider;
 import com.untact.service.member.MemberService;
 import com.untact.service.member.NoMatchMemberInformationException;
+import com.untact.vo.LoginResultVO;
 import com.untact.vo.MemberVO;
 
 import lombok.extern.java.Log;
@@ -28,10 +29,11 @@ public class MemberController {
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
 	@PostMapping("/member/login")
-	public ResponseEntity<String> login(@RequestBody MemberVO memberVO){
+	public ResponseEntity<LoginResultVO> login(@RequestBody MemberVO memberVO){
 		try {
 			MemberEntity member = memberService.login(memberVO);
-			return new ResponseEntity<>(jwtTokenProvider.createToken(member.getEmail(), member.getRole()),HttpStatus.OK);
+			LoginResultVO ret = new LoginResultVO(jwtTokenProvider.createToken(member.getEmail(), member.getRole()),member.getMno());
+			return new ResponseEntity<>(ret,HttpStatus.OK);
 		}catch(NoMatchMemberInformationException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
