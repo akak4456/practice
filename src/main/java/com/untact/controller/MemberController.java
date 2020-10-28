@@ -32,7 +32,7 @@ public class MemberController {
 	public ResponseEntity<LoginResultVO> login(@RequestBody MemberVO memberVO){
 		try {
 			MemberEntity member = memberService.login(memberVO);
-			LoginResultVO ret = new LoginResultVO(jwtTokenProvider.createToken(member.getEmail(), member.getRole()),member.getMno());
+			LoginResultVO ret = new LoginResultVO(jwtTokenProvider.createToken(member.getEmail(), member.getRole()),member.getMno(),member.getName());
 			return new ResponseEntity<>(ret,HttpStatus.OK);
 		}catch(NoMatchMemberInformationException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

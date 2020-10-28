@@ -13,4 +13,5 @@ public class ChatResponse {
 	private Long mno;
 	private String from;
 	private String msg;
+	private String time;
 }

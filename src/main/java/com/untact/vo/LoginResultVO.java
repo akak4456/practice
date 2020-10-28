@@ -12,4 +12,5 @@ import lombok.Setter;
 public class LoginResultVO {
 	private String token;
 	private Long mno;
+	private String name;
 }
