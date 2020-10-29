@@ -30,6 +30,8 @@ public class MemberServiceImpl implements MemberService {
 								.password(passwordEncoder.encode(memberVO.getPassword()))
 								.name(memberVO.getName())
 								.role(Role.MEMBER)
+								.remainPoint(0L)
+								.refundPoint(0L)
 								.build();
 		memberRepo.save(entity);
 	}

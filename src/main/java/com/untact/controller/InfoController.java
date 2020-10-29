@@ -21,14 +21,6 @@ import lombok.extern.java.Log;
 public class InfoController {
 	@Autowired
 	private MemberService memberService;
-	@GetMapping("/member/info")
-	public ResponseEntity<MemberEntity> getInfo(){
-		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
-		MemberEntity newMember = new MemberEntity().builder().mno(member.getMno()).email(member.getEmail()).role(member.getRole()).build();
-		//사용자에게 보여야할 정보만 넣을 것
-		//절대로 비밀번호는 넣지 말기
-		return new ResponseEntity<>(newMember,HttpStatus.OK);
-	}
 	@PutMapping("/member/info")
 	public ResponseEntity<String> changeInfo(@RequestBody MemberVO memberVO){
 		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();

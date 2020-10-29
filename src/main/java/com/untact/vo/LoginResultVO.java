@@ -1,5 +1,7 @@
 package com.untact.vo;
 
+import com.untact.domain.member.MemberEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LoginResultVO {
 	private String token;
-	private Long mno;
-	private String name;
+	private MemberEntity member;
 }

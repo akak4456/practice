@@ -46,6 +46,22 @@ public class MemberEntity implements UserDetails {
 	@NotNull
 	private Role role;//사용자인가 관리자인가?
 	
+	private Long remainPoint;
+	
+	private Long refundPoint;
+	
+	public MemberEntity copy() {
+		//비밀번호 빼고 나머지
+		return MemberEntity.builder()
+							.mno(this.mno)
+							.email(this.email)
+							.name(this.name)
+							.role(this.role)
+							.remainPoint(this.remainPoint)
+							.refundPoint(this.refundPoint)
+							.build();
+	}
+	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
