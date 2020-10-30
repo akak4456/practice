@@ -52,4 +52,9 @@ public class StudyController {
 		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
 		return new ResponseEntity<>(groupService.tryEntrance(gno, member),HttpStatus.OK);
 	}
+	
+	@GetMapping("/study/one/{groupid}")
+	public ResponseEntity<GroupEntity> getOne(@PathVariable("groupid")Long gno){
+		return new ResponseEntity<>(groupService.getOne(gno),HttpStatus.OK);
+	}
 }

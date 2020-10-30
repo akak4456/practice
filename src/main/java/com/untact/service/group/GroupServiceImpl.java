@@ -85,4 +85,9 @@ public class GroupServiceImpl implements GroupService {
 		return TryEntranceResult.denied.toString();
 	}
 
+	@Override
+	public GroupEntity getOne(Long gno) {
+		return groupRepo.findById(gno).get();
+	}
+
 }
