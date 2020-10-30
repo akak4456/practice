@@ -8,14 +8,17 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
+import com.untact.domain.timetable.TimeTable;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -62,4 +65,11 @@ public class GroupEntity {
 	@UpdateTimestamp
 	private LocalDateTime updatedate;//그룹 수정 시간
 	
+	@OneToOne
+	@JoinColumn(name="tno")
+	@JsonIgnore
+	private TimeTable representativeTimeTable;
+	public void setTimeTable(TimeTable representativeTimeTable) {
+		this.representativeTimeTable = representativeTimeTable;
+	}
 }
