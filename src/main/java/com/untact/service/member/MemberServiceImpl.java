@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.untact.domain.member.MemberEntity;
 import com.untact.domain.member.Role;
+import com.untact.exception.NoMatchMemberInformationException;
 import com.untact.persistent.member.MemberEntityRepository;
 import com.untact.vo.MemberVO;
 

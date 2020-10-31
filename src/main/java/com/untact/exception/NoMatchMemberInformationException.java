@@ -1,4 +1,4 @@
-package com.untact.service.member;
+package com.untact.exception;
 
 public class NoMatchMemberInformationException extends Exception {
 	private static final long serialVersionUID = -106179468640454447L;

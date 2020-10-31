@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.untact.domain.member.MemberEntity;
+import com.untact.exception.NoMatchMemberInformationException;
 import com.untact.security.JwtTokenProvider;
 import com.untact.service.member.MemberService;
-import com.untact.service.member.NoMatchMemberInformationException;
 import com.untact.vo.LoginResultVO;
 import com.untact.vo.MemberVO;
 

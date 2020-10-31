@@ -1,6 +1,7 @@
 package com.untact.service.member;
 
 import com.untact.domain.member.MemberEntity;
+import com.untact.exception.NoMatchMemberInformationException;
 import com.untact.vo.MemberVO;
 
 public interface MemberService {

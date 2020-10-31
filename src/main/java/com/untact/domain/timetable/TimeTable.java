@@ -1,7 +1,5 @@
 package com.untact.domain.timetable;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,8 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import com.untact.domain.board.Board;
 import com.untact.domain.group.GroupEntity;
-import com.untact.domain.group.WillRecruit;
 import com.untact.domain.member.MemberEntity;
 
 import lombok.EqualsAndHashCode;
@@ -44,5 +42,10 @@ public class TimeTable {
 	private MemberEntity member;//사용자와의 관계
 	public void setMember(MemberEntity member) {
 		this.member = member;	
+	}
+	
+	public TimeTable modifyThisToTargetTimeTable(TimeTable targetTimeTable) {
+		this.title = targetTimeTable.title;
+		return this;
 	}
 }

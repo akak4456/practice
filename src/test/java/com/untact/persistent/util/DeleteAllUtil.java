@@ -17,6 +17,8 @@ import com.untact.persistent.incorrectanswernote.IncorrectAnswerNoteRepository;
 import com.untact.persistent.member.MemberEntityRepository;
 import com.untact.persistent.reply.ReplyRepository;
 import com.untact.persistent.score.ScoreRepository;
+import com.untact.persistent.timetable.TimeTableRepository;
+import com.untact.persistent.timetableitem.TimeTableItemRepository;
 import com.untact.persistent.vocabulary.VocabularyRepository;
 import com.untact.persistent.wordincorrectanswernote.WordIncorrectAnswerNoteRepository;
 
@@ -51,10 +53,16 @@ public class DeleteAllUtil {
 	@Autowired
 	private ScoreRepository scoreRepo;
 	@Autowired
+	private TimeTableItemRepository timeTableItemRepo;
+	@Autowired
+	private TimeTableRepository timeTableRepo;
+	@Autowired
 	private VocabularyRepository vocabularyRepo;
 	@Autowired
 	private WordIncorrectAnswerNoteRepository wordIncorrectAnswerNoteRepo;
 	public void deleteAllRepo() {
+		timeTableItemRepo.deleteAllInBatch();
+		timeTableRepo.deleteAllInBatch();
 		connectionRecordRepo.deleteAllInBatch();
 		depositRepo.deleteAllInBatch();
 		groupRuleRepo.deleteAllInBatch();
