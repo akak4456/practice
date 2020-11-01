@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class GeneralChatHandler {
-	@MessageMapping("/send")
-	@SendTo("/sub/group")
+	@MessageMapping("/send/{groupid}")
+	@SendTo("/sub/group/{groupid}")
 	public ChatResponse broadcasting(ChatRequest vo) throws Exception{
 		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
 		Date time = new Date();

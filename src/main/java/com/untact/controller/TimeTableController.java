@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.untact.domain.member.MemberEntity;
 import com.untact.domain.timetable.TimeTable;
 import com.untact.exception.NotIncludeGroupException;
+import com.untact.exception.TimeTableNotCorrectException;
 import com.untact.security.AuthenticationFacade;
 import com.untact.service.timetable.TimeTableService;
 import com.untact.vo.PageMaker;
@@ -48,6 +49,9 @@ public class TimeTableController {
 		} catch (NotIncludeGroupException e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}catch (TimeTableNotCorrectException e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	@PutMapping("/timetable/{groupid}/{timetableid}")
@@ -57,6 +61,9 @@ public class TimeTableController {
 			timeTableService.modifyTimeTable(gno, member.getMno(), tno, timeTableVO.getTimeTable(), timeTableVO.getTimeTableItem());
 			return new ResponseEntity<String>("success",HttpStatus.OK);
 		}catch (NotIncludeGroupException e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		} catch (TimeTableNotCorrectException e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}

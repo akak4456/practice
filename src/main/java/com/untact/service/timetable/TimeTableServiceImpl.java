@@ -13,8 +13,10 @@ import com.untact.domain.groupinclude.GroupInclude;
 import com.untact.domain.groupinclude.WhichStatus;
 import com.untact.domain.member.MemberEntity;
 import com.untact.domain.timetable.TimeTable;
+import com.untact.domain.timetableitem.Time;
 import com.untact.domain.timetableitem.TimeTableItem;
 import com.untact.exception.NotIncludeGroupException;
+import com.untact.exception.TimeTableNotCorrectException;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.timetable.TimeTableRepository;
@@ -47,8 +49,11 @@ public class TimeTableServiceImpl implements TimeTableService {
 	}
 	@Override
 	@Transactional
-	public void addTimeTable(Long gno,MemberEntity member,TimeTable timeTable, List<TimeTableItem> timeTableItem) throws NotIncludeGroupException {
+	public void addTimeTable(Long gno,MemberEntity member,TimeTable timeTable, List<TimeTableItem> timeTableItem) throws NotIncludeGroupException,TimeTableNotCorrectException {
 		groupIncludeCheck(gno,member.getMno());
+		if(!verifyTimeTableItems(timeTableItem)) {
+			throw new TimeTableNotCorrectException();
+		}
 		timeTable.setGroup(groupRepo.findById(gno).get());
 		timeTable.setMember(member);
 		timeTableRepo.save(timeTable);
@@ -60,8 +65,11 @@ public class TimeTableServiceImpl implements TimeTableService {
 	@Override
 	@Transactional
 	public void modifyTimeTable(Long gno,Long mno,Long tno, TimeTable targetTable, List<TimeTableItem> targetTimeTableItem)
-			throws NotIncludeGroupException {
+			throws NotIncludeGroupException,TimeTableNotCorrectException {
 		groupIncludeCheck(gno,mno);
+		if(!verifyTimeTableItems(targetTimeTableItem)) {
+			throw new TimeTableNotCorrectException();
+		}
 		TimeTable oldTimeTable = timeTableRepo.findById(tno).get();
 		TimeTable newTimeTable = oldTimeTable.modifyThisToTargetTimeTable(targetTable);
 		timeTableRepo.save(newTimeTable);
@@ -91,6 +99,24 @@ public class TimeTableServiceImpl implements TimeTableService {
 			//그룹을 가입한 적이 없다면
 			throw new NotIncludeGroupException();
 		}
+	}
+	
+	private boolean verifyTimeTableItems(List<TimeTableItem> timeTableItems) {
+		for(int i=0;i<timeTableItems.size();i++) {
+			TimeTableItem a = timeTableItems.get(i);
+			Time startTime = new Time(a.getStartHour(),a.getStartMinute());
+			Time endTime = new Time(a.getEndHour(),a.getEndMinute());
+			if(endTime.isLessThan(startTime)) {
+				return false;
+			}
+			for(int j=i+1;j<timeTableItems.size();j++) {
+				TimeTableItem b= timeTableItems.get(j);
+				if(a.getDay() == b.getDay()&&a.isOverlap(b)) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 

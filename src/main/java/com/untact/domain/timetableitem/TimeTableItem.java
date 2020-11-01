@@ -50,4 +50,11 @@ public class TimeTableItem {
 	public void setTimeTable (TimeTable timeTable) {
 		this.timeTable = timeTable;
 	}
+	public boolean isOverlap(TimeTableItem b) {
+		Time tStartA = new Time(this.startHour,this.startMinute);
+		Time tEndA = new Time(this.endHour,this.endMinute);
+		Time tStartB = new Time(b.startHour,b.startMinute);
+		Time tEndB = new Time(b.endHour,b.endMinute);
+        return tStartA.isLessThan(tEndB)&&tStartB.isLessThan(tEndA);
+	}
 }
