@@ -29,7 +29,7 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Override
 	public Page<Reply> getListWithPagingAndBoardNumber(PageVO pageVO, Long bno) {
-		return replyRepo.getPageWithBoardNumber(pageVO.makePageable(0, "rno"), bno);
+		return replyRepo.getPageWithBoardNumber(pageVO.makePageable(1, "rno"), bno);
 	}
 
 	@Override

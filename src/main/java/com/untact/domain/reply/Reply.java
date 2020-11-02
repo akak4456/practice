@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -45,6 +47,7 @@ public class Reply {
 	private LocalDateTime updatedate;//댓글 수정 시간
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="gno")
 	private GroupEntity group;//이 답글은 어느 그룹에 속하는가?
 	public void setGroup(GroupEntity group) {
@@ -52,6 +55,7 @@ public class Reply {
 	}
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="mno")
 	private MemberEntity member;//이 답글은 어떤 사용자가 썻는가?
 	public void setMember(MemberEntity member) {
@@ -59,6 +63,7 @@ public class Reply {
 	}
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="bno")
 	private Board board;//어느 board에 속하는가?
 	public void setBoard(Board board) {
