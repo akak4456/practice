@@ -4,6 +4,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.junit.Before;
@@ -47,16 +49,16 @@ public class GroupIncludeRepositoryTest {
 	@Before
 	public void setUp() {
 		deleteAllUtil.deleteAllRepo();
-		member1 = new MemberEntity().builder().email("email1").password("password1").build();
+		member1 = MemberEntity.builder().email("email1").password("password1").build();
 		memberRepo.save(member1);
-		member2 = new MemberEntity().builder().email("email2").password("password2").build();
+		member2 = MemberEntity.builder().email("email2").password("password2").build();
 		memberRepo.save(member2);
-		member3 = new MemberEntity().builder().email("email3").password("password3").build();
+		member3 = MemberEntity.builder().email("email3").password("password3").build();
 		memberRepo.save(member3);
 
-		group1 = new GroupEntity().builder().title("title1").build();
+		group1 = GroupEntity.builder().title("title1").build();
 		groupRepo.save(group1);
-		group2 = new GroupEntity().builder().title("title2").build();
+		group2 = GroupEntity.builder().title("title2").build();
 		groupRepo.save(group2);
 	}
 	@Test
@@ -79,13 +81,13 @@ public class GroupIncludeRepositoryTest {
 	@Test
 	public void findByGroupAndMemberAndWhichStatusTest() {
 		
-		groupIncludeRepo.save(new GroupInclude().builder().group(group1).member(member1).whichStatus(WhichStatus.LEADER).build());
-		groupIncludeRepo.save(new GroupInclude().builder().group(group1).member(member2).whichStatus(WhichStatus.FOLLOWER).build());
-		groupIncludeRepo.save(new GroupInclude().builder().group(group1).member(member3).whichStatus(WhichStatus.FOLLOWER).build());
+		groupIncludeRepo.save(GroupInclude.builder().group(group1).member(member1).whichStatus(WhichStatus.LEADER).build());
+		groupIncludeRepo.save(GroupInclude.builder().group(group1).member(member2).whichStatus(WhichStatus.FOLLOWER).build());
+		groupIncludeRepo.save(GroupInclude.builder().group(group1).member(member3).whichStatus(WhichStatus.FOLLOWER).build());
 	
-		groupIncludeRepo.save(new GroupInclude().builder().group(group2).member(member1).whichStatus(WhichStatus.FOLLOWER).build());
-		groupIncludeRepo.save(new GroupInclude().builder().group(group2).member(member2).whichStatus(WhichStatus.LEADER).build());
-		groupIncludeRepo.save(new GroupInclude().builder().group(group2).member(member3).whichStatus(WhichStatus.FOLLOWER).build());
+		groupIncludeRepo.save(GroupInclude.builder().group(group2).member(member1).whichStatus(WhichStatus.FOLLOWER).build());
+		groupIncludeRepo.save(GroupInclude.builder().group(group2).member(member2).whichStatus(WhichStatus.LEADER).build());
+		groupIncludeRepo.save(GroupInclude.builder().group(group2).member(member3).whichStatus(WhichStatus.FOLLOWER).build());
 		
 		assertTrue(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group1.getGno(),member1.getMno(), WhichStatus.LEADER).isPresent());
 		assertFalse(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group1.getGno(),member2.getMno(), WhichStatus.LEADER).isPresent());
@@ -102,6 +104,21 @@ public class GroupIncludeRepositoryTest {
 		assertTrue(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group2.getGno(),member1.getMno(), WhichStatus.FOLLOWER).isPresent());
 		assertFalse(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group2.getGno(),member2.getMno(), WhichStatus.FOLLOWER).isPresent());
 		assertTrue(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(group2.getGno(),member3.getMno(), WhichStatus.FOLLOWER).isPresent());
+	}
+	
+	@Test
+	public void findMemberByGroupNumberTest() {
+		groupIncludeRepo.save(GroupInclude.builder().group(group1).member(member1).whichStatus(WhichStatus.LEADER).build());
+		groupIncludeRepo.save(GroupInclude.builder().group(group1).member(member2).whichStatus(WhichStatus.FOLLOWER).build());
+		groupIncludeRepo.save(GroupInclude.builder().group(group1).member(member3).whichStatus(WhichStatus.FOLLOWER).build());
+	
+		groupIncludeRepo.save(GroupInclude.builder().group(group2).member(member1).whichStatus(WhichStatus.FOLLOWER).build());
+		groupIncludeRepo.save(GroupInclude.builder().group(group2).member(member2).whichStatus(WhichStatus.LEADER).build());
+		List<MemberEntity> memberList1 = groupIncludeRepo.findMemberByGroupNumber(group1.getGno());
+		assertEquals(memberList1.size(),3);
+		
+		List<MemberEntity> memberList2 = groupIncludeRepo.findMemberByGroupNumber(group2.getGno());
+		assertEquals(memberList2.size(),2);
 	}
 	
 }

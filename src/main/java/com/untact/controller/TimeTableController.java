@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.untact.domain.member.MemberEntity;
 import com.untact.domain.timetable.TimeTable;
+import com.untact.exception.NotGroupLeaderException;
 import com.untact.exception.NotIncludeGroupException;
 import com.untact.exception.TimeTableNotCorrectException;
 import com.untact.security.AuthenticationFacade;
 import com.untact.service.timetable.TimeTableService;
 import com.untact.vo.PageMaker;
 import com.untact.vo.PageVO;
+import com.untact.vo.RepresentativeTimeTableVO;
 import com.untact.vo.TimeTableVO;
 
 @RestController
@@ -78,5 +80,29 @@ public class TimeTableController {
 			e.printStackTrace();
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@GetMapping("/timetable/represent/{groupid}")
+	public ResponseEntity<RepresentativeTimeTableVO> getRepresentativeOne(@PathVariable("groupid")Long gno){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		try {
+			return new ResponseEntity<>(timeTableService.getRepresentativeOne(gno, member),HttpStatus.OK);
+		}catch(NotGroupLeaderException e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	@PutMapping("/timetable/represent/{groupid}")
+	public ResponseEntity<String> modifyTimeTable(@PathVariable("groupid")Long gno,@RequestBody RepresentativeTimeTableVO timeTableVO){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		try {
+			timeTableService.modifyRepresentativeTimeTable(gno, member, timeTableVO.getTimeTable(), timeTableVO.getTimeTableItem());
+			return new ResponseEntity("success",HttpStatus.OK);
+		}catch (NotGroupLeaderException e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}catch (TimeTableNotCorrectException e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		} 
 	}
 }

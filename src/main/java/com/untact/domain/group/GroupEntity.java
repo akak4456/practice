@@ -18,6 +18,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
+import com.untact.domain.representativetimetable.RepresentativeTimeTable;
 import com.untact.domain.timetable.TimeTable;
 
 import lombok.EqualsAndHashCode;
@@ -66,10 +67,10 @@ public class GroupEntity {
 	private LocalDateTime updatedate;//그룹 수정 시간
 	
 	@OneToOne
-	@JoinColumn(name="tno")
+	@JoinColumn(name="rtno")
 	@JsonIgnore
-	private TimeTable representativeTimeTable;
-	public void setTimeTable(TimeTable representativeTimeTable) {
+	private RepresentativeTimeTable representativeTimeTable;
+	public void setRepresentativeTimeTable(RepresentativeTimeTable representativeTimeTable) {
 		this.representativeTimeTable = representativeTimeTable;
 	}
 }
