@@ -15,11 +15,11 @@ public interface RepresentativeTimeTableItemRepository
 		extends JpaRepository<RepresentativeTimeTableItem, Long>, RepresentativeTimeTableItemCustomRepository {
 	@Modifying
 	@Transactional
-	@Query("DELETE FROM RepresentativeTimeTableItem i where i.representativeTimeTable.rtno=:rtno")
-	public int deleteByRepresentativeTimeTableNumber(@Param("rtno")Long rtno);
+	@Query("DELETE FROM RepresentativeTimeTableItem i where i.group.gno=:gno")
+	public int deleteByGroupNumber(@Param("gno")Long gno);
 	
 	
-	@Query("SELECT i FROM RepresentativeTimeTableItem i WHERE i.representativeTimeTable.rtno=:rtno")
-	public List<RepresentativeTimeTableItem> findByRepresentativeTimeTableNumber(@Param("rtno")Long rtno);
+	@Query("SELECT i FROM RepresentativeTimeTableItem i WHERE i.group.gno=:gno")
+	public List<RepresentativeTimeTableItem> findByGroupNumber(@Param("gno")Long gno);
 	
 }

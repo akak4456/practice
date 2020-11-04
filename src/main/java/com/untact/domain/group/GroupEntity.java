@@ -8,17 +8,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
-import com.untact.domain.representativetimetable.RepresentativeTimeTable;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -51,6 +47,8 @@ public class GroupEntity {
 	private Long fineForBeingLate;//지각할 때 벌금
 	
 	private Long fineForBeingAbsence;//결석할 때 벌금
+	
+	private String representativeTimeTableTitle;//대표 시간표 제목
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime duedate;//그룹 기한(그룹이 언제 끝날 것인지)
 	
@@ -65,11 +63,9 @@ public class GroupEntity {
 	@UpdateTimestamp
 	private LocalDateTime updatedate;//그룹 수정 시간
 	
-	@OneToOne
-	@JoinColumn(name="rtno")
-	@JsonIgnore
-	private RepresentativeTimeTable representativeTimeTable;
-	public void setRepresentativeTimeTable(RepresentativeTimeTable representativeTimeTable) {
-		this.representativeTimeTable = representativeTimeTable;
+	public GroupEntity modiftyTitle(String representativeTimeTableTitle) {
+		this.representativeTimeTableTitle = representativeTimeTableTitle;
+		return this;
 	}
+	
 }

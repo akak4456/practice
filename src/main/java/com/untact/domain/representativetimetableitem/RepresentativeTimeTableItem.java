@@ -1,7 +1,6 @@
 package com.untact.domain.representativetimetableitem;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,9 +11,7 @@ import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.untact.domain.group.GroupEntity;
-import com.untact.domain.representativetimetable.RepresentativeTimeTable;
 import com.untact.domain.timetableitem.Time;
 
 import lombok.EqualsAndHashCode;
@@ -47,13 +44,6 @@ public class RepresentativeTimeTableItem {
 	
 	private int endMinute;
 	
-	@ManyToOne
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JoinColumn(name="rtno")
-	private RepresentativeTimeTable representativeTimeTable;//대표 시간표와의 관계
-	public void setRepresentativeTimeTable (RepresentativeTimeTable representativeTimeTable) {
-		this.representativeTimeTable = representativeTimeTable;
-	}
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="gno")

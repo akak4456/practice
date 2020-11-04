@@ -7,5 +7,5 @@ import java.util.Optional;
 import com.untact.domain.attendance.Attendance;
 
 public interface AttendanceCustomRepository {
-	public Long findAttendanceNumberByGroupNumberAndMemberNumberAndBetweenStartTimeAndCurrentTime(Long gno,Long mno,LocalDateTime startTime);
+	public Attendance findAttendanceNumberByGroupNumberAndMemberNumberAndBetweenStartTimeAndCurrentTime(Long gno,Long mno,LocalDateTime startTime);
 }

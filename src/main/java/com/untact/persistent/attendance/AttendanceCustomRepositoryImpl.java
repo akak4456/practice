@@ -15,7 +15,7 @@ public class AttendanceCustomRepositoryImpl extends QuerydslRepositorySupport im
 	}
 
 	@Override
-	public Long findAttendanceNumberByGroupNumberAndMemberNumberAndBetweenStartTimeAndCurrentTime(Long gno,Long mno,LocalDateTime startTime) {
+	public Attendance findAttendanceNumberByGroupNumberAndMemberNumberAndBetweenStartTimeAndCurrentTime(Long gno,Long mno,LocalDateTime startTime) {
 		QAttendance attendance = QAttendance.attendance;
 		JPQLQuery<Attendance> query = from(attendance);
 		query.where(
@@ -23,12 +23,7 @@ public class AttendanceCustomRepositoryImpl extends QuerydslRepositorySupport im
 				.and(attendance.member.mno.eq(mno))
 				.and(attendance.regdate.between(startTime,LocalDateTime.now()))
 				);
-		Attendance a = query.fetchOne();
-		if(a == null) {
-			return -1L;
-		}else {
-			return a.getAno();
-		}
+		return query.fetchOne();
 	}
 
 }

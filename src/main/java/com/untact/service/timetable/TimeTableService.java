@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 import com.untact.domain.member.MemberEntity;
-import com.untact.domain.representativetimetable.RepresentativeTimeTable;
 import com.untact.domain.representativetimetableitem.RepresentativeTimeTableItem;
 import com.untact.domain.timetable.TimeTable;
 import com.untact.domain.timetableitem.TimeTableItem;
@@ -24,5 +23,5 @@ public interface TimeTableService {
 	public void deleteTimeTable(Long gno,Long mno,Long tno) throws NotIncludeGroupException;
 	
 	public RepresentativeTimeTableVO getRepresentativeOne(Long gno,MemberEntity member) throws NotGroupLeaderException;
-	public void modifyRepresentativeTimeTable(Long gno, MemberEntity member, RepresentativeTimeTable targetTable,List<RepresentativeTimeTableItem> targetTimeTableItem) throws NotGroupLeaderException, TimeTableNotCorrectException;
+	public void modifyRepresentativeTimeTable(Long gno, MemberEntity member, String title,List<RepresentativeTimeTableItem> targetTimeTableItem) throws NotGroupLeaderException, TimeTableNotCorrectException;
 }

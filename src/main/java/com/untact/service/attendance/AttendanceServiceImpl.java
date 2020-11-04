@@ -46,17 +46,22 @@ public class AttendanceServiceImpl implements AttendanceService {
 	public TryAttendanceResult attendanceCheck(Long gno, Long mno) {
 		//시간표 아이템 하나의 시간 길이는 최소 1시간이 되어야 함
 		LocalDateTime beforeLateTime = LocalDateTime.now().minusMinutes(beforeLateTimeAmount);
-		Long beforeLateAttendance = attendanceRepo.findAttendanceNumberByGroupNumberAndMemberNumberAndBetweenStartTimeAndCurrentTime(gno, mno, beforeLateTime);
-		LocalDateTime beforeAbsentTime = LocalDateTime.now().minusMinutes(beforeAbsentTimeAmount);
-		Long beforeAbsentAttendance = attendanceRepo.findAttendanceNumberByGroupNumberAndMemberNumberAndBetweenStartTimeAndCurrentTime(gno, mno, beforeAbsentTime);
-		if(beforeLateAttendance != -1L) {
+		Attendance beforeLateAttendance = attendanceRepo.findAttendanceNumberByGroupNumberAndMemberNumberAndBetweenStartTimeAndCurrentTime(gno, mno, beforeLateTime);
+		if(beforeLateAttendance != null) {
 			//지각 시간
-			attendanceRepo.updateStatusByAttendanceNumber(AttendanceStatus.OK, beforeLateAttendance);
-			return TryAttendanceResult.attendance;
+			if(beforeLateAttendance.getStatus() == AttendanceStatus.ABSENT) {
+				attendanceRepo.updateStatusByAttendanceNumber(AttendanceStatus.OK, beforeLateAttendance.getAno());
+				return TryAttendanceResult.attendance;
+			}
 		}
-		if(beforeAbsentAttendance != -1L) {
-			attendanceRepo.updateStatusByAttendanceNumber(AttendanceStatus.OK, beforeAbsentAttendance);
-			return TryAttendanceResult.late;
+		LocalDateTime beforeAbsentTime = LocalDateTime.now().minusMinutes(beforeAbsentTimeAmount);
+		Attendance beforeAbsentAttendance = attendanceRepo.findAttendanceNumberByGroupNumberAndMemberNumberAndBetweenStartTimeAndCurrentTime(gno, mno, beforeAbsentTime);
+		
+		if(beforeAbsentAttendance != null) {
+			if(beforeAbsentAttendance.getStatus() == AttendanceStatus.ABSENT) {
+				attendanceRepo.updateStatusByAttendanceNumber(AttendanceStatus.LATE, beforeAbsentAttendance.getAno());
+				return TryAttendanceResult.late;
+			}
 		}
 		return TryAttendanceResult.notaccept;
 	}

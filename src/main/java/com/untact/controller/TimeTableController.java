@@ -95,7 +95,7 @@ public class TimeTableController {
 	public ResponseEntity<String> modifyTimeTable(@PathVariable("groupid")Long gno,@RequestBody RepresentativeTimeTableVO timeTableVO){
 		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
 		try {
-			timeTableService.modifyRepresentativeTimeTable(gno, member, timeTableVO.getTimeTable(), timeTableVO.getTimeTableItem());
+			timeTableService.modifyRepresentativeTimeTable(gno, member, timeTableVO.getTitle(), timeTableVO.getTimeTableItem());
 			return new ResponseEntity("success",HttpStatus.OK);
 		}catch (NotGroupLeaderException e) {
 			e.printStackTrace();

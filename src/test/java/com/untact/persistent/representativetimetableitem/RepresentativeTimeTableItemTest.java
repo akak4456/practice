@@ -17,10 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.untact.demo.UntactenglishstudyApplication;
 import com.untact.domain.group.GroupEntity;
-import com.untact.domain.representativetimetable.RepresentativeTimeTable;
 import com.untact.domain.representativetimetableitem.RepresentativeTimeTableItem;
 import com.untact.persistent.group.GroupEntityRepository;
-import com.untact.persistent.representativetimetable.RepresentativeTimeTableRepository;
 import com.untact.persistent.util.DeleteAllUtil;
 
 import lombok.extern.java.Log;
@@ -35,9 +33,6 @@ public class RepresentativeTimeTableItemTest {
 	private DeleteAllUtil deleteAllUtil;
 	
 	@Autowired
-	private RepresentativeTimeTableRepository representativeTimeTableRepo;
-	
-	@Autowired
 	private RepresentativeTimeTableItemRepository representativeTimeTableItemRepo;
 	
 	@Autowired
@@ -50,10 +45,10 @@ public class RepresentativeTimeTableItemTest {
 	
 	@Test
 	public void initTest() {
-		GroupEntity group = GroupEntity.builder().title("title").build();
-		groupRepo.save(group);
-		RepresentativeTimeTable table1 = RepresentativeTimeTable.builder().title("title1").build();
-		representativeTimeTableRepo.save(table1);
+		GroupEntity group1 = GroupEntity.builder().title("title1").representativeTimeTableTitle("time1").build();
+		groupRepo.save(group1);
+		GroupEntity group2 = GroupEntity.builder().title("title2").representativeTimeTableTitle("time2").build();
+		groupRepo.save(group2);
 		List<RepresentativeTimeTableItem> list1 = new ArrayList<>();
 		list1.add(RepresentativeTimeTableItem.builder()
 				.title("title1")
@@ -63,8 +58,8 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(12)
 				.endMinute(0)
-				.group(group)
-				.representativeTimeTable(table1).build());
+				.group(group1)
+				.build());
 		list1.add(RepresentativeTimeTableItem.builder()
 				.title("title2")
 				.detail("detail2")
@@ -73,8 +68,8 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(13)
 				.endMinute(0)
-				.group(group)
-				.representativeTimeTable(table1).build());
+				.group(group1)
+				.build());
 		list1.add(RepresentativeTimeTableItem.builder()
 				.title("title3")
 				.detail("detail3")
@@ -83,8 +78,8 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(15)
 				.endMinute(0)
-				.group(group)
-				.representativeTimeTable(table1).build());
+				.group(group1)
+				.build());
 		list1.add(RepresentativeTimeTableItem.builder()
 				.title("title4")
 				.detail("detail4")
@@ -93,8 +88,8 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(12)
 				.endMinute(0)
-				.group(group)
-				.representativeTimeTable(table1).build());
+				.group(group1)
+				.build());
 		list1.add(RepresentativeTimeTableItem.builder()
 				.title("title5")
 				.detail("detail5")
@@ -103,8 +98,8 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(13)
 				.endMinute(0)
-				.group(group)
-				.representativeTimeTable(table1).build());
+				.group(group1)
+				.build());
 		list1.add(RepresentativeTimeTableItem.builder()
 				.title("title6")
 				.detail("detail6")
@@ -113,11 +108,9 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(15)
 				.endMinute(0)
-				.group(group)
-				.representativeTimeTable(table1).build());
+				.group(group1)
+				.build());
 		representativeTimeTableItemRepo.saveAll(list1);
-		RepresentativeTimeTable table2 = RepresentativeTimeTable.builder().title("title2").build();
-		representativeTimeTableRepo.save(table2);
 		List<RepresentativeTimeTableItem> list2 = new ArrayList<>();
 		list2.add(RepresentativeTimeTableItem.builder()
 				.title("title1")
@@ -127,8 +120,8 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(12)
 				.endMinute(0)
-				.group(group)
-				.representativeTimeTable(table2).build());
+				.group(group2)
+				.build());
 		list2.add(RepresentativeTimeTableItem.builder()
 				.title("title2")
 				.detail("detail2")
@@ -137,8 +130,8 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(13)
 				.endMinute(0)
-				.group(group)
-				.representativeTimeTable(table2).build());
+				.group(group2)
+				.build());
 		list2.add(RepresentativeTimeTableItem.builder()
 				.title("title3")
 				.detail("detail3")
@@ -147,8 +140,8 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(15)
 				.endMinute(0)
-				.group(group)
-				.representativeTimeTable(table2).build());
+				.group(group2)
+				.build());
 		list2.add(RepresentativeTimeTableItem.builder()
 				.title("title4")
 				.detail("detail4")
@@ -157,8 +150,8 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(12)
 				.endMinute(0)
-				.group(group)
-				.representativeTimeTable(table2).build());
+				.group(group2)
+				.build());
 		list2.add(RepresentativeTimeTableItem.builder()
 				.title("title5")
 				.detail("detail5")
@@ -167,8 +160,8 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(13)
 				.endMinute(0)
-				.group(group)
-				.representativeTimeTable(table2).build());
+				.group(group2)
+				.build());
 		list2.add(RepresentativeTimeTableItem.builder()
 				.title("title6")
 				.detail("detail6")
@@ -177,8 +170,8 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(15)
 				.endMinute(0)
-				.group(group)
-				.representativeTimeTable(table2).build());
+				.group(group2)
+				.build());
 		representativeTimeTableItemRepo.saveAll(list2);
 		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(0, 10, 0).size(),2);
 		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(0, 10, 1).size(),0);

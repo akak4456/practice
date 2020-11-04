@@ -13,7 +13,6 @@ import com.untact.domain.group.GroupEntity;
 import com.untact.domain.groupinclude.GroupInclude;
 import com.untact.domain.groupinclude.WhichStatus;
 import com.untact.domain.member.MemberEntity;
-import com.untact.domain.representativetimetable.RepresentativeTimeTable;
 import com.untact.domain.representativetimetableitem.RepresentativeTimeTableItem;
 import com.untact.domain.representativetimetableitem.RepresentativeTimeTableItemConstant;
 import com.untact.domain.timetable.TimeTable;
@@ -24,7 +23,6 @@ import com.untact.exception.NotIncludeGroupException;
 import com.untact.exception.TimeTableNotCorrectException;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
-import com.untact.persistent.representativetimetable.RepresentativeTimeTableRepository;
 import com.untact.persistent.representativetimetableitem.RepresentativeTimeTableItemRepository;
 import com.untact.persistent.timetable.TimeTableRepository;
 import com.untact.persistent.timetableitem.TimeTableItemRepository;
@@ -41,8 +39,6 @@ public class TimeTableServiceImpl implements TimeTableService {
 	private TimeTableRepository timeTableRepo;
 	@Autowired
 	private TimeTableItemRepository timeTableItemRepo;
-	@Autowired
-	private RepresentativeTimeTableRepository representativeTimeTableRepo;
 	@Autowired
 	private RepresentativeTimeTableItemRepository representativeTimeTableItemRepo;
 	@Autowired
@@ -118,6 +114,9 @@ public class TimeTableServiceImpl implements TimeTableService {
 			TimeTableItem a = timeTableItems.get(i);
 			Time startTime = new Time(a.getStartHour(),a.getStartMinute());
 			Time endTime = new Time(a.getEndHour(),a.getEndMinute());
+			if(Time.diff(startTime, endTime) < RepresentativeTimeTableItemConstant.minimun) {
+				return false;
+			}
 			if(endTime.isLessThan(startTime)) {
 				return false;
 			}
@@ -136,7 +135,7 @@ public class TimeTableServiceImpl implements TimeTableService {
 			RepresentativeTimeTableItem a = representativeTimeTableItems.get(i);
 			Time startTime = new Time(a.getStartHour(),a.getStartMinute());
 			Time endTime = new Time(a.getEndHour(),a.getEndMinute());
-			if(Time.diff(endTime, startTime) < RepresentativeTimeTableItemConstant.minimun) {
+			if(Time.diff(startTime, endTime) < RepresentativeTimeTableItemConstant.minimun) {
 				return false;
 			}
 			if(endTime.isLessThan(startTime)) {
@@ -156,16 +155,16 @@ public class TimeTableServiceImpl implements TimeTableService {
 		if(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, member.getMno(), WhichStatus.LEADER).isEmpty()) {
 			throw new NotGroupLeaderException();
 		}
-		RepresentativeTimeTable representativeTimeTable = groupRepo.findById(gno).get().getRepresentativeTimeTable();
+		GroupEntity group = groupRepo.findById(gno).get();
+		String title = group.getRepresentativeTimeTableTitle();
 		List<RepresentativeTimeTableItem> representativeTimeTableItem = null;
-		if(representativeTimeTable != null) {
-			Long rtno = representativeTimeTable.getRtno();
-			representativeTimeTableItem = representativeTimeTableItemRepo.findByRepresentativeTimeTableNumber(rtno);
+		if(title != null) {
+			representativeTimeTableItem = representativeTimeTableItemRepo.findByGroupNumber(group.getGno());
 		}
-		return new RepresentativeTimeTableVO(representativeTimeTable,representativeTimeTableItem);
+		return new RepresentativeTimeTableVO(title,representativeTimeTableItem);
 	}
 	@Override
-	public void modifyRepresentativeTimeTable(Long gno, MemberEntity member, RepresentativeTimeTable targetTable,
+	public void modifyRepresentativeTimeTable(Long gno, MemberEntity member, String title,
 			List<RepresentativeTimeTableItem> targetTimeTableItem) throws NotGroupLeaderException, TimeTableNotCorrectException {
 		if(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, member.getMno(), WhichStatus.LEADER).isEmpty()) {
 			throw new NotGroupLeaderException();
@@ -174,27 +173,13 @@ public class TimeTableServiceImpl implements TimeTableService {
 			throw new TimeTableNotCorrectException();
 		}
 		GroupEntity group = groupRepo.findById(gno).get();
-		RepresentativeTimeTable oldTimeTable = group.getRepresentativeTimeTable();
-		if(oldTimeTable == null) {
-			//처음 저장하는 것이라면
-			representativeTimeTableRepo.save(targetTable);
-			for(RepresentativeTimeTableItem item:targetTimeTableItem) {
-				item.setRepresentativeTimeTable(targetTable);
-				item.setGroup(group);
-			}
-			representativeTimeTableItemRepo.saveAll(targetTimeTableItem);
-			group.setRepresentativeTimeTable(targetTable);
-			groupRepo.save(group);
-		}else {
-			RepresentativeTimeTable newTimeTable = oldTimeTable.modifyThisToTargetTimeTable(targetTable);
-			representativeTimeTableRepo.save(newTimeTable);
-			representativeTimeTableItemRepo.deleteByRepresentativeTimeTableNumber(newTimeTable.getRtno());
-			for(RepresentativeTimeTableItem item:targetTimeTableItem) {
-				item.setRepresentativeTimeTable(newTimeTable);
-				item.setGroup(group);
-			}
-			representativeTimeTableItemRepo.saveAll(targetTimeTableItem);
+		String oldTitle = group.getRepresentativeTimeTableTitle();
+		GroupEntity newGroup = group.modiftyTitle(title);
+		groupRepo.save(newGroup);
+		for(RepresentativeTimeTableItem item:targetTimeTableItem) {
+			item.setGroup(group);
 		}
+		representativeTimeTableItemRepo.saveAll(targetTimeTableItem);
 	}
 	
 
