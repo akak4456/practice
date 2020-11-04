@@ -1,11 +1,11 @@
 package com.untact.domain.attendance;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,12 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
-import com.untact.domain.board.Board;
-import com.untact.domain.board.Kind;
-import com.untact.domain.file.FileEntity;
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
 
@@ -47,15 +46,17 @@ public class Attendance {
 	@CreationTimestamp
 	private LocalDateTime regdate;//출석 등록 시간
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="gno")
+	@JsonIgnore
 	private GroupEntity group;//그룹과의 관계
 	public void setGroup (GroupEntity group) {
 		this.group = group;
 	}
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="mno")
+	@JsonIgnore
 	private MemberEntity member;//멤버와의 관계
 	public void setMember(MemberEntity member) {
 		this.member = member;	

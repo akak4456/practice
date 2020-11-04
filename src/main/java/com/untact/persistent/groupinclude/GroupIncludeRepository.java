@@ -1,6 +1,7 @@
 package com.untact.persistent.groupinclude;
 
 import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -9,10 +10,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.untact.domain.group.GroupEntity;
 import com.untact.domain.groupinclude.GroupInclude;
 import com.untact.domain.groupinclude.WhichStatus;
-import com.untact.domain.member.MemberEntity;
 
 public interface GroupIncludeRepository extends GroupIncludeCustomRepository, JpaRepository<GroupInclude, Long> {
 	@Modifying
@@ -25,4 +24,7 @@ public interface GroupIncludeRepository extends GroupIncludeCustomRepository, Jp
 
 	@Query("select groupInclude from GroupInclude groupInclude where groupInclude.group.gno=:gno and groupInclude.member.mno=:mno")
 	public Optional<GroupInclude> findByGroupNumberAndMemberNumber(@Param("gno")Long gno,@Param("mno")Long mno);
+	
+	@Query("SELECT COUNT(*) FROM GroupInclude groupInclude WHERE groupInclude.group.gno=:gno AND groupInclude.whichStatus IN :statusList")
+	public Long findCountByGroupNumber(@Param("gno")Long gno,@Param("statusList")Set<WhichStatus> statusList);
 }

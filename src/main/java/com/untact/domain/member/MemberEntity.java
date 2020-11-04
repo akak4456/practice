@@ -62,6 +62,11 @@ public class MemberEntity implements UserDetails {
 							.build();
 	}
 	
+	public MemberEntity updateRemainPoint(Long newRemainPoint) {
+		this.remainPoint = newRemainPoint;
+		return this;
+	}
+	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

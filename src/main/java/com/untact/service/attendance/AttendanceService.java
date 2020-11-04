@@ -1,6 +1,10 @@
 package com.untact.service.attendance;
 
+import org.springframework.data.domain.Page;
+
 import com.untact.controller.TryAttendanceResult;
+import com.untact.domain.attendance.Attendance;
+import com.untact.vo.PageVO;
 
 public interface AttendanceService {
 	/*
@@ -13,4 +17,8 @@ public interface AttendanceService {
 	public void insertAbsentPeriodically(int day, int startHour, int startMinute);
 	
 	public TryAttendanceResult attendanceCheck(Long gno, Long mno);
+	
+	public Long getRemainTime(Long gno, Long mno);
+	
+	public Page<Attendance> getList(PageVO pageVO,Long gno, Long mno);
 }

@@ -1,5 +1,9 @@
 package com.untact.socket;
 
+import java.util.List;
+
+import com.untact.domain.member.MemberEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,4 +18,5 @@ public class ChatResponse {
 	private String from;
 	private String msg;
 	private String time;
+	private List<MemberEntity> userList;
 }

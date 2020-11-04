@@ -1,5 +1,6 @@
 package com.untact.service.group;
 
+import java.util.EnumSet;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -15,13 +16,16 @@ import com.untact.domain.groupinclude.WhichStatus;
 import com.untact.domain.member.MemberEntity;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
+import com.untact.vo.GroupInfoVO;
 import com.untact.vo.PageVO;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.extern.java.Log;
 @Service
 @NoArgsConstructor
 @AllArgsConstructor
+@Log
 public class GroupServiceImpl implements GroupService {
 	@Autowired
 	private GroupEntityRepository groupRepo;
@@ -86,8 +90,15 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public GroupEntity getOne(Long gno) {
-		return groupRepo.findById(gno).get();
+	public GroupInfoVO getOne(Long gno) {
+		GroupEntity group = groupRepo.findById(gno).get();
+		Long memberCount = groupIncludeRepo.findCountByGroupNumber(gno,EnumSet.of(WhichStatus.LEADER,WhichStatus.FOLLOWER));
+		return new GroupInfoVO(group,memberCount);
+	}
+
+	@Override
+	public boolean tryLeaderEntrance(Long gno, MemberEntity member) {
+		return groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, member.getMno(), WhichStatus.LEADER).isPresent();
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.untact.domain.deposit.Deposit;
 import com.untact.domain.member.MemberEntity;
+import com.untact.exception.UnableToPayDepositException;
 import com.untact.security.AuthenticationFacade;
 import com.untact.service.deposit.DepositService;
 import com.untact.vo.AmountVO;
@@ -36,12 +37,12 @@ public class DepositController {
 		}
 	}
 	@PostMapping("/deposit/{groupid}")
-	public ResponseEntity<String> addDeposit(@PathVariable("groupid")Long gno,@RequestBody AmountVO amountVO){
+	public ResponseEntity<String> addDeposit(@PathVariable("groupid")Long gno){
 		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
 		try {
-			depositService.addDeposit(gno, member, amountVO);
+			depositService.addDeposit(gno, member);
 			return new ResponseEntity<>("success",HttpStatus.OK);
-		}catch(DataIntegrityViolationException e) {
+		}catch(UnableToPayDepositException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}

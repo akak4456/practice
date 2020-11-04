@@ -14,6 +14,7 @@ import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
 import com.untact.security.AuthenticationFacade;
 import com.untact.service.group.GroupService;
+import com.untact.vo.GroupInfoVO;
 import com.untact.vo.PageMaker;
 import com.untact.vo.PageVO;
 
@@ -54,7 +55,17 @@ public class StudyController {
 	}
 	
 	@GetMapping("/study/one/{groupid}")
-	public ResponseEntity<GroupEntity> getOne(@PathVariable("groupid")Long gno){
+	public ResponseEntity<GroupInfoVO> getOne(@PathVariable("groupid")Long gno){
 		return new ResponseEntity<>(groupService.getOne(gno),HttpStatus.OK);
+	}
+	
+	@GetMapping("/study/try/leader/{groupid}")
+	public ResponseEntity<String> tryLeaderEntrance(@PathVariable("groupid")Long gno){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		if(groupService.tryLeaderEntrance(gno, member)) {
+			return new ResponseEntity<>("success",HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 }
