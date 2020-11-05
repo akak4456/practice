@@ -15,6 +15,7 @@ import com.untact.domain.groupinclude.WhichStatus;
 import com.untact.domain.member.MemberEntity;
 import com.untact.domain.representativetimetable.RepresentativeTimeTable;
 import com.untact.domain.representativetimetableitem.RepresentativeTimeTableItem;
+import com.untact.domain.representativetimetableitem.RepresentativeTimeTableItemConstant;
 import com.untact.domain.timetable.TimeTable;
 import com.untact.domain.timetableitem.Time;
 import com.untact.domain.timetableitem.TimeTableItem;
@@ -135,6 +136,9 @@ public class TimeTableServiceImpl implements TimeTableService {
 			RepresentativeTimeTableItem a = representativeTimeTableItems.get(i);
 			Time startTime = new Time(a.getStartHour(),a.getStartMinute());
 			Time endTime = new Time(a.getEndHour(),a.getEndMinute());
+			if(Time.diff(endTime, startTime) < RepresentativeTimeTableItemConstant.minimun) {
+				return false;
+			}
 			if(endTime.isLessThan(startTime)) {
 				return false;
 			}

@@ -3,6 +3,7 @@ package com.untact.persistent.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.untact.persistent.attendance.AttendanceRepository;
 import com.untact.persistent.board.BoardRepository;
 import com.untact.persistent.connectionrecord.ConnectionRecordRepository;
 import com.untact.persistent.deposit.DepositRepository;
@@ -26,6 +27,8 @@ import com.untact.persistent.wordincorrectanswernote.WordIncorrectAnswerNoteRepo
 
 @Component
 public class DeleteAllUtil {
+	@Autowired
+	private AttendanceRepository attendanceRepo;
 	@Autowired
 	private BoardRepository boardRepo;
 	@Autowired
@@ -67,8 +70,8 @@ public class DeleteAllUtil {
 	@Autowired
 	private WordIncorrectAnswerNoteRepository wordIncorrectAnswerNoteRepo;
 	public void deleteAllRepo() {
+		attendanceRepo.deleteAllInBatch();
 		representativeTimeTableItemRepo.deleteAllInBatch();
-		representativeTimeTableRepo.deleteAllInBatch();
 		timeTableItemRepo.deleteAllInBatch();
 		timeTableRepo.deleteAllInBatch();
 		connectionRecordRepo.deleteAllInBatch();
@@ -87,5 +90,6 @@ public class DeleteAllUtil {
 		englishSpellingRepo.deleteAllInBatch();
 		memberRepo.deleteAllInBatch();
 		groupRepo.deleteAllInBatch();
+		representativeTimeTableRepo.deleteAllInBatch();
 	}
 }

@@ -26,5 +26,6 @@ public class AttendanceScheduler {
 		int day = curTime.getDayOfWeek().getValue()-1;//Mon-1 Sun-7 이므로 거기에다 1을 빼야 함
 		int hour = curTime.getHour();
 		int minute = curTime.getMinute();
+		attendanceService.insertAbsentPeriodically(day, hour, minute);
 	}
 }

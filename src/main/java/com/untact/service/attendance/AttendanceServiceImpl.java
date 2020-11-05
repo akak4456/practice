@@ -1,14 +1,64 @@
 package com.untact.service.attendance;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.untact.controller.TryAttendanceResult;
+import com.untact.domain.attendance.Attendance;
+import com.untact.domain.attendance.AttendanceStatus;
+import com.untact.persistent.attendance.AttendanceRepository;
+import com.untact.persistent.groupinclude.GroupIncludeRepository;
+import com.untact.persistent.representativetimetableitem.RepresentativeTimeTableItemRepository;
+import com.untact.vo.GroupAndMemberVO;
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
-
+	@Autowired
+	private RepresentativeTimeTableItemRepository representativeTimeTableRepo;
+	@Autowired
+	private GroupIncludeRepository groupIncludeRepo;
+	@Autowired
+	private AttendanceRepository attendanceRepo;
+	private static final long beforeLateTimeAmount = 30;//단위는 분, 이 시간 전까지는 지각이 아니다. 그러나 이 시간 이후로는 지각이다
+	private static final long beforeAbsentTimeAmount = 60;//단이는 분, 이 시간 전까지는 결석이 아니다. 그러나 이 시간 이후로든 결석이다
 	@Override
-	public void insertAbsentPeriodically() {
-		// TODO Auto-generated method stub
-
+	@Transactional
+	public void insertAbsentPeriodically(int day, int startHour, int startMinute) {
+		List<Long> ids = representativeTimeTableRepo.findGroupNumberByDayAndStartTime(day, startHour, startMinute);
+		List<GroupAndMemberVO> groupAndMemberList = groupIncludeRepo.findMemberByGroupNumber(ids);
+		List<Attendance> attendanceList = groupAndMemberList.stream()
+												.map(
+														vo->Attendance.builder()
+																.status(AttendanceStatus.ABSENT)
+																.group(vo.getGroup())
+																.member(vo.getMember())
+																.build())
+												.collect(Collectors.toList());
+		attendanceRepo.saveAll(attendanceList);
+	}
+	@Override
+	public TryAttendanceResult attendanceCheck(Long gno, Long mno) {
+		//시간표 아이템 하나의 시간 길이는 최소 1시간이 되어야 함
+		LocalDateTime beforeLateTime = LocalDateTime.now().minusMinutes(beforeLateTimeAmount);
+		Long beforeLateAttendance = attendanceRepo.findAttendanceNumberByGroupNumberAndMemberNumberAndBetweenStartTimeAndCurrentTime(gno, mno, beforeLateTime);
+		LocalDateTime beforeAbsentTime = LocalDateTime.now().minusMinutes(beforeAbsentTimeAmount);
+		Long beforeAbsentAttendance = attendanceRepo.findAttendanceNumberByGroupNumberAndMemberNumberAndBetweenStartTimeAndCurrentTime(gno, mno, beforeAbsentTime);
+		if(beforeLateAttendance != -1L) {
+			//지각 시간
+			attendanceRepo.updateStatusByAttendanceNumber(AttendanceStatus.OK, beforeLateAttendance);
+			return TryAttendanceResult.attendance;
+		}
+		if(beforeAbsentAttendance != -1L) {
+			attendanceRepo.updateStatusByAttendanceNumber(AttendanceStatus.OK, beforeAbsentAttendance);
+			return TryAttendanceResult.late;
+		}
+		return TryAttendanceResult.notaccept;
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.untact.service.attendance;
 
-import org.springframework.stereotype.Service;
+import com.untact.controller.TryAttendanceResult;
 
 public interface AttendanceService {
 	/*
@@ -10,5 +10,7 @@ public interface AttendanceService {
 	 모두 결석 처리 함
 	 3. 출석 체크를 누른 사람에 한해서 출석 또는 지각으로 상태 변경
 	 */
-	public void insertAbsentPeriodically();
+	public void insertAbsentPeriodically(int day, int startHour, int startMinute);
+	
+	public TryAttendanceResult attendanceCheck(Long gno, Long mno);
 }

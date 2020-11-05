@@ -22,6 +22,4 @@ public interface RepresentativeTimeTableItemRepository
 	@Query("SELECT i FROM RepresentativeTimeTableItem i WHERE i.representativeTimeTable.rtno=:rtno")
 	public List<RepresentativeTimeTableItem> findByRepresentativeTimeTableNumber(@Param("rtno")Long rtno);
 	
-	@Query("SELECT i FROM RepresentativeTimeTableItem i WHERE i.day=:day and i.startHour=:startHour and i.startMinute=:startMinute")
-	public List<RepresentativeTimeTableItem> findByDayAndStartTime(@Param("day")int day,@Param("startHour")int startHour, @Param("startMinute")int startMinute);
 }

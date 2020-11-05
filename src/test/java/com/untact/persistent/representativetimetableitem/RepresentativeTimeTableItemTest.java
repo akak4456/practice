@@ -16,8 +16,10 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.untact.demo.UntactenglishstudyApplication;
+import com.untact.domain.group.GroupEntity;
 import com.untact.domain.representativetimetable.RepresentativeTimeTable;
 import com.untact.domain.representativetimetableitem.RepresentativeTimeTableItem;
+import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.representativetimetable.RepresentativeTimeTableRepository;
 import com.untact.persistent.util.DeleteAllUtil;
 
@@ -38,6 +40,9 @@ public class RepresentativeTimeTableItemTest {
 	@Autowired
 	private RepresentativeTimeTableItemRepository representativeTimeTableItemRepo;
 	
+	@Autowired
+	private GroupEntityRepository groupRepo;
+	
 	@Before
 	public void setUp() {
 		deleteAllUtil.deleteAllRepo();
@@ -45,6 +50,8 @@ public class RepresentativeTimeTableItemTest {
 	
 	@Test
 	public void initTest() {
+		GroupEntity group = GroupEntity.builder().title("title").build();
+		groupRepo.save(group);
 		RepresentativeTimeTable table1 = RepresentativeTimeTable.builder().title("title1").build();
 		representativeTimeTableRepo.save(table1);
 		List<RepresentativeTimeTableItem> list1 = new ArrayList<>();
@@ -56,6 +63,7 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(12)
 				.endMinute(0)
+				.group(group)
 				.representativeTimeTable(table1).build());
 		list1.add(RepresentativeTimeTableItem.builder()
 				.title("title2")
@@ -65,6 +73,7 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(13)
 				.endMinute(0)
+				.group(group)
 				.representativeTimeTable(table1).build());
 		list1.add(RepresentativeTimeTableItem.builder()
 				.title("title3")
@@ -74,6 +83,7 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(15)
 				.endMinute(0)
+				.group(group)
 				.representativeTimeTable(table1).build());
 		list1.add(RepresentativeTimeTableItem.builder()
 				.title("title4")
@@ -83,6 +93,7 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(12)
 				.endMinute(0)
+				.group(group)
 				.representativeTimeTable(table1).build());
 		list1.add(RepresentativeTimeTableItem.builder()
 				.title("title5")
@@ -92,6 +103,7 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(13)
 				.endMinute(0)
+				.group(group)
 				.representativeTimeTable(table1).build());
 		list1.add(RepresentativeTimeTableItem.builder()
 				.title("title6")
@@ -101,6 +113,7 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(15)
 				.endMinute(0)
+				.group(group)
 				.representativeTimeTable(table1).build());
 		representativeTimeTableItemRepo.saveAll(list1);
 		RepresentativeTimeTable table2 = RepresentativeTimeTable.builder().title("title2").build();
@@ -114,6 +127,7 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(12)
 				.endMinute(0)
+				.group(group)
 				.representativeTimeTable(table2).build());
 		list2.add(RepresentativeTimeTableItem.builder()
 				.title("title2")
@@ -123,6 +137,7 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(13)
 				.endMinute(0)
+				.group(group)
 				.representativeTimeTable(table2).build());
 		list2.add(RepresentativeTimeTableItem.builder()
 				.title("title3")
@@ -132,6 +147,7 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(15)
 				.endMinute(0)
+				.group(group)
 				.representativeTimeTable(table2).build());
 		list2.add(RepresentativeTimeTableItem.builder()
 				.title("title4")
@@ -141,6 +157,7 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(12)
 				.endMinute(0)
+				.group(group)
 				.representativeTimeTable(table2).build());
 		list2.add(RepresentativeTimeTableItem.builder()
 				.title("title5")
@@ -150,6 +167,7 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(13)
 				.endMinute(0)
+				.group(group)
 				.representativeTimeTable(table2).build());
 		list2.add(RepresentativeTimeTableItem.builder()
 				.title("title6")
@@ -159,19 +177,20 @@ public class RepresentativeTimeTableItemTest {
 				.startMinute(0)
 				.endHour(15)
 				.endMinute(0)
+				.group(group)
 				.representativeTimeTable(table2).build());
 		representativeTimeTableItemRepo.saveAll(list2);
-		assertEquals(representativeTimeTableItemRepo.findByDayAndStartTime(0, 10, 0).size(),2);
-		assertEquals(representativeTimeTableItemRepo.findByDayAndStartTime(0, 10, 1).size(),0);
-		assertEquals(representativeTimeTableItemRepo.findByDayAndStartTime(0, 11, 0).size(),2);
-		assertEquals(representativeTimeTableItemRepo.findByDayAndStartTime(0, 11, 1).size(),0);
-		assertEquals(representativeTimeTableItemRepo.findByDayAndStartTime(0, 13, 0).size(),2);
-		assertEquals(representativeTimeTableItemRepo.findByDayAndStartTime(0, 13, 1).size(),0);
-		assertEquals(representativeTimeTableItemRepo.findByDayAndStartTime(1, 10, 0).size(),2);
-		assertEquals(representativeTimeTableItemRepo.findByDayAndStartTime(1, 10, 1).size(),0);
-		assertEquals(representativeTimeTableItemRepo.findByDayAndStartTime(1, 11, 0).size(),2);
-		assertEquals(representativeTimeTableItemRepo.findByDayAndStartTime(1, 11, 1).size(),0);
-		assertEquals(representativeTimeTableItemRepo.findByDayAndStartTime(1, 13, 0).size(),2);
-		assertEquals(representativeTimeTableItemRepo.findByDayAndStartTime(1, 13, 1).size(),0);
+		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(0, 10, 0).size(),2);
+		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(0, 10, 1).size(),0);
+		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(0, 11, 0).size(),2);
+		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(0, 11, 1).size(),0);
+		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(0, 13, 0).size(),2);
+		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(0, 13, 1).size(),0);
+		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(1, 10, 0).size(),2);
+		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(1, 10, 1).size(),0);
+		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(1, 11, 0).size(),2);
+		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(1, 11, 1).size(),0);
+		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(1, 13, 0).size(),2);
+		assertEquals(representativeTimeTableItemRepo.findGroupNumberByDayAndStartTime(1, 13, 1).size(),0);
 	}
 }

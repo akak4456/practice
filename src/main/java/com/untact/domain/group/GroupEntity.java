@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import com.untact.domain.representativetimetable.RepresentativeTimeTable;
-import com.untact.domain.timetable.TimeTable;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

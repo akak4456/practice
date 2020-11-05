@@ -19,4 +19,9 @@ public class Time {
             return false;
         }
     }
+	public static int diff(Time start, Time end) {
+		//end-start의 차이
+		//단위는 분
+		return (end.hour-start.hour)*60+(end.minute-start.minute);
+	}
 }

@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +22,7 @@ import com.untact.domain.member.MemberEntity;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.member.MemberEntityRepository;
 import com.untact.persistent.util.DeleteAllUtil;
+import com.untact.vo.GroupAndMemberVO;
 
 import lombok.extern.java.Log;
 
@@ -114,10 +113,11 @@ public class GroupIncludeRepositoryTest {
 	
 		groupIncludeRepo.save(GroupInclude.builder().group(group2).member(member1).whichStatus(WhichStatus.FOLLOWER).build());
 		groupIncludeRepo.save(GroupInclude.builder().group(group2).member(member2).whichStatus(WhichStatus.LEADER).build());
-		List<MemberEntity> memberList1 = groupIncludeRepo.findMemberByGroupNumber(group1.getGno());
+		List<Long> id1 = List.of(group1.getGno());
+		List<GroupAndMemberVO> memberList1 = groupIncludeRepo.findMemberByGroupNumber(id1);
 		assertEquals(memberList1.size(),3);
-		
-		List<MemberEntity> memberList2 = groupIncludeRepo.findMemberByGroupNumber(group2.getGno());
+		List<Long> id2 = List.of(group2.getGno());
+		List<GroupAndMemberVO> memberList2 = groupIncludeRepo.findMemberByGroupNumber(id2);
 		assertEquals(memberList2.size(),2);
 	}
 	

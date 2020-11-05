@@ -2,8 +2,8 @@ package com.untact.persistent.groupinclude;
 
 import java.util.List;
 
-import com.untact.domain.member.MemberEntity;
+import com.untact.vo.GroupAndMemberVO;
 
 public interface GroupIncludeCustomRepository {
-	public List<MemberEntity> findMemberByGroupNumber(Long gno);
+	public List<GroupAndMemberVO> findMemberByGroupNumber(List<Long> gno);
 }
