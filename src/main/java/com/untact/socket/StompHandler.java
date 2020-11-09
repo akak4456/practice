@@ -1,6 +1,8 @@
 package com.untact.socket;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -43,10 +45,14 @@ public class StompHandler implements ChannelInterceptor {
     		//memberMap.get(accessor.getDestination()).remove(accessor.getSessionId());
     		String sessionId = accessor.getSessionId();
     		String destination = sessionIdToDestination.get(sessionId);
-    		memberMap.get(destination).remove(sessionId);
     		//시스템 메시지 전송
-    		List<MemberEntity> list = new ArrayList<>(StompHandler.memberMap.get(destination).values());
-    		messagingTemplate.convertAndSend(destination, new ChatResponse(0L,"시스템","사용자퇴장","시간",list));
+    		MemberEntity member = memberMap.get(destination).get(sessionId);
+    		memberMap.get(destination).remove(sessionId);
+    		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
+    		Date time = new Date();
+    		String time1 = format1.format(time);
+    		List<MemberEntity> list = new ArrayList<>(memberMap.get(destination).values());
+    		messagingTemplate.convertAndSend(destination, new ChatResponse(0L,"시스템",member.getName()+"님이 퇴장하십니다.",time1,list));
     	}
     	return message;
     }
