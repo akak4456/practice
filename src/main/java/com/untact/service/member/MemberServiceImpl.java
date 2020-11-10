@@ -2,10 +2,13 @@ package com.untact.service.member;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.untact.domain.member.EmailCheck;
 import com.untact.domain.member.MemberEntity;
 import com.untact.domain.member.Role;
 import com.untact.exception.NoMatchMemberInformationException;
@@ -24,7 +27,8 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberEntityRepository memberRepo;
 	@Override
-	public void addMember(MemberVO memberVO) {
+	@Transactional
+	public Long addMember(MemberVO memberVO) {
 		//보안, 입력확인등 별도의 과정 필요함
 		MemberEntity entity = MemberEntity.builder()
 								.email(memberVO.getEmail())
@@ -33,8 +37,10 @@ public class MemberServiceImpl implements MemberService {
 								.role(Role.MEMBER)
 								.remainPoint(0L)
 								.refundPoint(0L)
+								.emailCheck(EmailCheck.N)
 								.build();
 		memberRepo.save(entity);
+		return entity.getMno();
 	}
 	@Override
 	public MemberEntity login(MemberVO memberVO) throws NoMatchMemberInformationException {
@@ -61,5 +67,16 @@ public class MemberServiceImpl implements MemberService {
 	public void deleteInfo(Long mno) {
 		memberRepo.deleteById(mno);
 	}
-
+	@Override
+	public boolean isDuplicateEmail(String email) {
+		return memberRepo.findByEmail(email).isPresent();
+	}
+	@Override
+	public void updateAuthKey(String email, String authKey) {
+		memberRepo.updateAuthKeyByEmail(authKey, email);
+	}
+	@Override
+	public void updateIsEmailCheckToTrue(String email) {
+		memberRepo.updateEmailCheckByEmail(EmailCheck.Y, email);
+	}
 }

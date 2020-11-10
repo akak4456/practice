@@ -16,7 +16,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 import lombok.EqualsAndHashCode;
@@ -50,6 +49,12 @@ public class MemberEntity implements UserDetails {
 	
 	private Long refundPoint;
 	
+	@Enumerated(EnumType.STRING)
+	@NotNull
+	private EmailCheck emailCheck;
+	
+	private String authKey;
+	
 	public MemberEntity copy() {
 		//비밀번호 빼고 나머지
 		return MemberEntity.builder()
@@ -59,6 +64,7 @@ public class MemberEntity implements UserDetails {
 							.role(this.role)
 							.remainPoint(this.remainPoint)
 							.refundPoint(this.refundPoint)
+							.emailCheck(this.emailCheck)
 							.build();
 	}
 	
