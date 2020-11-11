@@ -13,6 +13,8 @@ import com.untact.domain.member.MemberEntity;
 import com.untact.domain.member.Role;
 import com.untact.exception.NoMatchMemberInformationException;
 import com.untact.persistent.member.MemberEntityRepository;
+import com.untact.vo.ChangeMemberInfoVO;
+import com.untact.vo.ChangeMemberPasswordVO;
 import com.untact.vo.MemberVO;
 
 import lombok.AllArgsConstructor;
@@ -52,16 +54,19 @@ public class MemberServiceImpl implements MemberService {
 		return entity.get();
 	}
 	@Override
-	public void changeInfo(MemberEntity oldMember,MemberVO memberVO) {
-		MemberEntity newMember = MemberEntity.builder()
-									.mno(oldMember.getMno())
-									.email(oldMember.getEmail())
-									.password(passwordEncoder.encode(memberVO.getPassword()))
-									.name(memberVO.getName())
-									.role(oldMember.getRole())
-									.build();
-		//이메일, 역할은 변경 불가(역할은 관리자만이 바꿀 수 있음) 나머지는 바꿀수도 있음
+	public void changeInfo(MemberEntity oldMember,ChangeMemberInfoVO memberVO) {
+		MemberEntity newMember = oldMember.modifyInfo(memberVO);
+		//이메일, 역할, 비밀번호는 변경 불가(역할은 관리자만이 바꿀 수 있음) 나머지는 바꿀수도 있음
 		memberRepo.save(newMember);
+	}
+	@Override
+	public boolean changePassword(MemberEntity oldMember, ChangeMemberPasswordVO memberVO) {
+		if(!passwordEncoder.matches(memberVO.getOldPw(),oldMember.getPassword())) {
+			return false;
+		}
+		MemberEntity newMember = oldMember.modifyPassword(passwordEncoder.encode(memberVO.getNewPw()));
+		memberRepo.save(newMember);
+		return true;
 	}
 	@Override
 	public void deleteInfo(Long mno) {

@@ -17,6 +17,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.sun.istack.NotNull;
+import com.untact.vo.ChangeMemberInfoVO;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -73,6 +74,15 @@ public class MemberEntity implements UserDetails {
 		return this;
 	}
 	
+	public MemberEntity modifyInfo(ChangeMemberInfoVO vo) {
+		this.name = vo.getName();
+		return this;
+	}
+	
+	public MemberEntity modifyPassword(String encodedPassword) {
+		this.password = encodedPassword;
+		return this;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
