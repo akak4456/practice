@@ -27,4 +27,5 @@ public interface GroupIncludeRepository extends GroupIncludeCustomRepository, Jp
 	
 	@Query("SELECT COUNT(*) FROM GroupInclude groupInclude WHERE groupInclude.group.gno=:gno AND groupInclude.whichStatus IN :statusList")
 	public Long findCountByGroupNumber(@Param("gno")Long gno,@Param("statusList")Set<WhichStatus> statusList);
+
 }

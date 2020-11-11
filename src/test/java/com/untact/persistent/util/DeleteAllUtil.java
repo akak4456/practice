@@ -6,11 +6,9 @@ import org.springframework.stereotype.Component;
 import com.untact.persistent.attendance.AttendanceRepository;
 import com.untact.persistent.board.BoardRepository;
 import com.untact.persistent.connectionrecord.ConnectionRecordRepository;
-import com.untact.persistent.deposit.DepositRepository;
 import com.untact.persistent.englishdictionary.EnglishDictionaryRepository;
 import com.untact.persistent.englishspelling.EnglishSpellingRepository;
 import com.untact.persistent.file.FileEntityRepository;
-import com.untact.persistent.fine.FineRepository;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.grouprule.GroupRuleRepository;
@@ -33,15 +31,11 @@ public class DeleteAllUtil {
 	@Autowired
 	private ConnectionRecordRepository connectionRecordRepo;
 	@Autowired
-	private DepositRepository depositRepo;
-	@Autowired
 	private EnglishDictionaryRepository englishDictionaryRepo;
 	@Autowired
 	private EnglishSpellingRepository englishSpellingRepo;
 	@Autowired
 	private FileEntityRepository fileRepo;
-	@Autowired
-	private FineRepository fineRepo;
 	@Autowired
 	private GroupEntityRepository groupRepo;
 	@Autowired
@@ -72,12 +66,10 @@ public class DeleteAllUtil {
 		timeTableItemRepo.deleteAllInBatch();
 		timeTableRepo.deleteAllInBatch();
 		connectionRecordRepo.deleteAllInBatch();
-		depositRepo.deleteAllInBatch();
 		groupRuleRepo.deleteAllInBatch();
 		incorrectAnswerNoteRepo.deleteAllInBatch();
 		wordIncorrectAnswerNoteRepo.deleteAllInBatch();
 		scoreRepo.deleteAllInBatch();
-		fineRepo.deleteAllInBatch();
 		replyRepo.deleteAllInBatch();
 		fileRepo.deleteAllInBatch();
 		boardRepo.deleteAllInBatch();

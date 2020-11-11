@@ -43,7 +43,17 @@ public class GroupServiceImpl implements GroupService {
 	public void addGroup(GroupEntity group,MemberEntity member) {
 		// group add를 신청한 member는 자동으로 group leader가 된다.
 		groupRepo.save(group);
-		groupIncludeRepo.save(new GroupInclude().builder().group(group).member(member).whichStatus(WhichStatus.LEADER).build());
+		groupIncludeRepo.save(new GroupInclude().builder()
+									.group(group)
+									.member(member)
+									.whichStatus(WhichStatus.LEADER)
+									.deposit(0L)
+									.fine(0L)
+									.reward(0L)
+									.attendance(0L)
+									.absent(0L)
+									.late(0L)
+									.build());
 	}
 
 	@Transactional

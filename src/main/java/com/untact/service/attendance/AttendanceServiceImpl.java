@@ -9,16 +9,17 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.untact.controller.TryAttendanceResult;
 import com.untact.domain.attendance.Attendance;
 import com.untact.domain.attendance.AttendanceStatus;
+import com.untact.domain.group.GroupEntity;
+import com.untact.domain.groupinclude.GroupInclude;
 import com.untact.persistent.attendance.AttendanceRepository;
+import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.representativetimetableitem.RepresentativeTimeTableItemRepository;
-import com.untact.vo.GroupAndMemberVO;
 import com.untact.vo.PageVO;
 
 import lombok.extern.java.Log;
@@ -26,6 +27,8 @@ import lombok.extern.java.Log;
 @Service
 @Log
 public class AttendanceServiceImpl implements AttendanceService {
+	@Autowired
+	private GroupEntityRepository groupRepo;
 	@Autowired
 	private RepresentativeTimeTableItemRepository representativeTimeTableRepo;
 	@Autowired
@@ -38,8 +41,10 @@ public class AttendanceServiceImpl implements AttendanceService {
 	@Transactional
 	public void insertAbsentPeriodically(int day, int startHour, int startMinute) {
 		List<Long> ids = representativeTimeTableRepo.findGroupNumberByDayAndStartTime(day, startHour, startMinute);
-		List<GroupAndMemberVO> groupAndMemberList = groupIncludeRepo.findMemberByGroupNumber(ids);
-		List<Attendance> attendanceList = groupAndMemberList.stream()
+		
+		
+		List<GroupInclude> groupIncludes = groupIncludeRepo.findByGroupNumbers(ids);
+		List<Attendance> attendanceList = groupIncludes.stream()
 												.map(
 														vo->Attendance.builder()
 																.status(AttendanceStatus.ABSENT)
@@ -48,9 +53,17 @@ public class AttendanceServiceImpl implements AttendanceService {
 																.build())
 												.collect(Collectors.toList());
 		attendanceRepo.saveAll(attendanceList);
+		//우선 결석 벌금을 부과 나중에 출석을 하면 벌금이 삭감되는 식
+		for(GroupInclude include:groupIncludes) {
+			include.addFine(include.getGroup().getFineForBeingAbsence());
+			include.incrementAbsent();
+		}
+		groupIncludeRepo.saveAll(groupIncludes);
 	}
+	@Transactional
 	@Override
 	public TryAttendanceResult attendanceCheck(Long gno, Long mno) {
+		GroupEntity group = groupRepo.findById(gno).get();
 		//시간표 아이템 하나의 시간 길이는 최소 1시간이 되어야 함
 		LocalDateTime beforeLateTime = LocalDateTime.now().minusMinutes(beforeLateTimeAmount);
 		Attendance beforeLateAttendance = attendanceRepo.findAttendanceNumberByGroupNumberAndMemberNumberAndBetweenStartTimeAndCurrentTime(gno, mno, beforeLateTime);
@@ -58,6 +71,10 @@ public class AttendanceServiceImpl implements AttendanceService {
 			//지각 시간
 			if(beforeLateAttendance.getStatus() == AttendanceStatus.ABSENT) {
 				attendanceRepo.updateStatusByAttendanceNumber(AttendanceStatus.OK, beforeLateAttendance.getAno());
+				GroupInclude old = groupIncludeRepo.findByGroupNumberAndMemberNumber(gno, mno).get();
+				old.subFine(group.getFineForBeingAbsence());
+				old.changeAbsentToAttendance();
+				groupIncludeRepo.save(old);
 				return TryAttendanceResult.attendance;
 			}
 		}
@@ -67,6 +84,10 @@ public class AttendanceServiceImpl implements AttendanceService {
 		if(beforeAbsentAttendance != null) {
 			if(beforeAbsentAttendance.getStatus() == AttendanceStatus.ABSENT) {
 				attendanceRepo.updateStatusByAttendanceNumber(AttendanceStatus.LATE, beforeAbsentAttendance.getAno());
+				GroupInclude old = groupIncludeRepo.findByGroupNumberAndMemberNumber(gno, mno).get();
+				old.subFine(group.getFineForBeingAbsence()-group.getFineForBeingLate());
+				old.changeAbsentToLate();
+				groupIncludeRepo.save(old);
 				return TryAttendanceResult.late;
 			}
 		}
