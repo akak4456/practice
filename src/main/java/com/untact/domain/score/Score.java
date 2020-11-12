@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
 
@@ -32,6 +35,7 @@ public class Score {
 	private Long scoreAmount;//점수 크기
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
 	private GroupEntity group;//이 점수는 어떤 그룹에 속하나?
 	public void setGroup(GroupEntity group) {
@@ -39,6 +43,7 @@ public class Score {
 	}
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
 	private MemberEntity member;//이 멤버의 점수 크기는 무엇인가?
 	public void setMember(MemberEntity member) {

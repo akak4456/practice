@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.untact.domain.board.Board;
 import com.untact.domain.board.Kind;
 import com.untact.domain.englishspelling.EnglishSpelling;
@@ -35,6 +38,7 @@ public class WordIncorrectAnswerNote {
 	private String reason;//단어 틀린 이유
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
 	private EnglishSpelling englishSpelling;
 	public void setEnglishSpelling(EnglishSpelling englishSpelling) {

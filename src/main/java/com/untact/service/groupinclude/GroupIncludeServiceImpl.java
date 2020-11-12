@@ -2,6 +2,7 @@ package com.untact.service.groupinclude;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -37,9 +38,13 @@ public class GroupIncludeServiceImpl implements GroupIncludeService {
 
 	}
 	@Override
-	public void requestJoin(GroupWaitingVO groupWaitingVO) {
+	public boolean requestJoin(GroupWaitingVO groupWaitingVO) {
 		Optional<GroupEntity> groupEntity = groupRepo.findById(groupWaitingVO.getGno());
 		Optional<MemberEntity> memberEntity = memberRepo.findById(groupWaitingVO.getMno());
+		if(groupIncludeRepo.findCountByGroupNumber(groupWaitingVO.getGno(), Set.of(WhichStatus.LEADER,WhichStatus.FOLLOWER)) >= groupEntity.get().getMaximumNumberOfPeople()) {
+			//사람이 다꽉찾다면
+			 return false;
+		}
 		GroupInclude include = GroupInclude.builder()
 									.group(groupEntity.get())
 									.member(memberEntity.get())
@@ -52,6 +57,7 @@ public class GroupIncludeServiceImpl implements GroupIncludeService {
 									.late(0L)
 									.build();
 		groupIncludeRepo.save(include);
+		return true;
 	}
 	@Override
 	public void acceptJoin(Long gino) {
@@ -80,13 +86,6 @@ public class GroupIncludeServiceImpl implements GroupIncludeService {
 			return false;
 		}
 	}
-	@Override
-	public List<MemberManageVO> getListWithGroupNumber(Long gno,MemberEntity member) throws NotGroupLeaderException {
-		Optional<GroupInclude> include = groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, member.getMno(), WhichStatus.LEADER);
-		if(include.isEmpty()) {
-			throw new NotGroupLeaderException();
-		}
-		return groupIncludeRepo.findMemberManageByGroupNumber(gno);
-	}
+	
 
 }

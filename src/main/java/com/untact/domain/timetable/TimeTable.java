@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.untact.domain.board.Board;
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
@@ -31,6 +34,7 @@ public class TimeTable {
 	private String title;//시간표 제목
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="gno")
 	private GroupEntity group;//그룹과의 관계
 	public void setGroup (GroupEntity group) {
@@ -38,6 +42,7 @@ public class TimeTable {
 	}
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="mno")
 	private MemberEntity member;//사용자와의 관계
 	public void setMember(MemberEntity member) {

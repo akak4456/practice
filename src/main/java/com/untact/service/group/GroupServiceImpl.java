@@ -1,7 +1,10 @@
 package com.untact.service.group;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -16,6 +19,7 @@ import com.untact.domain.groupinclude.WhichStatus;
 import com.untact.domain.member.MemberEntity;
 import com.untact.persistent.group.GroupEntityRepository;
 import com.untact.persistent.groupinclude.GroupIncludeRepository;
+import com.untact.persistent.member.MemberEntityRepository;
 import com.untact.vo.GroupInfoVO;
 import com.untact.vo.PageVO;
 
@@ -31,6 +35,8 @@ public class GroupServiceImpl implements GroupService {
 	private GroupEntityRepository groupRepo;
 	@Autowired
 	private GroupIncludeRepository groupIncludeRepo;
+	@Autowired
+	private MemberEntityRepository memberRepo;
 	
 	@Transactional
 	@Override
@@ -71,7 +77,20 @@ public class GroupServiceImpl implements GroupService {
 			//리더가 아니라면
 			return false;
 		}
-		//나중에 dismiss할 코드를 추가할 것
+		List<GroupInclude> includes = groupIncludeRepo.findByGroupNumber(gno);
+		int n = includes.size();//총 사람 수
+		Long totalFine = groupIncludeRepo.findSumOfFineByGroupNumber(gno, Set.of(WhichStatus.LEADER,WhichStatus.FOLLOWER));
+		Long totalReward = groupIncludeRepo.findSumOfRewardByGroupNumber(gno, Set.of(WhichStatus.LEADER,WhichStatus.FOLLOWER));
+		Long totalDepositForEjectedPeople = groupIncludeRepo.findSumOfDepositByGroupNumber(gno, Set.of(WhichStatus.EJECT));
+		Long nDiv = (totalDepositForEjectedPeople+totalFine-totalReward)/n;
+		List<MemberEntity> members = new ArrayList<>();
+		for(GroupInclude inc:includes) {
+			MemberEntity mem = inc.getMember();
+			mem.addRefundPoint(inc.getDeposit()-inc.getFine()+inc.getReward()+nDiv);
+			members.add(mem);
+		}
+		memberRepo.saveAll(members);//환급금을 돌려 준다.
+		groupRepo.deleteById(gno);//그룹을 삭제한다.
 		return true;
 	}
 	
@@ -95,6 +114,10 @@ public class GroupServiceImpl implements GroupService {
 		}
 		if(groupInclude.getWhichStatus().equals(WhichStatus.WAITING)) {
 			return TryEntranceResult.wait.toString();
+		}
+		GroupEntity group = groupRepo.findById(gno).get();
+		if(groupIncludeRepo.findCountByGroupNumber(gno, Set.of(WhichStatus.LEADER,WhichStatus.FOLLOWER)) >= group.getMaximumNumberOfPeople()) {
+			return TryEntranceResult.full.toString();
 		}
 		return TryEntranceResult.denied.toString();
 	}

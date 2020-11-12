@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -48,6 +50,7 @@ public class GroupRule {
 	private LocalDateTime updatedate;//그룹 룰 수정 시간
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
 	private GroupEntity group;//이 룰은 어떤 그룹에 속할 것이냐?
 	public void setGroup(GroupEntity group) {

@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -47,6 +49,7 @@ public class Attendance {
 	private LocalDateTime regdate;//출석 등록 시간
 	
 	@ManyToOne(fetch=FetchType.LAZY)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="gno")
 	@JsonIgnore
 	private GroupEntity group;//그룹과의 관계
@@ -55,6 +58,7 @@ public class Attendance {
 	}
 	
 	@ManyToOne(fetch=FetchType.LAZY)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="mno")
 	@JsonIgnore
 	private MemberEntity member;//멤버와의 관계

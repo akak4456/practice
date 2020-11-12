@@ -26,8 +26,12 @@ public class GroupWaitingController {
 	public ResponseEntity<String> requestJoin(@PathVariable("groupid")Long gno){
 		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
 		GroupWaitingVO groupWaitingVO = new GroupWaitingVO(gno,member.getMno());
-		groupIncludeService.requestJoin(groupWaitingVO);
-		return new ResponseEntity<>("success",HttpStatus.OK);
+		if(groupIncludeService.requestJoin(groupWaitingVO)) {
+			return new ResponseEntity<>("success",HttpStatus.OK);
+		}else {
+			//사람이 다 찾을 경우에
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@PutMapping("/waiting/{gino}/accept")

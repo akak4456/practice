@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -42,6 +44,7 @@ public class Vocabulary {
 	private LocalDateTime updatedate;//단어장 수정 시간
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
 	private GroupEntity group;//이 단어장은 어떤 그룹에 속해 있나?
 	public void setGroup(GroupEntity group) {
@@ -49,6 +52,7 @@ public class Vocabulary {
 	}
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
 	private MemberEntity member;//이 단어장은 누가 썻는가?
 	public void setMember(MemberEntity member) {
@@ -56,6 +60,7 @@ public class Vocabulary {
 	}
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
 	private EnglishSpelling englishSpelling;
 	public void setEnglishSpelling(EnglishSpelling englishSpelling) {

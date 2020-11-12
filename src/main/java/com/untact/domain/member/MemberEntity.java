@@ -83,6 +83,10 @@ public class MemberEntity implements UserDetails {
 		this.password = encodedPassword;
 		return this;
 	}
+	
+	public void addRefundPoint(Long amount) {
+		this.refundPoint += amount;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

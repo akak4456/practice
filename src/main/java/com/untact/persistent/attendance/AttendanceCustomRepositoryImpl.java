@@ -1,6 +1,8 @@
 package com.untact.persistent.attendance;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -8,10 +10,11 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
+import com.querydsl.core.Tuple;
 import com.querydsl.jpa.JPQLQuery;
 import com.untact.domain.attendance.Attendance;
 import com.untact.domain.attendance.QAttendance;
-import com.untact.domain.board.Board;
+import com.untact.vo.AttendanceVO;
 
 public class AttendanceCustomRepositoryImpl extends QuerydslRepositorySupport implements AttendanceCustomRepository {
 	public AttendanceCustomRepositoryImpl() {
@@ -38,6 +41,24 @@ public class AttendanceCustomRepositoryImpl extends QuerydslRepositorySupport im
 		Long totalCount = query.fetchCount();
 		List<Attendance> list = getQuerydsl().applyPagination(pageable, query).fetch();
 		return new PageImpl<Attendance>(list,pageable,totalCount);
+	}
+
+	@Override
+	public List<AttendanceVO> getAttendanceResponseWithGroupNumberAndLocalDate(Long gno, LocalDate time) {
+		QAttendance attendance = QAttendance.attendance;
+		JPQLQuery<Tuple> query = from(attendance).select(
+										attendance.member.mno,
+										attendance.member.name,
+										attendance.status
+									);
+		query.where(attendance.group.gno.eq(gno)
+					.and(attendance.regdate.between(time.atStartOfDay(), time.plusDays(1L).atStartOfDay())));
+		List<Tuple> tuple = query.fetch();
+		List<AttendanceVO> response = new ArrayList<>();
+		for(Tuple t:tuple) {
+			response.add(new AttendanceVO(t.get(attendance.member.mno),t.get(attendance.member.name),t.get(attendance.status).toString()));
+		}
+		return response;
 	}
 
 }

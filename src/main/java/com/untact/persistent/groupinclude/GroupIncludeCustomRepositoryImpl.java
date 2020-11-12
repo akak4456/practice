@@ -10,6 +10,7 @@ import com.querydsl.jpa.JPQLQuery;
 import com.untact.domain.group.QGroupEntity;
 import com.untact.domain.groupinclude.GroupInclude;
 import com.untact.domain.groupinclude.QGroupInclude;
+import com.untact.domain.groupinclude.WhichStatus;
 import com.untact.domain.member.QMemberEntity;
 import com.untact.vo.MemberManageVO;
 
@@ -27,7 +28,11 @@ public class GroupIncludeCustomRepositoryImpl extends QuerydslRepositorySupport
 		JPQLQuery<GroupInclude> query = from(groupInclude);
 		query.innerJoin(groupInclude.group,group).fetchJoin();
 		query.innerJoin(groupInclude.member,member).fetchJoin();
-		query.where(groupInclude.group.gno.in(gno));
+		query.where(groupInclude.group.gno.in(gno)
+					.and(
+							groupInclude.whichStatus.eq(WhichStatus.LEADER)
+							.or(groupInclude.whichStatus.eq(WhichStatus.FOLLOWER))
+						));
 		return query.fetch();
 	}
 
@@ -35,6 +40,7 @@ public class GroupIncludeCustomRepositoryImpl extends QuerydslRepositorySupport
 	public List<MemberManageVO> findMemberManageByGroupNumber(Long gno) {
 		QGroupInclude groupInclude = QGroupInclude.groupInclude;
 		JPQLQuery<Tuple> query = from(groupInclude).select(
+													groupInclude.member.mno,
 													groupInclude.member.name,
 													groupInclude.attendance,
 													groupInclude.absent,
@@ -43,11 +49,12 @@ public class GroupIncludeCustomRepositoryImpl extends QuerydslRepositorySupport
 													groupInclude.fine,
 													groupInclude.reward
 													);
-		query.where(groupInclude.group.gno.eq(gno));
+		query.where(groupInclude.group.gno.eq(gno).and(groupInclude.whichStatus.eq(WhichStatus.LEADER).or(groupInclude.whichStatus.eq(WhichStatus.FOLLOWER))));
 		List<Tuple> tupleList = query.fetch();
 		List<MemberManageVO> list = new ArrayList<>();
 		for(Tuple t:tupleList) {
 			list.add(MemberManageVO.builder()
+									.mno(t.get(groupInclude.member.mno))
 									.name(t.get(groupInclude.member.name))
 									.attendance(t.get(groupInclude.attendance))
 									.absent(t.get(groupInclude.absent))
@@ -59,5 +66,21 @@ public class GroupIncludeCustomRepositoryImpl extends QuerydslRepositorySupport
 					);
 		}
 		return list;
+	}
+
+	@Override
+	public List<GroupInclude> findByGroupNumber(Long gno) {
+		QGroupInclude groupInclude = QGroupInclude.groupInclude;
+		QGroupEntity group = QGroupEntity.groupEntity;
+		QMemberEntity member = QMemberEntity.memberEntity;
+		JPQLQuery<GroupInclude> query = from(groupInclude);
+		query.innerJoin(groupInclude.group,group).fetchJoin();
+		query.innerJoin(groupInclude.member,member).fetchJoin();
+		query.where(groupInclude.group.gno.eq(gno)
+					.and(
+						groupInclude.whichStatus.eq(WhichStatus.LEADER)
+						.or(groupInclude.whichStatus.eq(WhichStatus.FOLLOWER))
+						));
+		return query.fetch();
 	}
 }

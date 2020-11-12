@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class MemberManageVO {
+	private Long mno;
 	private String name;
 	private Long attendance;
 	private Long absent;

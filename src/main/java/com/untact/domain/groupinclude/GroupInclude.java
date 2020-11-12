@@ -12,7 +12,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -23,9 +22,11 @@ import com.untact.domain.member.MemberEntity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @Entity
@@ -54,6 +55,7 @@ public class GroupInclude {
 	private Long late;//지각 횟수
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="gno")
 	private GroupEntity group;//그룹 포함과 그룹과의 관계
 	public void setGroup(GroupEntity group) {
@@ -80,6 +82,26 @@ public class GroupInclude {
 	}
 	
 	public void incrementAbsent() {
+		this.absent++;
+	}
+	
+	public void changeAttendanceToLate() {
+		this.attendance--;
+		this.late++;
+	}
+	
+	public void changeAttendanceToAbsent() {
+		this.attendance--;
+		this.absent++;
+	}
+	
+	public void changeLateToAttendance() {
+		this.late--;
+		this.attendance++;
+	}
+	
+	public void changeLateToAbsent() {
+		this.late--;
 		this.absent++;
 	}
 	

@@ -8,6 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
 
@@ -32,6 +35,7 @@ public class IncorrectAnswerNote {
 	private String reason;//문제 틀린 이유
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
 	private GroupEntity group;
 	public void setGroup(GroupEntity group) {
@@ -39,6 +43,7 @@ public class IncorrectAnswerNote {
 	}
 	
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
 	private MemberEntity member;
 	public void setMember(MemberEntity member) {
