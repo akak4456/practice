@@ -13,4 +13,5 @@ public class AttendanceVO {
 	private Long mno;
 	private String name;
 	private String status;
+	private Long ano;
 }

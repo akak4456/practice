@@ -49,6 +49,7 @@ public class AttendanceCustomRepositoryImpl extends QuerydslRepositorySupport im
 		JPQLQuery<Tuple> query = from(attendance).select(
 										attendance.member.mno,
 										attendance.member.name,
+										attendance.ano,
 										attendance.status
 									);
 		query.where(attendance.group.gno.eq(gno)
@@ -56,7 +57,7 @@ public class AttendanceCustomRepositoryImpl extends QuerydslRepositorySupport im
 		List<Tuple> tuple = query.fetch();
 		List<AttendanceVO> response = new ArrayList<>();
 		for(Tuple t:tuple) {
-			response.add(new AttendanceVO(t.get(attendance.member.mno),t.get(attendance.member.name),t.get(attendance.status).toString()));
+			response.add(new AttendanceVO(t.get(attendance.member.mno),t.get(attendance.member.name),t.get(attendance.status).toString(),t.get(attendance.ano)));
 		}
 		return response;
 	}

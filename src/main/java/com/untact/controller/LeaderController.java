@@ -85,4 +85,19 @@ public class LeaderController {
 		return new ResponseEntity<>(new AttendanceResponse(leaderService.getAttendanceListWithGroupNumberAndLocalDate(gno, time)),HttpStatus.OK);
 	}
 	
+	@PutMapping("/leader/attendance/{groupid}/{targetMno}/{attendanceid}/{oldStatus}/{newStatus}")
+	public ResponseEntity<String> changeAttendance(
+			@PathVariable("groupid")Long gno,
+			@PathVariable("targetMno")Long targetMno,
+			@PathVariable("attendanceid")Long ano,
+			@PathVariable("oldStatus")String oldStatus,
+			@PathVariable("newStatus")String newStatus){
+		MemberEntity leader = AuthenticationFacade.getMemberEntityFromAuthentication();
+		if(leaderService.changeAttendance(gno, leader, targetMno,ano, oldStatus, newStatus)) {
+			return new ResponseEntity<>("success",HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 }

@@ -15,4 +15,5 @@ public interface LeaderService {
 	public boolean changeFine(Long gno,MemberEntity leader,Long targetMno,Long newAmount);
 	
 	public List<AttendanceVO> getAttendanceListWithGroupNumberAndLocalDate(Long gno,LocalDate time);
+	public boolean changeAttendance(Long gno,MemberEntity leader,Long targetMno,Long ano,String oldStatus,String newStatus);
 }
