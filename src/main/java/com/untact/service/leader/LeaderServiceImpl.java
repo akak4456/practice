@@ -121,4 +121,15 @@ public class LeaderServiceImpl implements LeaderService {
 		attendanceRepo.updateStatusByAttendanceNumber(newStat, ano);
 		return true;
 	}
+	@Override
+	public List<GroupInclude> getWaitingList(Long gno) {
+		return groupIncludeRepo.findByGroupNumberAndWhichStatus(gno, WhichStatus.WAITING);
+	}
+	@Override
+	public boolean rejectAll(Long gno, MemberEntity leader) {
+		if(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, leader.getMno(), WhichStatus.LEADER).isEmpty()) 
+			return false;
+		groupIncludeRepo.rejectAllGroup(gno);
+		return true;
+	}
 }

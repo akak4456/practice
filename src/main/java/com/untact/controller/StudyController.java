@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -63,6 +64,15 @@ public class StudyController {
 	public ResponseEntity<String> tryLeaderEntrance(@PathVariable("groupid")Long gno){
 		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
 		if(groupService.tryLeaderEntrance(gno, member)) {
+			return new ResponseEntity<>("success",HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	@PutMapping("/study/{groupid}")
+	public ResponseEntity<String> modifyGroup(@PathVariable("groupid")Long gno,@RequestBody GroupEntity newGroup){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		if(groupService.modifyGroup(gno, member, newGroup)) {
 			return new ResponseEntity<>("success",HttpStatus.OK);
 		}else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

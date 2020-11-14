@@ -34,15 +34,17 @@ public class GroupWaitingController {
 		}
 	}
 	
-	@PutMapping("/waiting/{gino}/accept")
-	public ResponseEntity<String> acceptJoin(@PathVariable("gino")Long gino){
-		groupIncludeService.acceptJoin(gino);
+	@PutMapping("/waiting/{groupid}/{gino}/accept")
+	public ResponseEntity<String> acceptJoin(@PathVariable("groupid")Long gno,@PathVariable("gino")Long gino){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		groupIncludeService.acceptJoin(gno,gino,member);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
 	
-	@PutMapping("/waiting/{gino}/reject")
-	public ResponseEntity<String> rejectJoin(@PathVariable("gino")Long gino){
-		groupIncludeService.rejectJoin(gino);
+	@PutMapping("/waiting/{groupid}/{gino}/reject")
+	public ResponseEntity<String> rejectJoin(@PathVariable("groupid")Long gno,@PathVariable("gino")Long gino){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		groupIncludeService.rejectJoin(gno,gino,member);
 		return new ResponseEntity<>("success",HttpStatus.OK);
 	}
 }

@@ -60,12 +60,30 @@ public class GroupIncludeServiceImpl implements GroupIncludeService {
 		return true;
 	}
 	@Override
-	public void acceptJoin(Long gino) {
+	public boolean acceptJoin(Long gno,Long gino,MemberEntity leader) {
+		GroupEntity group = groupRepo.findById(gno).get();
+		if(groupIncludeRepo.findCountByGroupNumber(gno, Set.of(WhichStatus.LEADER,WhichStatus.FOLLOWER)) >= group.getMaximumNumberOfPeople()) {
+			//사람이 다꽉찾다면
+			 return false;
+		}
+		if(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, leader.getMno(), WhichStatus.LEADER).isEmpty()) {
+			return false;
+		}
 		groupIncludeRepo.updateStatusByGroupIncludeNumber(WhichStatus.FOLLOWER, gino);
+		return true;
 	}
 	@Override
-	public void rejectJoin(Long gino) {
+	public boolean rejectJoin(Long gno,Long gino,MemberEntity leader) {
+		GroupEntity group = groupRepo.findById(gno).get();
+		if(groupIncludeRepo.findCountByGroupNumber(gno, Set.of(WhichStatus.LEADER,WhichStatus.FOLLOWER)) >= group.getMaximumNumberOfPeople()) {
+			//사람이 다꽉찾다면
+			 return false;
+		}
+		if(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, leader.getMno(), WhichStatus.LEADER).isEmpty()) {
+			return false;
+		}
 		groupIncludeRepo.updateStatusByGroupIncludeNumber(WhichStatus.REJECT, gino);
+		return true;
 	}
 	@Override
 	public boolean depositPay(Long gno, MemberEntity member) {

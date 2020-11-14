@@ -134,4 +134,14 @@ public class GroupServiceImpl implements GroupService {
 		return groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, member.getMno(), WhichStatus.LEADER).isPresent();
 	}
 
+	@Override
+	public boolean modifyGroup(Long gno, MemberEntity member,GroupEntity newGroup) {
+		if(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, member.getMno(), WhichStatus.LEADER).isEmpty())
+			return false;
+		GroupEntity group = groupRepo.findById(gno).get();
+		group.modifyGroup(newGroup);
+		groupRepo.save(group);
+		return true;
+	}
+
 }

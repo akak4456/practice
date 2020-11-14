@@ -11,6 +11,7 @@ import com.untact.domain.group.QGroupEntity;
 import com.untact.domain.groupinclude.GroupInclude;
 import com.untact.domain.groupinclude.QGroupInclude;
 import com.untact.domain.groupinclude.WhichStatus;
+import com.untact.domain.member.MemberEntity;
 import com.untact.domain.member.QMemberEntity;
 import com.untact.vo.MemberManageVO;
 
@@ -82,5 +83,31 @@ public class GroupIncludeCustomRepositoryImpl extends QuerydslRepositorySupport
 						.or(groupInclude.whichStatus.eq(WhichStatus.FOLLOWER))
 						));
 		return query.fetch();
+	}
+
+	@Override
+	public List<GroupInclude> findByGroupNumberAndWhichStatus(Long gno, WhichStatus whichStatus) {
+		QGroupInclude groupInclude = QGroupInclude.groupInclude;
+		JPQLQuery<Tuple> query = from(groupInclude).select(groupInclude.gino,groupInclude.member.name,groupInclude.member.role);
+		query.where(groupInclude.group.gno.eq(gno).and(groupInclude.whichStatus.eq(whichStatus)));
+		List<Tuple> tuple = query.fetch();
+		List<GroupInclude> ret = new ArrayList<>();
+		for(Tuple t:tuple) {
+			ret.add(GroupInclude.builder()
+							.gino(t.get(groupInclude.gino))
+							.member(MemberEntity.builder().name(t.get(groupInclude.member.name)).role(t.get(groupInclude.member.role)).build())
+							.build());
+		}
+		return ret;
+	}
+
+	@Override
+	public void rejectAllGroup(Long gno) {
+		QGroupInclude groupInclude = QGroupInclude.groupInclude;
+		
+		update(groupInclude).where(groupInclude.group.gno.eq(gno).and(groupInclude.whichStatus.eq(WhichStatus.WAITING)))
+			.set(groupInclude.whichStatus, WhichStatus.REJECT)
+			.execute();
+		
 	}
 }

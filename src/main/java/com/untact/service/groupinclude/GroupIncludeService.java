@@ -7,8 +7,8 @@ public interface GroupIncludeService {
 	public void groupWithdraw(Long gno,MemberEntity memberWantToWithdraw);
 	public void groupEject(Long gno,MemberEntity leaderMember,MemberEntity memberWantToWithdraw);
 	public boolean requestJoin(GroupWaitingVO groupWaitingVO);
-	public void acceptJoin(Long gino);
-	public void rejectJoin(Long gino);
+	public boolean acceptJoin(Long gno,Long gino,MemberEntity leader);
+	public boolean rejectJoin(Long gno,Long gino,MemberEntity leader);
 	
 	public boolean depositPay(Long gno,MemberEntity member);
 }

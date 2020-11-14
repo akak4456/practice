@@ -3,6 +3,7 @@ package com.untact.service.leader;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.untact.domain.groupinclude.GroupInclude;
 import com.untact.domain.member.MemberEntity;
 import com.untact.exception.NotGroupLeaderException;
 import com.untact.vo.AttendanceVO;
@@ -16,4 +17,7 @@ public interface LeaderService {
 	
 	public List<AttendanceVO> getAttendanceListWithGroupNumberAndLocalDate(Long gno,LocalDate time);
 	public boolean changeAttendance(Long gno,MemberEntity leader,Long targetMno,Long ano,String oldStatus,String newStatus);
+	
+	public List<GroupInclude> getWaitingList(Long gno);
+	public boolean rejectAll(Long gno,MemberEntity leader);
 }

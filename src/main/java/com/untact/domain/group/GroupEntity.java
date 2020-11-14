@@ -68,4 +68,16 @@ public class GroupEntity {
 		return this;
 	}
 	
+	public void modifyGroup(GroupEntity newGroup) {
+		this.title = newGroup.title;
+		this.type = newGroup.type;
+		this.detail = newGroup.detail;
+		this.maximumNumberOfPeople = newGroup.maximumNumberOfPeople;
+		this.depositToBePaid = newGroup.depositToBePaid;
+		this.maximumNumberOfAbsencesAllowed = newGroup.maximumNumberOfAbsencesAllowed;
+		this.fineForBeingLate = newGroup.fineForBeingLate;
+		this.fineForBeingAbsence = newGroup.fineForBeingAbsence;
+		this.duedate = newGroup.duedate;
+	}
+	
 }

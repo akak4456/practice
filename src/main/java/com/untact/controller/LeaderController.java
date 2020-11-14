@@ -17,6 +17,7 @@ import com.untact.security.AuthenticationFacade;
 import com.untact.service.leader.LeaderService;
 import com.untact.vo.AttendanceResponse;
 import com.untact.vo.MemberManageResponse;
+import com.untact.vo.WaitingResponse;
 
 import lombok.extern.java.Log;
 
@@ -94,6 +95,21 @@ public class LeaderController {
 			@PathVariable("newStatus")String newStatus){
 		MemberEntity leader = AuthenticationFacade.getMemberEntityFromAuthentication();
 		if(leaderService.changeAttendance(gno, leader, targetMno,ano, oldStatus, newStatus)) {
+			return new ResponseEntity<>("success",HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping("/leader/waiting/{groupid}")
+	public ResponseEntity<WaitingResponse> getWaitingList(@PathVariable("groupid")Long gno){
+		return new ResponseEntity<>(new WaitingResponse(leaderService.getWaitingList(gno)),HttpStatus.OK);
+	}
+	
+	@PutMapping("/leader/rejectall/{groupid}")
+	public ResponseEntity<String> rejectAll(@PathVariable("groupid")Long gno){
+		MemberEntity leader = AuthenticationFacade.getMemberEntityFromAuthentication();
+		if(leaderService.rejectAll(gno, leader)) {
 			return new ResponseEntity<>("success",HttpStatus.OK);
 		}else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
