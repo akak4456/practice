@@ -21,6 +21,7 @@ public interface TimeTableService {
 	public void addTimeTable(Long gno,MemberEntity member,TimeTable timeTable,List<TimeTableItem> timeTableItem) throws NotIncludeGroupException,TimeTableNotCorrectException;
 	public void modifyTimeTable(Long gno,Long mno,Long tno,TimeTable targetTimeTable,List<TimeTableItem> targetTimeTableItem) throws NotIncludeGroupException,TimeTableNotCorrectException;
 	public void deleteTimeTable(Long gno,Long mno,Long tno) throws NotIncludeGroupException;
+	public TimeTableVO toggleAlarm(Long tno);
 	
 	public RepresentativeTimeTableVO getRepresentativeOne(Long gno,MemberEntity member) throws NotGroupLeaderException;
 	public void modifyRepresentativeTimeTable(Long gno, MemberEntity member, String title,List<RepresentativeTimeTableItem> targetTimeTableItem) throws NotGroupLeaderException, TimeTableNotCorrectException;

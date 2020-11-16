@@ -105,4 +105,8 @@ public class TimeTableController {
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		} 
 	}
+	@PutMapping("/timetable/toggle/{groupid}/{timetableid}")
+	public ResponseEntity<TimeTableVO> toggleAlarm(@PathVariable("groupid")Long gno,@PathVariable("timetableid")Long tno){
+		return new ResponseEntity<>(timeTableService.toggleAlarm(tno),HttpStatus.OK);
+	}
 }

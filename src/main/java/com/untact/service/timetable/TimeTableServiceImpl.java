@@ -181,6 +181,14 @@ public class TimeTableServiceImpl implements TimeTableService {
 		}
 		representativeTimeTableItemRepo.saveAll(targetTimeTableItem);
 	}
+	@Override
+	public TimeTableVO toggleAlarm(Long tno) {
+		TimeTable timetable = timeTableRepo.findById(tno).get();
+		List<TimeTableItem> timetableItems = timeTableItemRepo.findByTimeTableNumber(tno);
+		timetable.toggleAlarm();
+		timeTableRepo.save(timetable);
+		return new TimeTableVO(timetable,timetableItems);
+	}
 	
 
 }

@@ -1,6 +1,8 @@
 package com.untact.domain.timetable;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,10 +13,11 @@ import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import com.untact.domain.board.Board;
+import com.sun.istack.NotNull;
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +35,9 @@ public class TimeTable {
 	private Long tno;//시간표 번호
 	
 	private String title;//시간표 제목
+	@Builder.Default
+	@Enumerated(EnumType.STRING)
+	private IsAlarm isAlarm=IsAlarm.N;//알람을 울릴 것인지
 	
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -52,5 +58,13 @@ public class TimeTable {
 	public TimeTable modifyThisToTargetTimeTable(TimeTable targetTimeTable) {
 		this.title = targetTimeTable.title;
 		return this;
+	}
+	
+	public void toggleAlarm() {
+		if(this.isAlarm == IsAlarm.N) {
+			this.isAlarm = IsAlarm.Y;
+		}else {
+			this.isAlarm = IsAlarm.N;
+		}
 	}
 }
