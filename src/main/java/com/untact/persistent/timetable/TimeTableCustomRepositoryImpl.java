@@ -21,7 +21,7 @@ public class TimeTableCustomRepositoryImpl extends QuerydslRepositorySupport imp
 	@Override
 	public Page<TimeTable> getPageWithGroupNumberAndMemberNumber(Pageable pageable, Long gno, Long mno) {
 		QTimeTable timeTable = QTimeTable.timeTable;
-		JPQLQuery<Tuple> query = from(timeTable).select(timeTable.tno,timeTable.title);
+		JPQLQuery<Tuple> query = from(timeTable).select(timeTable.tno,timeTable.title,timeTable.isalarm);
 		query.where(timeTable.group.gno.eq(gno)
 					.and(timeTable.member.mno.eq(mno)));
 		Long totalCount = query.fetchCount();
@@ -31,6 +31,7 @@ public class TimeTableCustomRepositoryImpl extends QuerydslRepositorySupport imp
 			timeTableList.add(TimeTable.builder()
 					.tno(t.get(timeTable.tno))
 					.title(t.get(timeTable.title))
+					.isalarm(t.get(timeTable.isalarm))
 					.build());
 		}
 		return new PageImpl<TimeTable>(timeTableList,pageable,totalCount);

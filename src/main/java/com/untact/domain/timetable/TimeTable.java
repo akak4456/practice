@@ -17,7 +17,6 @@ import com.sun.istack.NotNull;
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
 
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,9 +34,7 @@ public class TimeTable {
 	private Long tno;//시간표 번호
 	
 	private String title;//시간표 제목
-	@Builder.Default
-	@Enumerated(EnumType.STRING)
-	private IsAlarm isAlarm=IsAlarm.N;//알람을 울릴 것인지
+	private String isalarm;//알람을 울릴 것인지
 	
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -61,10 +58,10 @@ public class TimeTable {
 	}
 	
 	public void toggleAlarm() {
-		if(this.isAlarm == IsAlarm.N) {
-			this.isAlarm = IsAlarm.Y;
+		if(this.isalarm.equals("N")) {
+			this.isalarm = "Y";
 		}else {
-			this.isAlarm = IsAlarm.N;
+			this.isalarm = "N";
 		}
 	}
 }
