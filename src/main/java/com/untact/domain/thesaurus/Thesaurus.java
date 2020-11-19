@@ -1,4 +1,4 @@
-package com.untact.domain.englishdictionary;
+package com.untact.domain.thesaurus;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +10,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.untact.domain.antonym.Antonym;
+import com.untact.domain.englishdictionary.EnglishDictionary;
 import com.untact.domain.englishspelling.EnglishSpelling;
-import com.untact.domain.thesaurus.Thesaurus;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,21 +23,19 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "spelling", "partOfSpeech", "meaning" }))
-@SequenceGenerator(name="ed_seq", initialValue=1, allocationSize=1)
-@EqualsAndHashCode(of="edno")
-public class EnglishDictionary {
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "wordfrom", "wordto" }))
+@SequenceGenerator(name="tu_seq", initialValue=1, allocationSize=1)
+@EqualsAndHashCode(of="tuno")
+public class Thesaurus {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO,generator="ed_seq")
-	private Long edno;
+	@GeneratedValue(strategy=GenerationType.AUTO,generator="tu_seq")
+	private Long tuno;
 	@ManyToOne
-	@JoinColumn(name="spelling")
+	@JoinColumn(name="wordfrom")
 	private EnglishSpelling englishSpelling;
 	public void setEnglishSpelling(EnglishSpelling englishSpelling) {
 		this.englishSpelling = englishSpelling;
 	}
 	
-	private String partOfSpeech;//품사
-	
-	private String meaning;
+	private String wordto;
 }

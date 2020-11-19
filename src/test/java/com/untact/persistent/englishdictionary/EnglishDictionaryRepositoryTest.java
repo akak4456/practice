@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.untact.demo.UntactenglishstudyApplication;
 import com.untact.domain.englishdictionary.EnglishDictionary;
-import com.untact.domain.englishdictionary.EnglishDictionaryId;
 import com.untact.domain.englishspelling.EnglishSpelling;
 import com.untact.persistent.englishspelling.EnglishSpellingRepository;
 import com.untact.persistent.util.DeleteAllUtil;
@@ -47,25 +46,21 @@ public class EnglishDictionaryRepositoryTest {
 	
 	@Test
 	public void insertTest() {
-		EnglishSpelling spell = new EnglishSpelling().builder().spelling("a").build();
+		EnglishSpelling spell = EnglishSpelling.builder().spelling("a").build();
 		englishSpellingRepo.save(spell);
 		
-		EnglishDictionaryId id1 = new EnglishDictionaryId(spell.getSpelling(),"가나다");
-		EnglishDictionaryId id2 = new EnglishDictionaryId(spell.getSpelling(),"마바사");
-		englishDictionaryRepo.save(new EnglishDictionary().builder().id(id1).englishSpelling(spell).build());
-		englishDictionaryRepo.save(new EnglishDictionary().builder().id(id2).englishSpelling(spell).build());
+		englishDictionaryRepo.save(EnglishDictionary.builder().englishSpelling(spell).meaning("가나다").build());
+		englishDictionaryRepo.save(EnglishDictionary.builder().englishSpelling(spell).meaning("마바사").build());
 		assertEquals(englishDictionaryRepo.count(),2L);
 	}
 	
 	@Test
 	public void insertDuplicateTest() {
-		EnglishSpelling spell = new EnglishSpelling().builder().spelling("a").build();
+		EnglishSpelling spell = EnglishSpelling.builder().spelling("a").build();
 		englishSpellingRepo.save(spell);
-		
-		EnglishDictionaryId id1 = new EnglishDictionaryId(spell.getSpelling(),"가나다");
-		englishDictionaryRepo.save(new EnglishDictionary().builder().id(id1).englishSpelling(spell).build());
-		englishDictionaryRepo.save(new EnglishDictionary().builder().id(id1).englishSpelling(spell).build());
-		englishDictionaryRepo.save(new EnglishDictionary().builder().id(id1).englishSpelling(spell).build());
+		englishDictionaryRepo.save(EnglishDictionary.builder().englishSpelling(spell).meaning("가나다").build());
+		englishDictionaryRepo.save(EnglishDictionary.builder().englishSpelling(spell).meaning("가나다").build());
+		englishDictionaryRepo.save(EnglishDictionary.builder().englishSpelling(spell).meaning("가나다").build());
 		assertEquals(englishDictionaryRepo.count(),1L);
 	}
 }
