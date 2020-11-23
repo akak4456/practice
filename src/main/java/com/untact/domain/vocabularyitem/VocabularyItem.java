@@ -1,4 +1,4 @@
-package com.untact.domain.vocabulary;
+package com.untact.domain.vocabularyitem;
 
 import java.time.LocalDateTime;
 
@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.untact.domain.englishspelling.EnglishSpelling;
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
+import com.untact.domain.vocabulary.Vocabulary;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -29,26 +30,24 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
-@SequenceGenerator(name="v_seq", initialValue=1, allocationSize=1)
-@EqualsAndHashCode(of="vno")
-public class Vocabulary {
+@SequenceGenerator(name="vi_seq", initialValue=1, allocationSize=1)
+@EqualsAndHashCode(of="vino")
+public class VocabularyItem {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="v_seq")
-	private Long vno;//단어장 번호
-	
-	private String title;//단어장 제목
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="vi_seq")
+	private Long vino;//단어장 아이템 번호
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@CreationTimestamp
-	private LocalDateTime regdate;//단어장 생성 시간
+	private LocalDateTime regdate;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@UpdateTimestamp
-	private LocalDateTime updatedate;//단어장 수정 시간
+	private LocalDateTime updatedate;
 	
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
-	private GroupEntity group;//이 단어장은 어떤 그룹에 속해 있나?
+	private GroupEntity group;
 	public void setGroup(GroupEntity group) {
 		this.group = group;
 	}
@@ -56,8 +55,24 @@ public class Vocabulary {
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
-	private MemberEntity member;//이 단어장은 누가 썻는가?
+	private MemberEntity member;
 	public void setMember(MemberEntity member) {
 		this.member = member;
+	}
+	
+	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn
+	private Vocabulary vocabulary;
+	public void setVocabulary(Vocabulary vocabulary) {
+		this.vocabulary = vocabulary;
+	}
+	
+	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn
+	private EnglishSpelling englishSpelling;
+	public void setEnglishSpelling(EnglishSpelling englishSpelling) {
+		this.englishSpelling = englishSpelling;
 	}
 }

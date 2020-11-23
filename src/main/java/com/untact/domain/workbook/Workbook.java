@@ -3,6 +3,7 @@ package com.untact.domain.workbook;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ public class Workbook {
 	@GeneratedValue(strategy=GenerationType.AUTO,generator="wb_seq")
 	private Long wbno;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="spelling")
 	private EnglishSpelling englishSpelling;
 	public void setEnglishSpelling(EnglishSpelling englishSpelling) {
