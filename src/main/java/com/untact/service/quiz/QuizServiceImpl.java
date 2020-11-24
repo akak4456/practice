@@ -33,6 +33,8 @@ public class QuizServiceImpl implements QuizService {
 	private WorkbookRepository workbookRepo;
 	@Override
 	public Optional<QuizResponse> generateQuiz(Long gno, MemberEntity member, Long vno, String kind, Long count) {
+		WorkbookKind retKind = WorkbookKind.valueOf(kind);
+		Random random = new Random();
 		List<EnglishSpelling> words = null;
 		if(vno == 0L) {
 			//사용자가 기본 단어장을 이용해 퀴즈를 만들기를 원하면
@@ -45,29 +47,21 @@ public class QuizServiceImpl implements QuizService {
 			//단어장에 있는 단어의 개수가 너무 적으면
 			return Optional.empty();
 		}
-		
+		Map<EnglishSpelling,List<Workbook>> cand = workbookRepo.findBywordListAndKind(words, retKind).stream().collect(Collectors.groupingBy(Workbook::getEnglishSpelling));
+		List<EnglishSpelling> spellingList = new ArrayList<>(cand.keySet());
+		if(spellingList.size() < count) {
+			return Optional.empty();
+		}
 		Set<Integer> problemIdx = new HashSet<>();
 		while(problemIdx.size() < count) {
-			Random random = new Random();
-			problemIdx.add(random.nextInt(words.size()));
+			problemIdx.add(random.nextInt(spellingList.size()));
 		}
-		
-		List<EnglishSpelling> problems = new ArrayList<>();
-		for(Integer idx:problemIdx) {
-			problems.add(words.get(idx));
-		}
-		
-		WorkbookKind retKind = WorkbookKind.valueOf(kind);
-		Map<EnglishSpelling,List<Workbook>> cand = workbookRepo.findBywordListAndKind(problems, retKind).stream().collect(Collectors.groupingBy(Workbook::getEnglishSpelling));
 		List<QuizVO> vo = new ArrayList<>();
-		for(EnglishSpelling spell:cand.keySet()) {
-			List<Workbook> wList = cand.get(spell);
-			Random random = new Random();
+		for(Integer idx:problemIdx) {
+			List<Workbook> wList = cand.get(spellingList.get(idx));
 			Workbook w = wList.get(random.nextInt(wList.size()));
 			vo.add(new QuizVO(w.getQuestion(),w.getAns1(),w.getAns2(),w.getAns3(),w.getAns4(),w.getEnglishSpelling().getSpelling()));
 		}
 		return Optional.of(new QuizResponse(vo));
 	}
-	
-
 }
