@@ -15,12 +15,14 @@ import org.springframework.stereotype.Service;
 import com.untact.domain.antonym.Antonym;
 import com.untact.domain.englishdictionary.EnglishDictionary;
 import com.untact.domain.englishspelling.EnglishSpelling;
+import com.untact.domain.phrase.Phrase;
 import com.untact.domain.thesaurus.Thesaurus;
 import com.untact.domain.workbook.Workbook;
 import com.untact.domain.workbook.WorkbookKind;
 import com.untact.persistent.antonym.AntonymRepository;
 import com.untact.persistent.englishdictionary.EnglishDictionaryRepository;
 import com.untact.persistent.englishspelling.EnglishSpellingRepository;
+import com.untact.persistent.phrase.PhraseRepository;
 import com.untact.persistent.thesaurus.ThesaurusRepository;
 import com.untact.persistent.workbook.WorkbookRepository;
 
@@ -36,6 +38,8 @@ public class AdminServiceImpl implements AdminService {
 	private ThesaurusRepository thesaurusRepo;
 	@Autowired
 	private AntonymRepository antonymRepo;
+	@Autowired
+	private PhraseRepository phraseRepo;
 	@Override
 	public void setupQuiz() {
 		workbookRepo.deleteAllInBatch();
@@ -224,7 +228,48 @@ public class AdminServiceImpl implements AdminService {
 								.build());
 			}
 		}
+		
+		//구동사(phrase verb) 문제 생성
+		/*
+		 여기에서 phrase는 englishSpelling이 없는 것을 확인할수 있는데
+		 이것은 english_spelling이 phrase에 있는 verb를 담지 않을수도 있기 때문이다.
+		 */
+				List<Phrase> phraseList = phraseRepo.findAll();
+				Set<String> allPrep = new HashSet<>();//phrase 테이블에 있는 모든 전치사들
+				//문제의 정 오답을 만들때 쓰인다.
+				for(int i = 0;i<phraseList.size();i++) {
+					allPrep.add(phraseList.get(i).getPrep());
+				}
+				List<String> allPrepToList = new ArrayList<>(allPrep);
+				for(Phrase phrase:phraseList) {
+					String problem = phrase.getEnglishSpelling().getSpelling()+" (__)\n"+phrase.getMeaning();
+					String rightAnswer = phrase.getPrep();
+					Set<Integer> wrongAnswerPos = new HashSet<>();//allPrep중에서 오답으로 뽑을 것들의 인덱스
+					while(wrongAnswerPos.size() < 3) {
+						int idx = random.nextInt(allPrepToList.size());
+						String cand = allPrepToList.get(idx);
+						if(cand.equals(rightAnswer)) {
+							continue;
+						}
+						wrongAnswerPos.add(idx);
+					}
+					List<String> wrongAnswerList = new ArrayList<>();
+					for(Integer idx:wrongAnswerPos) {
+						wrongAnswerList.add(allPrepToList.get(idx));
+					}
+					workbooks.add(Workbook.builder()
+									.englishSpelling(phrase.getEnglishSpelling())
+									.question(problem)
+									.kind(WorkbookKind.phrase)
+									.ans1(rightAnswer)
+									.ans2(wrongAnswerList.get(0))
+									.ans3(wrongAnswerList.get(1))
+									.ans4(wrongAnswerList.get(2))
+									.build());
+				}
+		
 		workbookRepo.saveAll(workbooks);
+		
 	}
 
 }

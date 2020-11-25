@@ -25,4 +25,14 @@ public class WorkbookCustomRepositoryImpl extends QuerydslRepositorySupport impl
 		query.where(workbook.englishSpelling.in(words).and(workbook.kind.eq(kind)));
 		return query.fetch();
 	}
+
+	@Override
+	public List<Workbook> findByKind(WorkbookKind kind) {
+		QWorkbook workbook = QWorkbook.workbook;
+		QEnglishSpelling spelling = QEnglishSpelling.englishSpelling;
+		JPQLQuery<Workbook> query = from(workbook);
+		query.innerJoin(workbook.englishSpelling,spelling);
+		query.where(workbook.kind.eq(kind));
+		return query.fetch();
+	}
 }

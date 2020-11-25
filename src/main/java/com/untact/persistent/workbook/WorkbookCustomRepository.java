@@ -8,4 +8,5 @@ import com.untact.domain.workbook.WorkbookKind;
 
 public interface WorkbookCustomRepository {
 	public List<Workbook> findBywordListAndKind(List<EnglishSpelling> words,WorkbookKind kind);
+	public List<Workbook> findByKind(WorkbookKind kind);
 }

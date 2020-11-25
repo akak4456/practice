@@ -38,6 +38,8 @@ public class Vocabulary {
 	
 	private String title;//단어장 제목
 	
+	private Long cnt;//갯수
+	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@CreationTimestamp
 	private LocalDateTime regdate;//단어장 생성 시간

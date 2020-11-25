@@ -47,6 +47,7 @@ public class QuizServiceImpl implements QuizService {
 			//단어장에 있는 단어의 개수가 너무 적으면
 			return Optional.empty();
 		}
+		
 		Map<EnglishSpelling,List<Workbook>> cand = workbookRepo.findBywordListAndKind(words, retKind).stream().collect(Collectors.groupingBy(Workbook::getEnglishSpelling));
 		List<EnglishSpelling> spellingList = new ArrayList<>(cand.keySet());
 		if(spellingList.size() < count) {
