@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.untact.domain.englishdictionary.EnglishDictionary;
 import com.untact.domain.member.MemberEntity;
 import com.untact.domain.vocabulary.Vocabulary;
 import com.untact.security.AuthenticationFacade;
@@ -26,5 +27,10 @@ public class VocabularyController {
 		VocabularyPageVO vo = vocabularyService.getListWithPagingAndGroupNumberAndMemberNumber(pageVO, gno,member.getMno());
 		PageMaker<Vocabulary> pageMaker = new PageMaker<>(vo.getPage(),pageVO);
 		return new ResponseEntity<>(new VocabularyPageResponse(pageMaker,vo.getDefaultVocaCount()),HttpStatus.OK);
+	}
+	@GetMapping("/vocabulary/{groupid}/{vocabularyid}")
+	public ResponseEntity<PageMaker<EnglishDictionary>> getVocabularyItemPage(@PathVariable("groupid")Long gno,@PathVariable("vocabularyid")Long vno,PageVO pageVO){
+		PageMaker<EnglishDictionary> maker = new PageMaker<>(vocabularyService.getVocabularyItemsWithPagingAndVocabularyNumber(pageVO, vno),pageVO);
+		return new ResponseEntity<>(maker,HttpStatus.OK);
 	}
 }

@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
@@ -30,6 +32,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "vno", "spelling" }))
 @SequenceGenerator(name="vi_seq", initialValue=1, allocationSize=1)
 @EqualsAndHashCode(of="vino")
 public class VocabularyItem {
@@ -62,7 +65,7 @@ public class VocabularyItem {
 	
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JoinColumn
+	@JoinColumn(name="vno")
 	private Vocabulary vocabulary;
 	public void setVocabulary(Vocabulary vocabulary) {
 		this.vocabulary = vocabulary;
@@ -70,7 +73,7 @@ public class VocabularyItem {
 	
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JoinColumn
+	@JoinColumn(name="spelling")
 	private EnglishSpelling englishSpelling;
 	public void setEnglishSpelling(EnglishSpelling englishSpelling) {
 		this.englishSpelling = englishSpelling;
