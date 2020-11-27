@@ -32,7 +32,7 @@ public class ChatHandler {
 	@SendTo("/sub/group/{groupid}")
 	public ChatResponse hello(@DestinationVariable String groupid, SimpMessageHeaderAccessor headerAccessor) throws Exception{
 		String sessionId = headerAccessor.getSessionId();
-		Map<String,MemberEntity> members = StompHandler.memberMap.get("/sub/group/"+groupid);
+		Map<String,MemberEntity> members = SocketDataStructure.memberMap.get("/sub/group/"+groupid);
 		MemberEntity member = members.get(sessionId);
 		List<MemberEntity> list = new ArrayList<>(members.values());
 		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
@@ -61,7 +61,7 @@ public class ChatHandler {
 	@SendTo("/sub/group/en/{groupid}")
 	public ChatResponse helloEnglish(@DestinationVariable String groupid, SimpMessageHeaderAccessor headerAccessor) throws Exception{
 		String sessionId = headerAccessor.getSessionId();
-		Map<String,MemberEntity> members = StompHandler.memberMap.get("/sub/group/en/"+groupid);
+		Map<String,MemberEntity> members = SocketDataStructure.memberMap.get("/sub/group/en/"+groupid);
 		MemberEntity member = members.get(sessionId);
 		List<MemberEntity> list = new ArrayList<>(members.values());
 		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");

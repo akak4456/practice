@@ -17,4 +17,5 @@ public interface GroupService {
 	public void dismissGroupAuto();//cron에 의해 주기적으로 실행되는 함수
 	public boolean tryLeaderEntrance(Long gno,MemberEntity member);
 	public boolean modifyGroup(Long gno,MemberEntity member,GroupEntity newGroup);
+	public Long getGroupMemberCount(Long gno);
 }

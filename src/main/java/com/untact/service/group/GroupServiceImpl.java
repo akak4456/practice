@@ -144,4 +144,9 @@ public class GroupServiceImpl implements GroupService {
 		return true;
 	}
 
+	@Override
+	public Long getGroupMemberCount(Long gno) {
+		return groupIncludeRepo.findCountByGroupNumber(gno, Set.of(WhichStatus.LEADER,WhichStatus.FOLLOWER));
+	}
+
 }

@@ -11,4 +11,6 @@ public interface GroupIncludeService {
 	public boolean rejectJoin(Long gno,Long gino,MemberEntity leader);
 	
 	public boolean depositPay(Long gno,MemberEntity member);
+	
+	public boolean isLeader(Long gno,MemberEntity member);
 }

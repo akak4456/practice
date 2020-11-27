@@ -22,9 +22,6 @@ import com.untact.domain.member.MemberEntity;
 import com.untact.security.JwtTokenProvider;
 @Component
 public class StompHandler implements ChannelInterceptor {
-	public static Map<String,Map<String,MemberEntity>> memberMap = new ConcurrentHashMap<>();
-	//destination, member
-	private static Map<String,String> sessionIdToDestination = new ConcurrentHashMap<>();
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 	@Autowired
@@ -39,20 +36,25 @@ public class StompHandler implements ChannelInterceptor {
             MemberEntity member = ((MemberEntity)authentication.getPrincipal()).copy();
             String sessionId = accessor.getSessionId();
             String destination = accessor.getDestination();
-            memberMap.computeIfAbsent(destination, memSet->new ConcurrentHashMap<>()).put(sessionId,member);
-            sessionIdToDestination.put(sessionId, destination);
+            SocketDataStructure.memberMap.computeIfAbsent(destination, memSet->new ConcurrentHashMap<>()).put(sessionId,member);
+            SocketDataStructure.sessionIdToDestination.put(sessionId, destination);
     	}else if(StompCommand.UNSUBSCRIBE == accessor.getCommand()||StompCommand.DISCONNECT == accessor.getCommand()) {
     		//memberMap.get(accessor.getDestination()).remove(accessor.getSessionId());
     		String sessionId = accessor.getSessionId();
-    		String destination = sessionIdToDestination.get(sessionId);
+    		String destination = SocketDataStructure.sessionIdToDestination.get(sessionId);
     		//시스템 메시지 전송
-    		MemberEntity member = memberMap.get(destination).get(sessionId);
-    		memberMap.get(destination).remove(sessionId);
+    		MemberEntity member = SocketDataStructure.memberMap.get(destination).get(sessionId);
+    		SocketDataStructure.memberMap.get(destination).remove(sessionId);
     		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
     		Date time = new Date();
     		String time1 = format1.format(time);
-    		List<MemberEntity> list = new ArrayList<>(memberMap.get(destination).values());
-    		messagingTemplate.convertAndSend(destination, new ChatResponse(0L,"시스템",member.getName()+"님이 퇴장하십니다.",time1,list));
+    		if(destination.contains("/sub/group")) {
+    			List<MemberEntity> list = new ArrayList<>(SocketDataStructure.memberMap.get(destination).values());
+    			messagingTemplate.convertAndSend(destination, new ChatResponse(0L,"시스템",member.getName()+"님이 퇴장하십니다.",time1,list));
+    		}else if(destination.contains("/sub/rank")) {
+    			List<MemberEntity> list = new ArrayList<>(SocketDataStructure.memberMap.get(destination).values());
+    			messagingTemplate.convertAndSend(destination, new RankWaitingResponse("disconnect",list,0L));
+    		}
     	}
     	return message;
     }

@@ -104,6 +104,10 @@ public class GroupIncludeServiceImpl implements GroupIncludeService {
 			return false;
 		}
 	}
+	@Override
+	public boolean isLeader(Long gno, MemberEntity member) {
+		return groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, member.getMno(), WhichStatus.LEADER).isPresent();
+	}
 	
 
 }
