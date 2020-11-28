@@ -221,7 +221,7 @@ public class AdminServiceImpl implements AdminService {
 								.englishSpelling(spell)
 								.question(d.getPartOfSpeech()+"\n"+d.getMeaning())
 								.kind(WorkbookKind.blank)
-								.ans1("none")
+								.ans1(spell.getSpelling())
 								.ans2("none")
 								.ans3("none")
 								.ans4("none")

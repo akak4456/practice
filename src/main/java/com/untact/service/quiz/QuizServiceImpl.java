@@ -65,4 +65,8 @@ public class QuizServiceImpl implements QuizService {
 		}
 		return Optional.of(new QuizResponse(vo));
 	}
+	@Override
+	public List<Workbook> generateRandomQuiz(Long cnt) {
+		return workbookRepo.findByRandom(cnt);
+	}
 }

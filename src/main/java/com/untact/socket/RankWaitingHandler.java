@@ -25,7 +25,7 @@ import lombok.extern.java.Log;
 
 @Controller
 @Log
-public class RankHandler {
+public class RankWaitingHandler {
 	private final int MINIMUM_PEOPLE = 3;
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
@@ -81,6 +81,11 @@ public class RankHandler {
     		if(prizeSum > totalFine-totalReward) {
     			return new RankWaitingResponse("start",member.getMno(),"N");
     		}
+    		List<Long> priceList = new ArrayList<>();
+    		priceList.add(request.getFirst_prize());
+    		priceList.add(request.getSecond_prize());
+    		priceList.add(request.getThird_prize());
+    		SocketDataStructure.prizeMap.putIfAbsent("/sub/rankgame/"+groupid, priceList);
     		return new RankWaitingResponse("start",0L,"Y");
         }else {
         	return new RankWaitingResponse("start",member.getMno(),"N");

@@ -80,6 +80,9 @@ public class GroupInclude {
 	public void subFine(Long fine) {
 		this.fine -= fine;
 	}
+	public void addReward(Long reward) {
+		this.reward += reward;
+	}
 	
 	public void incrementAbsent() {
 		this.absent++;
