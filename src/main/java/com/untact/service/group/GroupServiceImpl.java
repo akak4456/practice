@@ -82,6 +82,9 @@ public class GroupServiceImpl implements GroupService {
 		Long totalFine = groupIncludeRepo.findSumOfFineByGroupNumber(gno, Set.of(WhichStatus.LEADER,WhichStatus.FOLLOWER));
 		Long totalReward = groupIncludeRepo.findSumOfRewardByGroupNumber(gno, Set.of(WhichStatus.LEADER,WhichStatus.FOLLOWER));
 		Long totalDepositForEjectedPeople = groupIncludeRepo.findSumOfDepositByGroupNumber(gno, Set.of(WhichStatus.EJECT));
+		if(totalDepositForEjectedPeople == null) {
+			totalDepositForEjectedPeople = 0L;
+		}
 		Long nDiv = (totalDepositForEjectedPeople+totalFine-totalReward)/n;
 		List<MemberEntity> members = new ArrayList<>();
 		for(GroupInclude inc:includes) {

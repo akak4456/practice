@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -89,6 +90,11 @@ public class MemberController {
 		}else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+	}
+	@GetMapping("/member")
+	public ResponseEntity<MemberEntity> getMember(){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		return new ResponseEntity<>(member.copy(),HttpStatus.OK);
 	}
 	private String generateCode() {
 		return RandomStringUtils.randomNumeric(6);

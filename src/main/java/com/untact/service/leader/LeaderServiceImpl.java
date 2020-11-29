@@ -122,7 +122,7 @@ public class LeaderServiceImpl implements LeaderService {
 				include.subFine(group.getFineForBeingLate());
 			}else if(newStat == AttendanceStatus.ABSENT) {
 				include.changeLateToAbsent();
-				include.subFine(group.getFineForBeingAbsence()-group.getFineForBeingLate());
+				include.addFine(group.getFineForBeingAbsence()-group.getFineForBeingLate());
 			}
 		}
 		groupIncludeRepo.save(include);
