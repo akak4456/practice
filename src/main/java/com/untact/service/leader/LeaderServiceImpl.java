@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.untact.domain.attendance.AttendanceStatus;
+import com.untact.domain.group.GroupEntity;
 import com.untact.domain.groupinclude.GroupInclude;
 import com.untact.domain.groupinclude.WhichStatus;
 import com.untact.domain.member.MemberEntity;
@@ -93,6 +94,7 @@ public class LeaderServiceImpl implements LeaderService {
 	}
 	@Override
 	public boolean changeAttendance(Long gno, MemberEntity leader, Long targetMno,Long ano, String oldStatus, String newStatus) {
+		GroupEntity group = groupRepo.findById(gno).get();
 		if(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, leader.getMno(), WhichStatus.LEADER).isEmpty()) 
 			return false;
 		AttendanceStatus oldStat = AttendanceStatus.valueOf(oldStatus);
@@ -101,20 +103,26 @@ public class LeaderServiceImpl implements LeaderService {
 		if(oldStat == AttendanceStatus.OK) {
 			if(newStat == AttendanceStatus.LATE) {
 				include.changeAttendanceToLate();
+				include.addFine(group.getFineForBeingLate());
 			}else if(newStat == AttendanceStatus.ABSENT) {
 				include.changeAttendanceToAbsent();
+				include.addFine(group.getFineForBeingAbsence());
 			}
 		}else if(oldStat == AttendanceStatus.ABSENT) {
 			if(newStat == AttendanceStatus.OK) {
 				include.changeAbsentToAttendance();
+				include.subFine(group.getFineForBeingAbsence());
 			}else if(newStat == AttendanceStatus.LATE) {
 				include.changeAbsentToLate();
+				include.subFine(group.getFineForBeingAbsence()-group.getFineForBeingLate());
 			}
 		}else if(oldStat == AttendanceStatus.LATE) {
 			if(newStat == AttendanceStatus.OK) {
 				include.changeLateToAttendance();
+				include.subFine(group.getFineForBeingLate());
 			}else if(newStat == AttendanceStatus.ABSENT) {
 				include.changeLateToAbsent();
+				include.subFine(group.getFineForBeingAbsence()-group.getFineForBeingLate());
 			}
 		}
 		groupIncludeRepo.save(include);
