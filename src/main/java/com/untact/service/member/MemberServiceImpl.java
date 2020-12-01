@@ -84,4 +84,18 @@ public class MemberServiceImpl implements MemberService {
 	public void updateIsEmailCheckToTrue(String email) {
 		memberRepo.updateEmailCheckByEmail(EmailCheck.Y, email);
 	}
+	@Override
+	public void pay(MemberEntity member, Long amount) {
+		member.addRemainPoint(amount);
+		memberRepo.save(member);
+	}
+	@Override
+	public boolean refund(MemberEntity member, Long amount) {
+		if(member.getRemainPoint() < amount) {
+			return false;
+		}
+		member.subRemainPoint(amount);
+		memberRepo.save(member);
+		return true;
+	}
 }

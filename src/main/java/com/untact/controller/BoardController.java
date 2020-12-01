@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.untact.domain.board.Board;
+import com.untact.domain.board.BoardKind;
 import com.untact.domain.member.MemberEntity;
 import com.untact.security.AuthenticationFacade;
 import com.untact.service.board.BoardService;
-import com.untact.vo.FileEntityListVO;
 import com.untact.vo.PageMaker;
 import com.untact.vo.PageVO;
 
@@ -31,7 +31,10 @@ public class BoardController {
 	public ResponseEntity<PageMaker<Board>> getBoards(PageVO pageVO,@PathVariable("groupid")Long gno) {
 		return new ResponseEntity<>(new PageMaker<Board>(boardService.getListWithPagingAndGroupNumber(pageVO, gno),pageVO),HttpStatus.OK);
 	}
-	
+	@GetMapping("/board/kind/{groupid}/{kind}")
+	public ResponseEntity<PageMaker<Board>> getBoardsWithKind(PageVO pageVO,@PathVariable("groupid") Long gno,@PathVariable("kind")BoardKind kind){
+		return new ResponseEntity<>(new PageMaker<Board>(boardService.getListWithPagingAndGroupNumberAndKind(pageVO, gno, kind),pageVO),HttpStatus.OK);
+	}
 	@GetMapping("/board/{groupid}/{boardid}")
 	public ResponseEntity<Board> getBoard(@PathVariable("groupid")Long gno,@PathVariable("boardid")Long bno){
 		return new ResponseEntity<>(boardService.getOne(bno),HttpStatus.OK);

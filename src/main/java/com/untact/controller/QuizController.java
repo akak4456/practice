@@ -18,14 +18,16 @@ import com.untact.vo.QuizResponse;
 public class QuizController {
 	@Autowired
 	private QuizService quizService;
-	@PostMapping("/quiz/{groupid}/{vocabularyid}/{kind}/{count}")
-	public ResponseEntity<QuizResponse> makeQuiz(
+	@PostMapping("/quiz/{groupid}/{vocabularyid}/{kind}/{count}/{difficulty}")
+	public ResponseEntity<QuizResponse> makeQuizWithDifficulty(
 			@PathVariable("groupid")Long gno,
 			@PathVariable("vocabularyid")Long vno,
 			@PathVariable("kind")String kind,
-			@PathVariable("count")Long count){
+			@PathVariable("count")Long count,
+			@PathVariable("difficulty")String difficulty
+			){
 		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
-		Optional<QuizResponse> res = quizService.generateQuiz(gno, member, vno, kind, count);
+		Optional<QuizResponse> res = quizService.generateQuiz(gno, member, vno, kind, count,difficulty);
 		if(res.isPresent()) {
 			return new ResponseEntity<>(res.get(),HttpStatus.OK);
 		}else {

@@ -52,9 +52,9 @@ public class Board {
 	@Column(columnDefinition = "LONGTEXT")
 	private String content;//게시판 글 내용
 	
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	@NotNull
-	private Kind kind;//게시판 글 종류(일반 글인지 질의 응답인지)
+	private BoardKind kind;//게시판 글 종류(일반 글인지 질의 응답인지)
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@CreationTimestamp

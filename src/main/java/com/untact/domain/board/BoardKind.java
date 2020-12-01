@@ -1,6 +1,7 @@
 package com.untact.domain.board;
 
-public enum Kind {
+public enum BoardKind {
 	NORMAL,
-	QNA
+	QNA,
+	NOTICE
 }

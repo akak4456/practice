@@ -56,6 +56,13 @@ public class MemberEntity implements UserDetails {
 	
 	private String authKey;
 	
+	public void addRemainPoint(Long addPoint) {
+		this.remainPoint += addPoint;
+	}
+	
+	public void subRemainPoint(Long subPoint) {
+		this.remainPoint -= subPoint;
+	}
 	public MemberEntity copy() {
 		//비밀번호 빼고 나머지
 		return MemberEntity.builder()
@@ -119,4 +126,5 @@ public class MemberEntity implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
+	
 }

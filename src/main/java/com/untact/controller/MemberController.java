@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -104,5 +105,21 @@ public class MemberController {
 		content.append("<strong>"+code+"</strong>");
 		content.append(" 를 입력해주세요");
 		emailService.sendMail( to,"이메일 인증을 완료해주세요!" , content.toString());
+	}
+	
+	@PutMapping("/member/pay/{amount}")
+	public ResponseEntity<String> pay(@PathVariable("amount")Long amount){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		memberService.pay(member,amount);
+		return new ResponseEntity<>("success",HttpStatus.OK);
+	}
+	
+	@PutMapping("/member/refund/{amount}")
+	public ResponseEntity<String> refund(@PathVariable("amount")Long amount){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		if(memberService.refund(member,amount))
+			return new ResponseEntity<>("success",HttpStatus.OK);
+		else
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 }

@@ -15,4 +15,6 @@ public interface MemberService {
 	public boolean isDuplicateEmail(String email);
 	public void updateAuthKey(String email,String authKey);
 	public void updateIsEmailCheckToTrue(String email);
+	public void pay(MemberEntity member,Long amount);
+	public boolean refund(MemberEntity member,Long amount);
 }

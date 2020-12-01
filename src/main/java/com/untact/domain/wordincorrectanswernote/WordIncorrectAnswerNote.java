@@ -14,7 +14,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.untact.domain.board.Board;
-import com.untact.domain.board.Kind;
+import com.untact.domain.board.BoardKind;
 import com.untact.domain.englishspelling.EnglishSpelling;
 import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;

@@ -9,10 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import com.sun.istack.NotNull;
 import com.untact.domain.englishspelling.EnglishSpelling;
 
@@ -25,11 +25,23 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
-@SequenceGenerator(name="wb_seq", initialValue=1, allocationSize=1)
 @EqualsAndHashCode(of="wbno")
 public class Workbook {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO,generator="wb_seq")
+	@GenericGenerator(
+            name = "wb_seq",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "hibernate_sequence"),
+                    @Parameter(name = "optimizer", value = "pooled"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "1000")
+            }
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "wb_seq"
+    )
 	private Long wbno;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

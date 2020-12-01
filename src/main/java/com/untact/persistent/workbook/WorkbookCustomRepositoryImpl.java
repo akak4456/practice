@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 
 import com.querydsl.jpa.JPQLQuery;
 import com.untact.domain.englishspelling.EnglishSpelling;
+import com.untact.domain.englishspelling.EnglishSpellingDifficulty;
 import com.untact.domain.englishspelling.QEnglishSpelling;
 import com.untact.domain.workbook.QWorkbook;
 import com.untact.domain.workbook.Workbook;
@@ -22,6 +23,7 @@ public class WorkbookCustomRepositoryImpl extends QuerydslRepositorySupport impl
 		QEnglishSpelling spelling = QEnglishSpelling.englishSpelling;
 		JPQLQuery<Workbook> query = from(workbook);
 		query.innerJoin(workbook.englishSpelling,spelling);
+		query.fetchJoin();
 		query.where(workbook.englishSpelling.in(words).and(workbook.kind.eq(kind)));
 		return query.fetch();
 	}
@@ -32,7 +34,20 @@ public class WorkbookCustomRepositoryImpl extends QuerydslRepositorySupport impl
 		QEnglishSpelling spelling = QEnglishSpelling.englishSpelling;
 		JPQLQuery<Workbook> query = from(workbook);
 		query.innerJoin(workbook.englishSpelling,spelling);
+		query.fetchJoin();
 		query.where(workbook.kind.eq(kind));
+		return query.fetch();
+	}
+
+	@Override
+	public List<Workbook> findByKindAndDifficulty(WorkbookKind kind, EnglishSpellingDifficulty difficulty) {
+		// TODO Auto-generated method stub
+		QWorkbook workbook = QWorkbook.workbook;
+		QEnglishSpelling spelling = QEnglishSpelling.englishSpelling;
+		JPQLQuery<Workbook> query = from(workbook);
+		query.innerJoin(workbook.englishSpelling,spelling);
+		query.fetchJoin();
+		query.where(workbook.kind.eq(kind).and(workbook.englishSpelling.lv.eq(difficulty)));
 		return query.fetch();
 	}
 }
