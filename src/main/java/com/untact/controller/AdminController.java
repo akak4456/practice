@@ -16,8 +16,10 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	@PostMapping("/admin/setupquiz")
-	public ResponseEntity<String> setupQuiz(){
-		adminService.setupQuiz();
-		return new ResponseEntity<>("success",HttpStatus.OK);
+	public ResponseEntity<String> setup(){
+		if(adminService.setup())
+			return new ResponseEntity<>("success",HttpStatus.OK);
+		else
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 }

@@ -32,7 +32,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "vno", "spelling" }))
 @SequenceGenerator(name="vi_seq", initialValue=1, allocationSize=1)
 @EqualsAndHashCode(of="vino")
 public class VocabularyItem {

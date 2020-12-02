@@ -1,5 +1,5 @@
 package com.untact.service.admin;
 
 public interface AdminService {
-	public void setupQuiz();
+	public boolean setup();
 }

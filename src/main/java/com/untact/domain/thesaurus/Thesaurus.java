@@ -6,12 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import com.untact.domain.antonym.Antonym;
-import com.untact.domain.englishdictionary.EnglishDictionary;
 import com.untact.domain.englishspelling.EnglishSpelling;
 
 import lombok.EqualsAndHashCode;
@@ -23,12 +24,23 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "wordfrom", "wordto" }))
-@SequenceGenerator(name="tu_seq", initialValue=1, allocationSize=1)
 @EqualsAndHashCode(of="tuno")
 public class Thesaurus {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO,generator="tu_seq")
+	@GenericGenerator(
+            name = "tu_seq",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "hibernate_sequence"),
+                    @Parameter(name = "optimizer", value = "pooled"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "1000")
+            }
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "tu_seq"
+    )
 	private Long tuno;
 	@ManyToOne
 	@JoinColumn(name="wordfrom")

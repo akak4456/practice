@@ -9,6 +9,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +27,12 @@ import com.untact.persistent.englishspelling.EnglishSpellingRepository;
 import com.untact.persistent.phrase.PhraseRepository;
 import com.untact.persistent.thesaurus.ThesaurusRepository;
 import com.untact.persistent.workbook.WorkbookRepository;
+import com.untact.service.crawler.CrawlerService;
+
+import lombok.extern.java.Log;
 
 @Service
+@Log
 public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private EnglishSpellingRepository englishSpellingRepo;
@@ -40,12 +46,36 @@ public class AdminServiceImpl implements AdminService {
 	private AntonymRepository antonymRepo;
 	@Autowired
 	private PhraseRepository phraseRepo;
+	@Autowired
+	private CrawlerService crawlerService;
+	@Transactional
 	@Override
-	public void setupQuiz() {
+	public boolean setup() {
+		if(englishSpellingRepo.count() == 0L) {
+			log.info("english_spelling table must be inserted");
+			return false;//english spelling에 데이터가 우선 들어가야만 한다
+		}
+		if(englishDictionaryRepo.count() == 0L) {
+			log.info("english_dictionary table must be inserted");
+			return false;
+		}
+		if(thesaurusRepo.count() == 0L) {
+			log.info("thesaurus table must be inserted");
+			return false;
+		}
+		if(antonymRepo.count() == 0L) {
+			log.info("antonym table must be inserted");
+			return false;
+		}
+		if(phraseRepo.count() == 0L) {
+			log.info("phrase table must be inserted");
+			return false;
+		}
 		workbookRepo.deleteAllInBatch();
 		List<EnglishSpelling> spellingList = englishSpellingRepo.findAll();
 		Map<EnglishSpelling,List<EnglishDictionary>> dic = englishDictionaryRepo.findAll()
 														.stream()
+														.filter(d->!d.getMeaning().equals("NOTFOUND"))
 														.collect(Collectors.groupingBy(EnglishDictionary::getEnglishSpelling));//사전 저장
 		Map<EnglishSpelling,List<Thesaurus>> thesarus = thesaurusRepo.findAll()
 														.stream()
@@ -54,6 +84,7 @@ public class AdminServiceImpl implements AdminService {
 		Map<EnglishSpelling,List<Antonym>> antonym = antonymRepo.findAll()
 														.stream()
 														.collect(Collectors.groupingBy(Antonym::getEnglishSpelling));
+		List<Phrase> phraseList = phraseRepo.findAll();
 		List<Workbook> workbooks = new ArrayList<>();
 		//영어-뜻, 뜻-영어 문제 생성
 		Random random = new Random();
@@ -234,7 +265,7 @@ public class AdminServiceImpl implements AdminService {
 		 여기에서 phrase는 englishSpelling이 없는 것을 확인할수 있는데
 		 이것은 english_spelling이 phrase에 있는 verb를 담지 않을수도 있기 때문이다.
 		 */
-				List<Phrase> phraseList = phraseRepo.findAll();
+				
 				Set<String> allPrep = new HashSet<>();//phrase 테이블에 있는 모든 전치사들
 				//문제의 정 오답을 만들때 쓰인다.
 				for(int i = 0;i<phraseList.size();i++) {
@@ -267,9 +298,8 @@ public class AdminServiceImpl implements AdminService {
 									.ans4(wrongAnswerList.get(2))
 									.build());
 				}
-		
 		workbookRepo.saveAll(workbooks);
-		
+		return true;
 	}
 
 }

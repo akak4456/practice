@@ -32,6 +32,7 @@ public class EnglishDictionaryCustomRepositoryImpl extends QuerydslRepositorySup
 			//기본단어장에 있는 단어들을 원하면
 			JPQLQuery<Tuple> query = from(englishDictionary).select(englishDictionary.edno,englishDictionary.englishSpelling,englishDictionary.meaning,englishDictionary.partOfSpeech);
 			query.innerJoin(englishDictionary.englishSpelling,spelling);
+			query.where(englishDictionary.meaning.notEqualsIgnoreCase("NOTFOUND"));
 			totalCount = query.fetchCount();
 			list = getQuerydsl().applyPagination(pageable, query).fetch();
 		}else {
@@ -42,7 +43,7 @@ public class EnglishDictionaryCustomRepositoryImpl extends QuerydslRepositorySup
 					JPAExpressions.select(vocabularyItem.englishSpelling.spelling)
 					.from(vocabularyItem)
 					.where(vocabularyItem.vocabulary.vno.eq(vno))
-					));
+					).and(englishDictionary.meaning.notEqualsIgnoreCase("NOTFOUND")));
 			totalCount = query.fetchCount();
 			list = getQuerydsl().applyPagination(pageable, query).fetch();
 		}
