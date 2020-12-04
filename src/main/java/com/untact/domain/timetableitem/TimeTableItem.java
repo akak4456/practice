@@ -27,7 +27,7 @@ import lombok.experimental.SuperBuilder;
 public class TimeTableItem {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO,generator="ti_seq")
-	private Long tino;//시간표 번호
+	private Long tino;//시간표 아이템 번호
 	
 	private String title;
 	
@@ -46,7 +46,7 @@ public class TimeTableItem {
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="tno")
-	private TimeTable timeTable;//그룹과의 관계
+	private TimeTable timeTable;
 	public void setTimeTable (TimeTable timeTable) {
 		this.timeTable = timeTable;
 	}

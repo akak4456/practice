@@ -1,5 +1,7 @@
 package com.untact.service.group;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.domain.Page;
 
 import com.untact.domain.group.GroupEntity;
@@ -14,7 +16,7 @@ public interface GroupService {
 	public String tryEntrance(Long gno,MemberEntity member);
 	public void addGroup(GroupEntity group,MemberEntity member);
 	public boolean dismissGroupManual(Long gno,MemberEntity member);
-	public void dismissGroupAuto();//cron에 의해 주기적으로 실행되는 함수
+	public void dismissGroupAuto(LocalDateTime duedate);//cron에 의해 주기적으로 실행되는 함수
 	public boolean tryLeaderEntrance(Long gno,MemberEntity member);
 	public boolean modifyGroup(Long gno,MemberEntity member,GroupEntity newGroup);
 	public Long getGroupMemberCount(Long gno);

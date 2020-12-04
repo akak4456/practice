@@ -1,5 +1,6 @@
 package com.untact.service.group;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -69,16 +70,9 @@ public class GroupServiceImpl implements GroupService {
 	public Page<GroupEntity> getListWithPagingAndUserNumber(PageVO pageVO, Long mno) {
 		return groupRepo.getPageWithUserNumber(pageVO.makePageable(0, "gno"), mno);
 	}
-
-	@Transactional
-	@Override
-	public boolean dismissGroupManual(Long gno, MemberEntity member) {
+	
+	private void dismissGroup(Long gno) {
 		GroupEntity group = groupRepo.findById(gno).get();
-		Optional<GroupInclude> include = groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, member.getMno(), WhichStatus.LEADER);
-		if(include.isEmpty()) {
-			//리더가 아니라면
-			return false;
-		}
 		List<GroupInclude> includes = groupIncludeRepo.findByGroupNumber(gno);
 		int n = includes.size();//총 사람 수
 		Long totalFine = groupIncludeRepo.findSumOfFineByGroupNumber(gno, Set.of(WhichStatus.LEADER,WhichStatus.FOLLOWER));
@@ -96,13 +90,26 @@ public class GroupServiceImpl implements GroupService {
 		}
 		memberRepo.saveAll(members);//환급금을 돌려 준다.
 		groupRepo.deleteById(gno);//그룹을 삭제한다.
+	}
+	@Transactional
+	@Override
+	public boolean dismissGroupManual(Long gno, MemberEntity member) {
+		Optional<GroupInclude> include = groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, member.getMno(), WhichStatus.LEADER);
+		if(include.isEmpty()) {
+			//리더가 아니라면
+			return false;
+		}
+		dismissGroup(gno);
 		return true;
 	}
 	
 	@Transactional
 	@Override
-	public void dismissGroupAuto() {
-		
+	public void dismissGroupAuto(LocalDateTime duedate) {
+		List<Long> gnoList = groupRepo.findGroupNumberByDuedate(duedate);
+		for(Long gno:gnoList) {
+			dismissGroup(gno);
+		}
 	}
 
 	@Override
