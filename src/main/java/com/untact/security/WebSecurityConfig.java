@@ -13,6 +13,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.untact.domain.member.Role;
+
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -50,6 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         	.antMatchers("/board/**").authenticated()
         	.antMatchers("/reply/**").authenticated()
         	.antMatchers("/deposit/**").authenticated()
+        	.antMatchers("/admin/**").hasAuthority(Role.ADMIN.toString())
         	.anyRequest().permitAll()
             .and()
         	.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
