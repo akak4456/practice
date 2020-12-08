@@ -96,7 +96,7 @@ public class TimeTableController {
 		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
 		try {
 			timeTableService.modifyRepresentativeTimeTable(gno, member, timeTableVO.getTitle(), timeTableVO.getTimeTableItem());
-			return new ResponseEntity("success",HttpStatus.OK);
+			return new ResponseEntity<>("success",HttpStatus.OK);
 		}catch (NotGroupLeaderException e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);

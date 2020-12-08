@@ -176,6 +176,7 @@ public class TimeTableServiceImpl implements TimeTableService {
 		String oldTitle = group.getRepresentativeTimeTableTitle();
 		GroupEntity newGroup = group.modiftyTitle(title);
 		groupRepo.save(newGroup);
+		representativeTimeTableItemRepo.deleteByGroupNumber(gno);
 		for(RepresentativeTimeTableItem item:targetTimeTableItem) {
 			item.setGroup(group);
 		}

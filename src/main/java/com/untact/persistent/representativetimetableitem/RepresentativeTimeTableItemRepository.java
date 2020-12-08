@@ -21,5 +21,4 @@ public interface RepresentativeTimeTableItemRepository
 	
 	@Query("SELECT i FROM RepresentativeTimeTableItem i WHERE i.group.gno=:gno")
 	public List<RepresentativeTimeTableItem> findByGroupNumber(@Param("gno")Long gno);
-	
 }
