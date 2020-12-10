@@ -89,6 +89,7 @@ public class Board {
 	}
 	
 	@OneToMany(cascade=CascadeType.ALL,orphanRemoval=true,fetch = FetchType.LAZY)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name="bno")
 	private List<FileEntity> files;
 	public void setFiles(List<FileEntity> files) {
