@@ -152,9 +152,6 @@ public class TimeTableServiceImpl implements TimeTableService {
 	}
 	@Override
 	public RepresentativeTimeTableVO getRepresentativeOne(Long gno,MemberEntity member) throws NotGroupLeaderException {
-		if(groupIncludeRepo.findByGroupNumberAndMemberNumberAndWhichStatus(gno, member.getMno(), WhichStatus.LEADER).isEmpty()) {
-			throw new NotGroupLeaderException();
-		}
 		GroupEntity group = groupRepo.findById(gno).get();
 		String title = group.getRepresentativeTimeTableTitle();
 		List<RepresentativeTimeTableItem> representativeTimeTableItem = null;
