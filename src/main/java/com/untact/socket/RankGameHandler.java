@@ -69,7 +69,7 @@ public class RankGameHandler {
 		String second = "없음";
 		String third = "없음";
 		//게임에 남은 사람이 2명이하일 수도 있다. 그럴 때 없음을 표시해야만 한다
-		if(SocketDataStructure.gameResult.get(destination).size() == SocketDataStructure.memberMap.get(destination).size()) {
+		if(SocketDataStructure.gameResult.get(destination).size() >= SocketDataStructure.memberMap.get(destination).size()) {
 			//남아 있는 인원하고 결과를 모은 사람의 수가 같다면 결과를 집계할 수 있다.
 			Map<String,Long> resultMap =  SocketDataStructure.gameResult.get(destination);
 			List<Entry<String,Long>> top3 = resultMap.entrySet().stream()

@@ -8,6 +8,7 @@ import com.untact.domain.group.GroupEntity;
 import com.untact.domain.member.MemberEntity;
 import com.untact.vo.GroupInfoVO;
 import com.untact.vo.PageVO;
+import com.untact.vo.RewardAndFineVO;
 
 public interface GroupService {
 	public Page<GroupEntity> getListWithPaging(PageVO pageVO);
@@ -20,4 +21,5 @@ public interface GroupService {
 	public boolean tryLeaderEntrance(Long gno,MemberEntity member);
 	public boolean modifyGroup(Long gno,MemberEntity member,GroupEntity newGroup);
 	public Long getGroupMemberCount(Long gno);
+	public RewardAndFineVO getRewardAndFine(Long gno,MemberEntity member);
 }

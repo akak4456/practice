@@ -18,6 +18,7 @@ import com.untact.service.group.GroupService;
 import com.untact.vo.GroupInfoVO;
 import com.untact.vo.PageMaker;
 import com.untact.vo.PageVO;
+import com.untact.vo.RewardAndFineVO;
 
 import lombok.extern.java.Log;
 
@@ -77,5 +78,11 @@ public class StudyController {
 		}else {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@GetMapping("/study/findrewardandfine/{groupid}")
+	public ResponseEntity<RewardAndFineVO> getRewardAndFine(@PathVariable("groupid")Long gno){
+		MemberEntity member = AuthenticationFacade.getMemberEntityFromAuthentication();
+		return new ResponseEntity<>(groupService.getRewardAndFine(gno, member),HttpStatus.OK);
 	}
 }

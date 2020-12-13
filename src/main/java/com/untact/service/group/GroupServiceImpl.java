@@ -24,6 +24,7 @@ import com.untact.persistent.groupinclude.GroupIncludeRepository;
 import com.untact.persistent.member.MemberEntityRepository;
 import com.untact.vo.GroupInfoVO;
 import com.untact.vo.PageVO;
+import com.untact.vo.RewardAndFineVO;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -159,6 +160,12 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public Long getGroupMemberCount(Long gno) {
 		return groupIncludeRepo.findCountByGroupNumber(gno, Set.of(WhichStatus.LEADER,WhichStatus.FOLLOWER));
+	}
+
+	@Override
+	public RewardAndFineVO getRewardAndFine(Long gno, MemberEntity member) {
+		GroupInclude include = groupIncludeRepo.findByGroupNumberAndMemberNumber(gno,member.getMno()).get();
+		return new RewardAndFineVO(include.getReward(),include.getFine());
 	}
 
 }
