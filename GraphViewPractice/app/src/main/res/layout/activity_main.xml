@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#f3f3ed">
+
+    <com.jo.practice.graphviewpractice.GraphView
+        android:id="@+id/graph_view"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:graphLineColor="@color/graph_line_color"
+
+        app:dateTextColor="@color/date_text_color"
+        app:dateTextSize="12sp"
+        android:background="@color/white"
+        app:dateTextMarginBottom="10dp"
+        app:firstCircleColor="@color/first_circle_color"
+        app:secondCircleColor="@color/second_circle_color"
+        app:thirdCircleColor="@color/third_circle_color"
+        app:fourthCircleColor="@color/fourth_circle_color"
+        app:fifthCircleColor="@color/fifth_circle_color"
+        app:graphColor="@color/graph_color"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

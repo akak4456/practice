@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GraphView">
+        <attr name="graphLineColor" format="color"/>
+        <attr name="dateTextColor" format="color"/>
+        <attr name="dateTextSize" format="dimension"/>
+        <attr name="dateTextMarginBottom" format="dimension"/>
+        <attr name="firstCircleColor" format="color"/>
+        <attr name="secondCircleColor" format="color"/>
+        <attr name="thirdCircleColor" format="color"/>
+        <attr name="fourthCircleColor" format="color"/>
+        <attr name="fifthCircleColor" format="color"/>
+        <attr name="graphColor" format="color"/>
+    </declare-styleable>
+</resources>

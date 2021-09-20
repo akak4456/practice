@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="graph_line_color">#f0f0f0</color>
+    <color name="date_text_color">#707070</color>
+
+    <color name="first_circle_color">#eedc88</color>
+    <color name="second_circle_color">#b8d68a</color>
+    <color name="third_circle_color">#61ae72</color>
+    <color name="fourth_circle_color">#3b7851</color>
+    <color name="fifth_circle_color">#6b7772</color>
+
+    <color name="graph_color">#61ae72</color>
+</resources>
