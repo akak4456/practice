@@ -12,8 +12,6 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun componentTest(){
-        val (name,ext) = splitFilename("example.kt")
-        println(name)
-        println(ext)
+        twoAndThree { a, b -> a*b  }
     }
 }

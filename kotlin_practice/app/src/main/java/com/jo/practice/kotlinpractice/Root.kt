@@ -1,6 +1,6 @@
 package com.jo.practice.kotlinpractice
 
-fun splitFilename(fullName:String):NameComponents{
-    val (name,ext) = fullName.split('.',limit = 2)
-    return NameComponents(name,ext)
+fun twoAndThree(operation: (Int, Int) -> Int){
+    val result = operation(2,3)
+    println("The result is $result")
 }
