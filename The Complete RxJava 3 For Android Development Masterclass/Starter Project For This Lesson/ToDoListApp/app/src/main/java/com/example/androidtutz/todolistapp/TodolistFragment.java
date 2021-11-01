@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,6 +30,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static android.content.Context.MODE_PRIVATE;
+
+import io.reactivex.Observable;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 
 /**
@@ -62,6 +70,8 @@ public class TodolistFragment extends Fragment {
 
     private View view;
     private TextView searchEditText;
+
+    private CompositeDisposable disposable = new CompositeDisposable()
 
 
 
@@ -230,9 +240,24 @@ public class TodolistFragment extends Fragment {
     private void loadData() {
 
 
+        Observable<ToDoListItem> observable = Observable.fromArray(toDoDataManager.getAllToDoListItem_list().toArray(new ToDoListItem[0]));
+        observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<ToDoListItem>(){
 
+            @Override
+            public void onNext(@NonNull ToDoListItem toDoListItem) {
 
+            }
 
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        })
     }
 
 
