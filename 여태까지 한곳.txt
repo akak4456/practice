@@ -1,1 +1,1 @@
-﻿Writing your first Django app, part4 Write a minimal form 완료
+﻿Writing your first Django app, part4 완료
