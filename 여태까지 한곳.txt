@@ -1,1 +1,1 @@
-﻿Writing your first Django app, part5 The Django test client에서 Improving our view 전까지 완료
+﻿Writing your first Django app, part5 완료
