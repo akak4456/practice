@@ -15,8 +15,9 @@ import com.example.fpkoltinpractice.FunList.Nil
 class ExampleUnitTest {
     @Test
     fun mainTest() {
-        val list = Cons(1, Cons(2, Cons(3, Cons(4,
-            Cons(5, Nil)
-        ))))
+        val list = funListOf(1, 2, 3, 4, 5)
+        require(list.filterByFoldRight { it % 2 == 0 } == funListOf(2, 4))
+        require(list.filterByFoldRight { it < 1 } == FunList.Nil)
+        require(list.filterByFoldRight { it < 6 } == funListOf(1, 2, 3, 4, 5))
     }
 }
