@@ -104,3 +104,36 @@ fun <T> FunList<T>.reverseByFoldRight(): FunList<T> = this.foldRight(FunList.Nil
 fun <T> FunList<T>.filterByFoldRight(p: (T) -> Boolean): FunList<T> = this.foldRight(FunList.Nil) {x, acc: FunList<T> ->
     if(p(x)) acc.addHead(x) else acc
 }
+
+tailrec fun <T, R> FunList<T>.zip(other: FunList<R>, acc: FunList<Pair<T, R>> = FunList.Nil): FunList<Pair<T, R>> = when{
+    this === FunList.Nil || other === FunList.Nil -> acc.reverse()
+    else -> getTail().zip(other.getTail(),acc.addHead(Pair(this.getHead(), other.getHead())))
+}
+
+tailrec fun <T1, T2, R> FunList<T1>.zipWith(f: (T1, T2)->R, list:FunList<T2>, acc: FunList<R> = FunList.Nil) : FunList<R> = when{
+    this === FunList.Nil || list === FunList.Nil -> acc.reverse()
+    else -> getTail().zipWith(f,list.getTail(), acc.addHead(f(getHead(),list.getHead())))
+}
+
+fun <T, R> FunList<T>.associate(f: (T) -> Pair<T, R>): Map<T, R> = when{
+    this === FunList.Nil -> mapOf()
+    else -> mapOf(f(getHead())) + getTail().associate(f)
+}
+
+fun <T, K> FunList<T>.groupBy(f: (T) -> K): Map<K, FunList<T>> = foldRight(mapOf()){value, acc ->
+    acc.plus(f(value) to (acc.getOrElse(f(value)){funListOf()}.addHead(value)))
+}
+
+tailrec fun <T> FunList<T>.toString(acc: String): String = when{
+    this === FunList.Nil -> acc
+    else -> {
+        val addedString = if(acc==""){
+            "[${getHead()}"
+        }else if(getTail() === FunList.Nil){
+            ", ${getHead()}]"
+        }else {
+            ", ${getHead()}"
+        }
+        getTail().toString(acc+addedString)
+    }
+}
