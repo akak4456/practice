@@ -2,11 +2,14 @@ package com.example.memoryusagetest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity  : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     private lateinit var bottomNavigationView: BottomNavigationView
+
+    val albums: List<Album> by lazy { GalleryUtil.getMedia(this, MediaType.IMAGE) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -16,6 +19,12 @@ class MainActivity  : AppCompatActivity(), BottomNavigationView.OnNavigationItem
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
         supportFragmentManager.beginTransaction().add(R.id.frameLayout, HomeFragment()).commit()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        Log.d("ABC",albums.toString())
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
