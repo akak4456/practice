@@ -8,49 +8,75 @@
 import SwiftUI
 
 struct ContentView: View {
-  var emojis: [String] = ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐","🛻","🚚","🚛","🚜","🦽"
-                          ,"🦼","🛴","🚲","🛵","🏍","🛺","🚔","🚍","🚘"]
+  let vehicleTheme: [String] = ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐","🛻","🚚","🚛","🚜","🦽"
+                                ,"🦼","🛴","🚲","🛵","🏍","🛺","🚔","🚍","🚘"]
+  let emotionTheme: [String] = ["😀","😃","😇","🥰","🤬","🥵","🤣","😤","👺","🤖"]
+  let animalTheme: [String] = ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐻‍❄️","🐨","🐯","🦁","🐮","🐷"]
+  @State var emojis: [String] = ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐","🛻","🚚","🚛","🚜","🦽"
+                                 ,"🦼","🛴","🚲","🛵","🏍","🛺","🚔","🚍","🚘"]
   
-  @State var emojiCount = 4
   var body: some View {
     VStack {
+      Text("Memorize!").font(.largeTitle)
       ScrollView {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))] ) {
-          ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
+          ForEach(emojis, id: \.self) { emoji in
             CardView(emoji: emoji).aspectRatio(2/3, contentMode: .fit)
           }
         }
       }
       Spacer()
       HStack {
-        remove
         Spacer()
-        add
-      }.font(.largeTitle)
+        theme1
+        Spacer()
+        theme2
+        Spacer()
+        theme3
+        Spacer()
+      }
     }.padding()
   }
   
-  var remove: some View {
+  var theme1: some View {
     Button {
-      if emojiCount > 1 {
-        emojiCount -= 1
-      }
+      emojis = vehicleTheme
+      emojis.shuffle()
     }
   label: {
-    Image(systemName: "minus.circle")
+    VStack {
+      Image(systemName: "minus.circle").font(.largeTitle)
+      Text("theme1").font(.caption)
+    }
   }
   }
   
-  var add: some View {
+  var theme2: some View {
     Button {
-      if emojiCount < emojis.count {
-        emojiCount += 1
-      }
+      emojis = emotionTheme
+      emojis.shuffle()
     }
   label: {
-    Image(systemName: "plus.circle")
+    VStack {
+      Image(systemName: "minus.circle").font(.largeTitle)
+      Text("theme2").font(.caption)
+    }
   }
   }
+  
+  var theme3: some View {
+    Button {
+      emojis = animalTheme
+      emojis.shuffle()
+    }
+  label: {
+    VStack {
+      Image(systemName: "minus.circle").font(.largeTitle)
+      Text("theme3").font(.caption)
+    }
+  }
+  }
+  
 }
 
 struct CardView: View {
