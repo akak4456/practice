@@ -23,7 +23,7 @@ struct ContentView: View {
             }
           }
         }
-        .foregroundColor(.red)
+        .foregroundColor(getColorByString(viewModel.currentCardColor))
         .padding(.horizontal)
         Button(action: {}) {
           Text("New Game").font(.largeTitle)
@@ -31,6 +31,16 @@ struct ContentView: View {
       }
       
     }
+  
+  func getColorByString(_ colorString: String) -> Color {
+    switch colorString {
+    case "red": return Color.red
+    case "blue": return Color.blue
+    case "orange": return Color.orange
+    case "gray": return Color.gray
+    default: return Color.red
+    }
+  }
 }
 
 struct CardView: View {
