@@ -25,7 +25,9 @@ struct ContentView: View {
         }
         .foregroundColor(getColorByString(viewModel.currentCardColor))
         .padding(.horizontal)
-        Button(action: {}) {
+        Button(action: {
+          viewModel.startNewGame()
+        }) {
           Text("New Game").font(.largeTitle)
         }.padding(.vertical)
       }

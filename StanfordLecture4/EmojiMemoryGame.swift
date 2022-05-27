@@ -31,6 +31,7 @@ class EmojiMemoryGame: ObservableObject {
   
   @Published private var currentTheme: Theme = initialTheme
   
+  
   var cards: Array<MemoryGame<String>.Card> {
     model.cards
   }
@@ -44,4 +45,11 @@ class EmojiMemoryGame: ObservableObject {
   func choose(_ card: MemoryGame<String>.Card) {
     model.choose(card)
   }
+  
+  func startNewGame() {
+    let newTheme = EmojiMemoryGame.themeList[2]
+    currentTheme = newTheme
+    model = EmojiMemoryGame.createMemoryGame(theme: newTheme)
+  }
+
 }
