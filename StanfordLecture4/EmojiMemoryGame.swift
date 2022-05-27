@@ -8,12 +8,22 @@
 import Foundation
 
 class EmojiMemoryGame: ObservableObject {
-  static let emojis: [String] = ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐","🛻","🚚","🚛","🚜","🦽"
+  static let theme1: [String] = ["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐","🛻","🚚","🚛","🚜","🦽"
                           ,"🦼","🛴","🚲","🛵","🏍","🛺","🚔","🚍","🚘"]
+  
+  static let theme2: [String] = ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐻‍❄️","🐨"]
+  
+  static let theme3: [String] = ["😀", "😃", "😄", "😁", "😆","😅", "😂"]
+  
+  static let theme4: [String] = ["🍏","🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🫐","🍈","🍒","🍑","🥭"]
+  
+  static let theme5: [String] = ["⚽️","🏀","🏈","⚾️"]
+  
+  static let theme6: [String] = ["⌚️","📱","💻","📲","⌨️","🖥","🖨"]
   
   static func createMemoryGame() -> MemoryGame<String> {
     MemoryGame<String>(numberOfPairsOfCards: 3) {
-      emojis[$0]
+      theme1[$0]
     }
   }
   @Published private var model: MemoryGame<String> = createMemoryGame()
