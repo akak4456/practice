@@ -1,3 +1,5 @@
+# 뭔가 figma shadow 를 적용하는 데 적절할 것 같아서 fork 를 함.
+
 # ShadowLayout a css like shadow for android
 
 Have you ever wanted a CSS type of shadow in your Android project ? No?! Me neither but designers
