@@ -35,7 +35,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
   }
   
   init(numberOfPairsOfCards: Int, createCardContent: (Int) -> CardContent) {
-    cards = Array<Card>()
+    cards = []
     // add numberOfPairsOfCards X 2 cards to cards array
     
     for pairIndex in 0..<numberOfPairsOfCards {
@@ -46,10 +46,10 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
   }
   
   struct Card: Identifiable {
-    var id: Int
+    let id: Int
     
-    var isFaceUp: Bool = false
-    var isMatched: Bool = false
-    var content: CardContent
+    var isFaceUp = false
+    var isMatched = false
+    let content: CardContent
   }
 }
