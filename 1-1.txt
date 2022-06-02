@@ -1,0 +1,47 @@
+import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    println(Thread.currentThread().name)
+    println("Hello")
+} 
+
+import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    println(this)
+    println(Thread.currentThread().name)
+    println("Hello")
+} 
+
+코루틴의 시작은 코루틴 스코프다.
+
+import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    println(coroutineContext)
+    println(Thread.currentThread().name)
+    println("Hello")
+} 
+
+import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    launch {
+        println("launch: ${Thread.currentThread().name}")
+        println("World!")
+    }
+    println("runBlocking: ${Thread.currentThread().name}")
+    println("Hello")
+} 
+
+import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    launch {
+        println("launch: ${Thread.currentThread().name}")
+        println("World!")
+    }
+    println("runBlocking: ${Thread.currentThread().name}")
+    delay(500L)
+    println("Hello")
+}

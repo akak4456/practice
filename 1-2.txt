@@ -1,0 +1,90 @@
+import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    launch {
+        println("launch: ${Thread.currentThread().name}")
+
+        println("World!")
+    }
+    println("runBlocking: ${Thread.currentThread().name}")
+    Thread.sleep(500)
+    println("Hello")
+}
+
+delay : 양보를 함 Thread.sleep 양보를 하지 않음.
+
+import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    launch {
+        println("launch1: ${Thread.currentThread().name}")
+        delay(1000L)
+        println("3!")
+    }
+    launch {
+        println("launch2: ${Thread.currentThread().name}")
+        println("1!")
+    }
+    println("runBlocking: ${Thread.currentThread().name}")
+    delay(500L)
+    println("2!")
+}
+
+import kotlinx.coroutines.*
+
+fun main() {
+    runBlocking {
+        launch {
+            println("launch1: ${Thread.currentThread().name}")
+            delay(1000L)
+            println("3!")
+        }
+        launch {
+            println("launch2: ${Thread.currentThread().name}")
+            println("1!")
+        }
+        println("runBlocking: ${Thread.currentThread().name}")
+		delay(500L)
+        println("2!")
+    }
+    println("4!")
+}
+
+계층적, 구조적
+
+부모 캔슬 => 자식도 캔슬
+
+import kotlinx.coroutines.*
+
+suspend fun doThree() {
+    println("launch1: ${Thread.currentThread().name}")
+       delay(1000L)
+            println("3!")
+}
+
+suspend fun doOne() {
+    println("launch2: ${Thread.currentThread().name}")
+            delay(2000L)
+            println("1!")
+}
+
+suspend fun doTwo() {
+    println("runBlocking: ${Thread.currentThread().name}")
+		delay(500L)
+        println("2!")
+}
+
+fun main() {
+    runBlocking {
+        launch {
+            doThree()
+        }
+        launch {
+            doOne()
+        }
+        doTwo()
+    }
+    println("4!")
+}
+
+suspend => 중단 가능한 함수, 양보 가능한 함수
