@@ -1,13 +1,28 @@
 import React, { useState, useEffect, memo, useCallback } from 'react';
 
-import Block from '../block/Block';
+import ToAddBlock from '../block/to_add/ToAddBlock';
+import ToAddIdBlock from '../block/to_add_id/ToAddIdBlock';
 import styles from './BlockList.module.css';
 
-const BlockList = memo(({ blocks }) => {
-  const [findBlock, setFindBlock] = useState(blocks);
+import { TO_ADD_BLOCK_TYPE, TO_ADD_ID_BLOCK_TYPE } from '../../constants/BlockConstants';
 
-  const blockComponentList = findBlock.map((block, index) => {
-    return <Block id={block.id} index={index} blockContent={block.content} />;
+const BlockList = memo(({ blocks, setBlocks }) => {
+  const addBlock = (targetBlock) => {
+    let idx = blocks.indexOf(targetBlock);
+    let newBlocks = [...blocks];
+    let newObject = { ...newBlocks[idx] };
+    newObject.type = TO_ADD_ID_BLOCK_TYPE;
+    newBlocks[idx] = newObject;
+    setBlocks(newBlocks);
+  };
+  const blockComponentList = blocks.map((block) => {
+    if (block.type == TO_ADD_BLOCK_TYPE) {
+      return <ToAddBlock block={block} addBlock={addBlock} />;
+    } else if (block.type == TO_ADD_ID_BLOCK_TYPE) {
+      return <ToAddIdBlock block={block} />;
+    } else {
+      return <ToAddBlock block={block} />;
+    }
   });
   return <div className={styles.grid}>{blockComponentList}</div>;
 });
