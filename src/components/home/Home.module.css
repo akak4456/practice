@@ -1,0 +1,7 @@
+.grid {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(2, auto);
+  grid-auto-rows: minmax(minmax(5vh, 120px), auto);
+  gap: 0.5em 1em;
+}
