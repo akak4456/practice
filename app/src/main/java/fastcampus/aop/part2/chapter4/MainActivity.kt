@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.room.Room
+import fastcampus.aop.part2.chapter4.model.History
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,12 +32,20 @@ class MainActivity : AppCompatActivity() {
         findViewById(R.id.historyLinearLayout)
     }
 
+    lateinit var db: AppDatabase
+
     private var isOperator = false
     private var hasOperator = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "historyDB"
+        ).build()
     }
 
     fun buttonClicked(v: View) {
@@ -131,6 +142,12 @@ class MainActivity : AppCompatActivity() {
         val expressionText = expressionTextView.text.toString()
         val resultText = calculateExpression()
 
+        Thread(Runnable {
+            db.historyDao().insertHistory(
+                History(null, expressionText, resultText)
+            )
+        }).start()
+
         resultTextView.text = ""
         expressionTextView.text = resultText
 
@@ -170,9 +187,20 @@ class MainActivity : AppCompatActivity() {
 
     fun historyButtonClicked(v: View) {
         historyLayout.isVisible = true
+        historyLinearLayout.removeAllViews()
 
-        //TODO 디비에서 모든 기록 가져오기
-        //TODO 뷰에 모든 기록 할당하기
+        Thread(Runnable {
+            db.historyDao().getAll().reversed().forEach {
+
+                runOnUiThread {
+                    val historyView =
+                        LayoutInflater.from(this).inflate(R.layout.history_row, null, false)
+                    historyView.findViewById<TextView>(R.id.expressionTextView).text = it.expression
+                    historyView.findViewById<TextView>(R.id.resultTextView).text = "= ${it.result}"
+                    historyLinearLayout.addView(historyView)
+                }
+            }
+        }).start()
     }
 
     fun closeHistoryButtonClicked(v: View) {
@@ -180,8 +208,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun historyClearButtonClicked(v: View) {
-        // TODO 디비에서 모든 기록 삭제
-        // TODO 뷰에서 모든 기록 삭제
+        historyLinearLayout.removeAllViews()
+
+        Thread(Runnable {
+            db.historyDao().deleteAll()
+        }).start()
     }
 }
 
