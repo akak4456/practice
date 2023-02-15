@@ -1,7 +1,8 @@
 package fastcampus.aop.part3.chapter02
 
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.ktx.Firebase
@@ -9,6 +10,7 @@ import com.google.firebase.remoteconfig.ktx.remoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.math.absoluteValue
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,11 +18,32 @@ class MainActivity : AppCompatActivity() {
         findViewById(R.id.viewPager)
     }
 
+    private val progressBar: ProgressBar by lazy {
+        findViewById(R.id.progressBar)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initViews()
         initData()
+    }
+
+    private fun initViews() {
+        viewPager.setPageTransformer { page, position ->
+            when {
+                position.absoluteValue >= 0.5f -> {
+                    page.alpha = 0f
+                }
+                position == 0f -> {
+                    page.alpha = 1f
+                }
+                else -> {
+                    page.alpha = 1f - position.absoluteValue * 2f
+                }
+            }
+        }
     }
 
     private fun initData() {
@@ -31,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             }
         )
         remoteConfig.fetchAndActivate().addOnCompleteListener {
+            progressBar.visibility = View.GONE
             if (it.isSuccessful) {
                 val quotes = parseQuotesJson(remoteConfig.getString("quotes"))
                 val isNameRevealed = remoteConfig.getBoolean("is_name_revealed")
@@ -59,6 +83,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayQuotesPager(quotes: List<Quote>, isNameRevealed: Boolean) {
-        viewPager.adapter = QuotePagerAdapter(quotes, isNameRevealed)
+        val adapter = QuotePagerAdapter(quotes, isNameRevealed)
+        viewPager.adapter = adapter
+        viewPager.setCurrentItem(adapter.itemCount / 2, false)
     }
 }
