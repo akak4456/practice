@@ -1,8 +1,11 @@
 package fastcampus.aop.part3.chapter03
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.TimePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +36,42 @@ class MainActivity : AppCompatActivity() {
    }
 
     private fun initChangeAlarmTimeButton() {
+        val changeAlarmButton = findViewById<Button>(R.id.changeAlarmTimeButton)
+        changeAlarmButton.setOnClickListener {
 
+            val calendar = Calendar.getInstance()
+            TimePickerDialog(this, { picker, hour, minute ->
+
+                val model = saveAlarmModel(hour, minute, false)
+
+                // 데이터를 저장한다.
+                // 뷰를 업데이트 한다.
+                // 기존에 있던 알람을 삭제한다.
+
+            }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false)
+                .show()
+        }
+    }
+
+    private fun saveAlarmModel(
+        hour: Int,
+        minute: Int,
+        onOff: Boolean,
+    ): AlarmDisplayModel {
+        val model = AlarmDisplayModel(
+            hour = hour,
+            minute = minute,
+            onOff = onOff,
+        )
+
+        val sharedPreferences = getSharedPreferences("time", Context.MODE_PRIVATE)
+
+        with(sharedPreferences.edit()) {
+            putString("alarm", model.makeDataForDB())
+            putBoolean("onOff", model.onOff)
+            commit()
+        }
+
+        return model
     }
 }
