@@ -12,9 +12,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //step0 뷰를 초기화해주기
         initOnOffButton()
         initChangeAlarmTimeButton()
+
+        val model = fetchDataFromSharedPreferences()
+        renderView(model)
 
         //step1 데이터 가져오기
 
