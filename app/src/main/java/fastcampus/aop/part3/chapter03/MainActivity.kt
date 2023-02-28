@@ -1,7 +1,9 @@
 package fastcampus.aop.part3.chapter03
 
+import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -47,7 +49,14 @@ class MainActivity : AppCompatActivity() {
 
                 val model = saveAlarmModel(hour, minute, false)
                 renderView(model)
-                // 기존에 있던 알람을 삭제한다.
+
+                val pendingIntent = PendingIntent.getBroadcast(
+                    this,
+                    ALARM_REQUEST_CODE,
+                    Intent(this, AlarmReceiver::class.java),
+                    PendingIntent.FLAG_NO_CREATE
+                )
+                pendingIntent?.cancel()
 
             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false)
                 .show()
@@ -91,21 +100,21 @@ class MainActivity : AppCompatActivity() {
 
         // 보정 예외처리
 
-//        val pendingIntent = PendingIntent.getBroadcast(
-//            this,
-//            ALARM_REQUEST_CODE,
-//            Intent(this, AlarmReceiver::class.java),
-//            PendingIntent.FLAG_NO_CREATE
-//        )
-//
-//        if ((pendingIntent == null) and alarmModel.onOff) {
-//            // 알람은 꺼져있는데, 데이터는 커져있는 경우
-//            alarmModel.onOff = false
-//        } else if ((pendingIntent != null) and alarmModel.onOff.not()) {
-//            // 알람은 켜져있는데, 데이터는 꺼져있는 경우
-//            // 알람을 취소함
-//            pendingIntent.cancel()
-//        }
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            ALARM_REQUEST_CODE,
+            Intent(this, AlarmReceiver::class.java),
+            PendingIntent.FLAG_NO_CREATE
+        )
+
+        if ((pendingIntent == null) and alarmModel.onOff) {
+            // 알람은 꺼져있는데, 데이터는 커져있는 경우
+            alarmModel.onOff = false
+        } else if ((pendingIntent != null) and alarmModel.onOff.not()) {
+            // 알람은 켜져있는데, 데이터는 꺼져있는 경우
+            // 알람을 취소함
+            pendingIntent.cancel()
+        }
 
         return alarmModel
     }
