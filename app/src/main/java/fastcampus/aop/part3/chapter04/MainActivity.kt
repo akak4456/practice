@@ -2,12 +2,15 @@ package fastcampus.aop.part3.chapter04
 
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
+import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import fastcampus.aop.part3.chapter04.adapter.BookAdapter
 import fastcampus.aop.part3.chapter04.api.BookService
 import fastcampus.aop.part3.chapter04.databinding.ActivityMainBinding
 import fastcampus.aop.part3.chapter04.model.BestSellerDto
+import fastcampus.aop.part3.chapter04.model.SearchBookDto
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: BookAdapter
+    private lateinit var bookService: BookService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +35,9 @@ class MainActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val bookService = retrofit.create(BookService::class.java)
+        bookService = retrofit.create(BookService::class.java)
 
-        bookService.getBestSellerBooks("6F1FE16445646F158DBCC2949163DF1AD751462EFA01E011BC6D9FD506353176")
+        bookService.getBestSellerBooks(getString(R.string.interparkAPIKey))
             .enqueue(object : Callback<BestSellerDto> {
                 override fun onResponse(
                     call: Call<BestSellerDto>,
@@ -58,6 +62,41 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<BestSellerDto>, t: Throwable) {
+                    // todo 실패처리
+
+                    Log.e(TAG, t.toString())
+                }
+
+            })
+
+        binding.searchEditText.setOnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == MotionEvent.ACTION_DOWN) {
+                search(binding.searchEditText.text.toString())
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener false
+        }
+    }
+
+    private fun search(keyword: String) {
+        bookService.getBooksByName(getString(R.string.interparkAPIKey), keyword)
+            .enqueue(object : Callback<SearchBookDto> {
+                override fun onResponse(
+                    call: Call<SearchBookDto>,
+                    response: Response<SearchBookDto>
+                ) {
+                    // todo 성공처리
+
+                    if (response.isSuccessful.not()) {
+                        Log.e(TAG, "NOT!! SUCCESS")
+                        return
+                    }
+
+                    adapter.submitList(response.body()?.books.orEmpty())
+
+                }
+
+                override fun onFailure(call: Call<SearchBookDto>, t: Throwable) {
                     // todo 실패처리
 
                     Log.e(TAG, t.toString())
