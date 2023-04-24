@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2023-04-23-1032번 명령 프롬프트.cpp">
+    <ClCompile Include="2023-04-24-1100번 하얀 칸.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
