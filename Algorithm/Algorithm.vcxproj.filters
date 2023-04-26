@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2023-04-25-10798번 세로읽기.cpp">
+    <ClCompile Include="2023-04-26-10610번 30.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
