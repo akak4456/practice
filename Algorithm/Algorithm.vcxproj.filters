@@ -15,8 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2023-04-30-1439번 뒤집기.cpp">
+    <ClCompile Include="2023-05-01-14928번-큰 수.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="2023-05-01-14928번-큰 수BIG">
+      <Filter>헤더 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>
