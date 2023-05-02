@@ -19,10 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2023-05-01-14928번-큰 수.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="2023-05-01-14928번-큰 수BIG" />
+    <ClCompile Include="2023-05-02-2851번-슈퍼 마리오.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

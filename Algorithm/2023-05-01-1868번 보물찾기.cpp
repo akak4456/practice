@@ -57,17 +57,25 @@ void dfs(int n, int depth) {
 	}
 }
 */
+/*
 int solution(int n, int len) {
+	// cout << n << ' ' << len << endl;
 	visited[n] = true;
 	int ret = -1;
 	for (int i = 0; i < graph[n].size(); i++) {
 		int target = graph[n][i];
 		if (!visited[target]) {
-			if (graph[target].size() <= 2) {
-				ret = max(ret, solution(target, len + 1));
+			if (graph[n].size() > 2) {
+				// 그러니까 이 부분이 문제인건데...
+				if (len == 1) {
+					ret = max(ret, solution(target, 1) + 1);
+				}
+				else {
+					ret = max(ret, solution(target, 1) + (int)ceil(log2(len)));
+				}
 			}
 			else {
-				ret = max(ret, solution(target, 1));
+				ret = max(ret, solution(target, len + 1));
 			}
 		}
 	}
@@ -76,6 +84,52 @@ int solution(int n, int len) {
 	}
 	else {
 		return ret;
+	}
+}
+*/
+int solution(int node, int depth, bool isFromBranch) {
+	visited[node] = true;
+	if (graph[node].size() <= 2) {
+		for (int i = 0; i < graph[node].size(); i++) {
+			int target = graph[node][i];
+			if (!visited[target]) {
+				return solution(target, depth + 1, isFromBranch);
+			}
+		}
+		if (!isFromBranch) {
+			return (int)log2(depth);
+		}
+		else {
+			if (depth - 1 >= 1) {
+				return (int)log2(depth - 1);
+			}
+			else {
+				return 0;
+			}
+		}
+	}
+	else {
+		int ret = 0;
+		for (int i = 0; i < graph[node].size(); i++) {
+			int target = graph[node][i];
+			if (!visited[target]) {
+				ret = max(ret, solution(target, 1, true));
+			}
+		}
+		if (!isFromBranch) {
+			int additional = 0;
+			if (depth - 1 >= 1) {
+				additional = (int)log2(depth - 1);
+			}
+			return ret + 1 + additional;
+		}
+		else {
+			int additional = 0;
+			if (depth - 2 >= 1) {
+				additional = (int)log2(depth - 2);
+			}
+			return ret + 1 + additional;
+		}
 	}
 }
 int main() {
@@ -102,6 +156,12 @@ int main() {
 	근데 사실 1번방-2번방 이것도 어느 구조의 서브 트리라면 그리고 어차피 1번은 선택해야 한다면 1번방을 선택하는 것이 이득아닐까?
 
 	그러면 leaf 의 부모들 set 을 의미하는 건가? 아니 그건 아닌것 같다.
+
+	어느 방향으로 가야 하는지를 물어보는 거니 내 생각이 완전히 틀렸다. 이래서 문제를 잘 읽어봐야 한다.
+	어느 방향인지를 알려준다고 했으니
+	정답은 2이다.
+	근데 이건 맞다 leaf의 부모에 대해서는 한번 물어봐야만 한다.
+
 	13
 	1 2
 	1 3
@@ -115,30 +175,14 @@ int main() {
 	8 10
 	11 12
 	11 13
+	답:2
 
 	5
 	1 2
 	2 3
-	2 4
-	1 5
-
-	어느 방향으로 가야 하는지를 물어보는 거니 내 생각이 완전히 틀렸다. 이래서 문제를 잘 읽어봐야 한다.
-	어느 방향인지를 알려준다고 했으니
-
-	
-
-
-	정답은 2이다.
-	근데 이건 맞다 leaf의 부모에 대해서는 한번 물어봐야만 한다.
-
-	8
-	1 2
-	2 3
-	2 4
-	2 5
-	3 6
-	4 7
-	5 8
+	4 3
+	5 3
+	답:2
 
 	8
 	1 4
@@ -148,6 +192,29 @@ int main() {
 	5 6
 	5 7
 	5 8
+	답:2
+
+	9
+	1 4
+	2 4
+	3 4
+	4 5
+	5 6
+	6 7
+	6 8
+	6 9
+	답:2
+
+	현재 시도한 방법은 다음과 같다.
+	1 2
+	2 3
+	2 4
+	4 5
+	4 6
+	과 같이 연결되었다고 할 때(대략 아령 모양)
+	2번과 4번은 분기점이니까 일단 이건 무조건 선택한다고 가정하고
+	트리가 만약 일직선 일시에 노드의 개수가 N 개 이면 log2(N) 이 정답인 것을
+	이용해서 구하고자 하였는데 이 부분에서 잘 안된다...
 	*/
 	int n;
 	cin >> n;
@@ -190,8 +257,8 @@ int main() {
 	}
 	*/
 	for (int i = 1; i <= n; i++) {
-		if (graph[i].size() > 2) {
-			cout << solution(i, 0) << endl;
+		if (graph[i].size() == 1) {
+			cout << solution(i, 1, false) << endl;
 			break;
 		}
 	}
