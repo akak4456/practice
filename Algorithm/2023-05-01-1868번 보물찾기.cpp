@@ -43,8 +43,6 @@ graph[0] 은 사용하지 않는다.
 graph[1] 은 1번방에 연결된 다른 방을 의미한다.
 graph[n] 은 n번방에 연결된 다른 방을 의미한다.
 */
-vector<int> graph[50001];
-bool visited[50001];
 /*
 int maxDepth = -1;
 void dfs(int n, int depth) {
@@ -87,6 +85,7 @@ int solution(int n, int len) {
 	}
 }
 */
+/*
 int solution(int node, int depth, bool isFromBranch) {
 	visited[node] = true;
 	if (graph[node].size() <= 2) {
@@ -131,6 +130,28 @@ int solution(int node, int depth, bool isFromBranch) {
 			return ret + 1 + additional;
 		}
 	}
+}
+*/
+vector<int> graph[50001];
+bool visited[50001];
+int solution(int node, int depth) {
+	visited[node] = true;
+	int ret = -1;
+	for (int i = 0; i < graph[node].size(); i++) {
+		int target = graph[node][i];
+		if (!visited[target]) {
+			if (graph[node].size() <= 2) {
+				return solution(target, depth + 1);
+			}
+			else {
+				if (ret == -1) ret = (int)log2(depth) + 1;
+				ret = max(ret, solution(target, 1) + 1);
+				ret = max(ret, solution(target, depth + 1));
+			}
+		}
+	}
+	if (ret != -1) return ret;
+	return (int)log2(depth);
 }
 int main() {
 	/*
@@ -258,7 +279,7 @@ int main() {
 	*/
 	for (int i = 1; i <= n; i++) {
 		if (graph[i].size() == 1) {
-			cout << solution(i, 1, false) << endl;
+			cout << solution(i, 1) << endl;
 			break;
 		}
 	}
