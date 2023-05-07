@@ -1,8 +1,6 @@
 ﻿  2023-05-01-2614번-청개구리.cpp
-C:\Algorithm\Algorithm\2023-05-01-2614번-청개구리.cpp(30,25): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Algorithm\Algorithm\2023-05-01-2614번-청개구리.cpp(31,28): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Algorithm\Algorithm\2023-05-01-2614번-청개구리.cpp(69,25): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Algorithm\Algorithm\2023-05-01-2614번-청개구리.cpp(70,28): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Algorithm\Algorithm\2023-05-01-2614번-청개구리.cpp(100,21): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Algorithm\Algorithm\2023-05-01-2614번-청개구리.cpp(101,24): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Algorithm\Algorithm\2023-05-01-2614번-청개구리.cpp(33,25): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Algorithm\Algorithm\2023-05-01-2614번-청개구리.cpp(34,28): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Algorithm\Algorithm\2023-05-01-2614번-청개구리.cpp(77,5): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Algorithm\Algorithm\2023-05-01-2614번-청개구리.cpp(81,9): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Algorithm.vcxproj -> C:\Algorithm\x64\Debug\Algorithm.exe
