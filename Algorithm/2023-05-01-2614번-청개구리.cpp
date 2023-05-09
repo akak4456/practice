@@ -179,7 +179,20 @@ int main() {
             }
         }
     }
-    printMatrix(row_echelon(A));
+    printMatrix(A);
+    vector<int> tmpMatrix = vector<int>(A.mat[0].size(), 0);
+    int tmpB = 0;
+    for (int i = 0; i < A.mat.size(); i++) {
+        for (int j = 0; j < A.mat[i].size(); j++) {
+            tmpMatrix[j] += A.mat[i][j];
+        }
+        tmpB += A.b[i];
+    }
+    for (int i = 0; i < tmpMatrix.size(); i++) {
+        cout << tmpMatrix[i] << ' ';
+    }
+    cout << endl;
+    cout << tmpB << endl;
     // solve(A, 0, vector<pair<int, int>>());
     cout << possibleCnt << endl;
     for (int i = 0; i < possible.size(); i++) {
