@@ -1,2 +1,6 @@
-﻿  2023-05-12-19535번-ㄷㄷㄷㅈ.cpp
+﻿  2023-05-13-1646번-피이보나치 트리.cpp
+C:\Algorithm\Algorithm\2023-05-13-1646번-피이보나치 트리.cpp(14,48): warning C4244: '인수': 'unsigned __int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Algorithm\Algorithm\2023-05-13-1646번-피이보나치 트리.cpp(32,64): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Algorithm\Algorithm\2023-05-13-1646번-피이보나치 트리.cpp(35,64): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Algorithm\Algorithm\2023-05-13-1646번-피이보나치 트리.cpp(50,2): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Algorithm.vcxproj -> C:\Algorithm\x64\Debug\Algorithm.exe

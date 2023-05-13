@@ -14,27 +14,15 @@ bool visitedG[MAX_N + 1];
 unsigned long long int D = 0;
 unsigned long long int G = 0;
 
-void calculateD(int node, int level, queue<pair<int,int>> parent) {
+void calculateD(int node) {
 	visitedD[node] = true;
-	if (level >= 4) D++;
-	queue<pair<int, int>> newQueue = queue<pair<int, int>>(parent);
-	if (graph[node].size() >= 3) {
-		newQueue.push(make_pair(node, level));
-	}
-	while (newQueue.size() > 0) {
-		pair<int, int> qFront = newQueue.front();
-		if (level - qFront.second == 2) {
-			D += max((int)graph[qFront.first].size() - 2, 0);
-			newQueue.pop();
-		}
-		else {
-			break;
-		}
-	}
 	for (int i = 0; i < graph[node].size(); i++) {
 		int target = graph[node][i];
 		if (!visitedD[target]) {
-			calculateD(target, level + 1, newQueue);
+			if (graph[node].size() >= 2 && graph[target].size() >= 2) {
+				D += (graph[node].size() - 1) * (graph[target].size() - 1);
+			}
+			calculateD(target);
 		}
 	}
 }
@@ -62,14 +50,9 @@ int main() {
 		graph[a].push_back(b);
 		graph[b].push_back(a);
 	}
-	for (int i = 1; i <= N; i++) {
-		if (graph[i].size() == 1) {
-			calculateD(i, 1, queue<pair<int,int>>());
-			break;
-		}
-	}
+	calculateD(1);
 	calculateG(1);
-	// cout << D << ' ' << G << endl;
+	cout << D << ' ' << G << endl;
 	if (D > G * 3) {
 		cout << "D" << endl;
 	}
