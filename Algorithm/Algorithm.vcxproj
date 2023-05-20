@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2023-05-13-1208번-부분수열의 합 2.cpp" />
+    <ClCompile Include="2023-05-20-12919번-A와 B 2.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
