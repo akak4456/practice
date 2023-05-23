@@ -29,5 +29,7 @@ class MainActivityTest {
     fun addNumberSequence() {
         onView(withId(R.id.button_no_1)).perform(click())
         onView(withId(R.id.tv_input)).check(matches(withText("1")))
+        onView(withId(R.id.button_no_2)).perform(click())
+        onView(withId(R.id.tv_input)).check(matches(withText("12")))
     }
 }
