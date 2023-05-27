@@ -54,13 +54,21 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun addNumber(number: String) {
-        val originInputSplit = binding.tvInput.text.toString().split(*operation)
-        Log.e("TMPTEST", originInputSplit.toString())
-        var newText = originInputSplit.last() + number
-        newText = newText.replace(",", "")
-        newText = "%,d".format(newText.toInt())
-        binding.tvInput.text =
-            originInputSplit.subList(0, originInputSplit.size - 1).joinToString() + newText
+        val originInput = binding.tvInput.text.toString()
+        if(originInput.isEmpty() || originInput.last() !in '0'..'9') {
+            binding.tvInput.text = originInput + number
+        } else {
+            var firstIdxOfLastNumber = originInput.length - 1
+            while(firstIdxOfLastNumber >= 0 && (originInput[firstIdxOfLastNumber] in '0'..'9' || originInput[firstIdxOfLastNumber] == ',')){
+                firstIdxOfLastNumber--
+            }
+            firstIdxOfLastNumber++
+            var newText = originInput.substring(firstIdxOfLastNumber) + number
+            newText = newText.replace(",","")
+            newText = "%,d".format(newText.toInt())
+            binding.tvInput.text =
+                originInput.substring(0, firstIdxOfLastNumber) + newText
+        }
     }
 
     @SuppressLint("SetTextI18n")
