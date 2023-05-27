@@ -48,4 +48,25 @@ class MainActivityTest {
         onView(withId(R.id.button_no_0)).perform(click())
         onView(withId(R.id.tv_input)).check(matches(withText("1,234,567,890")))
     }
+
+    @Test
+    fun addOperation() {
+        onView(withId(R.id.button_no_1)).perform(click())
+        onView(withId(R.id.button_no_1)).perform(click())
+        onView(withId(R.id.button_no_1)).perform(click())
+        onView(withId(R.id.button_no_1)).perform(click())
+        onView(withId(R.id.button_plus)).perform(click())
+        onView(withId(R.id.tv_input)).check(matches(withText("1,111+")))
+        onView(withId(R.id.button_no_2)).perform(click())
+        onView(withId(R.id.button_no_2)).perform(click())
+        onView(withId(R.id.button_no_2)).perform(click())
+        onView(withId(R.id.button_no_2)).perform(click())
+        onView(withId(R.id.tv_input)).check(matches(withText("1,111+2,222")))
+        onView(withId(R.id.button_minus)).perform(click())
+        onView(withId(R.id.button_no_3)).perform(click())
+        onView(withId(R.id.button_no_3)).perform(click())
+        onView(withId(R.id.button_no_3)).perform(click())
+        onView(withId(R.id.button_no_3)).perform(click())
+        onView(withId(R.id.tv_input)).check(matches(withText("1,111+2,222-3,333")))
+    }
 }
