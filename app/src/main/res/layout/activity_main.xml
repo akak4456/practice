@@ -67,6 +67,82 @@
                 app:layout_constraintBottom_toBottomOf="@id/ll_numbers_2"
                 app:layout_constraintStart_toEndOf="@id/ll_numbers_2"
                 app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/button_multiply"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="×"
+                android:background="@drawable/bg_rounded_rectangle_black"
+                app:layout_constraintTop_toTopOf="@id/ll_numbers_3"
+                app:layout_constraintBottom_toBottomOf="@id/ll_numbers_3"
+                app:layout_constraintStart_toEndOf="@id/ll_numbers_3"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/button_divide"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="÷"
+                android:background="@drawable/bg_rounded_rectangle_black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/ll_numbers_3"
+                app:layout_constraintStart_toEndOf="@id/button_modular"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/button_modular"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="%"
+                android:background="@drawable/bg_rounded_rectangle_black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/ll_numbers_3"
+                app:layout_constraintStart_toEndOf="@id/button_right_bracket"
+                app:layout_constraintEnd_toStartOf="@id/button_divide"/>
+
+            <TextView
+                android:id="@+id/button_left_bracket"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="("
+                android:background="@drawable/bg_rounded_rectangle_black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/ll_numbers_3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/button_right_bracket"/>
+
+            <TextView
+                android:id="@+id/button_right_bracket"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text=")"
+                android:background="@drawable/bg_rounded_rectangle_black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/ll_numbers_3"
+                app:layout_constraintStart_toEndOf="@id/button_left_bracket"
+                app:layout_constraintEnd_toStartOf="@id/button_modular"/>
+
             <LinearLayout
                 android:id="@+id/ll_numbers_1"
                 android:layout_width="0dp"
@@ -169,7 +245,7 @@
                 android:layout_height="0dp"
                 app:layout_constraintWidth_percent="0.75"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_divide"
                 app:layout_constraintBottom_toTopOf="@id/ll_numbers_2"
                 android:orientation="horizontal">
                 <TextView
