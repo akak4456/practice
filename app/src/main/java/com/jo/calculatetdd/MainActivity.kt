@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity() {
         "÷",
         "%",
         "(",
-        ")"
+        ")",
+        "."
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,6 +71,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.buttonRightBracket.setOnClickListener {
             addOperation(6)
+        }
+        binding.buttonDot.setOnClickListener {
+            addOperation(7)
         }
     }
 

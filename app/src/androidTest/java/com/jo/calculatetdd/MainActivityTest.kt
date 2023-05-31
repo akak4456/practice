@@ -95,4 +95,11 @@ class MainActivityTest {
         onView(withId(R.id.button_right_bracket)).perform(click())
         onView(withId(R.id.tv_input)).check(matches(withText("1,111+2,222-3,333×4,444÷5,555%6,666+(7,777)")))
     }
+
+    @Test
+    fun addDot() {
+        onView(withId(R.id.button_no_1)).perform(click())
+        onView(withId(R.id.button_dot)).perform(click())
+        onView(withId(R.id.tv_input)).check(matches(withText("1.")))
+    }
 }
