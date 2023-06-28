@@ -604,6 +604,7 @@ public class WheelPicker extends View implements IDebug, IWheelPicker, Runnable 
                 mCamera.restore();
                 Log.e("TMPTEST", mMatrixRotate.toString());
                 // TODO 아래의 preTranslate, postTranslate 에 대해서 구체적으로 이해하기
+                // TODO 그리고 스크롤이 끝나면 특정 position 으로 wheelpicker 가 fix 되는 데 이 부분도 이해하기
                 mMatrixRotate.preTranslate(-transX, -transY);
                 mMatrixRotate.postTranslate(transX, transY);
 
