@@ -603,6 +603,7 @@ public class WheelPicker extends View implements IDebug, IWheelPicker, Runnable 
                 mCamera.getMatrix(mMatrixRotate);
                 mCamera.restore();
                 Log.e("TMPTEST", mMatrixRotate.toString());
+                // TODO 아래의 preTranslate, postTranslate 에 대해서 구체적으로 이해하기
                 mMatrixRotate.preTranslate(-transX, -transY);
                 mMatrixRotate.postTranslate(transX, transY);
 
