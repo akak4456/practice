@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2023-06-27-16395번-파스칼의 삼각형.cpp">
+    <ClCompile Include="2023-07-04-14719번-빗물.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
