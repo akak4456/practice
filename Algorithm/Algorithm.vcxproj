@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2023-07-14-9322번-철벽 보안 알고리즘.cpp" />
+    <ClCompile Include="2023-07-29-1539번-이진 검색 트리.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
