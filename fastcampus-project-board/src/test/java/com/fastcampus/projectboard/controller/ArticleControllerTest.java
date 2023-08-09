@@ -1,3 +1,5 @@
+package com.fastcampus.projectboard.controller;
+
 import com.fastcampus.projectboard.config.SecurityConfig;
 import com.fastcampus.projectboard.controller.ArticleController;
 import com.fastcampus.projectboard.domain.constant.FormStatus;
