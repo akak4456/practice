@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9ad41d2d-fd67-4b35-8796-8c25b429dc15" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/GodOfJava.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Calculator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Car.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CarManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConstantPool.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ControlElseIf.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ControlFor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ControlIf.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ControlIfAndOr.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ControlIfElse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ControlSwitch.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ControlWhile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GodOfJava.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HealthInsurance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HelloGodOfJava.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InterestManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ManageHeight.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ManageStudent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemberDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/MemberDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MethodVarargs.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MultiCatchSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OperatorCasting.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OperatorPlusMinus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OperatorRelational.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OperatorTilde.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PrimitiveTypes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Profile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProfilePrint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReferenceConstructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/ReferenceConstructor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReferenceDefault.java" beforeDir="false" afterPath="$PROJECT_DIR$/ReferenceDefault.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReferenceOverloading.java" beforeDir="false" afterPath="$PROJECT_DIR$/ReferenceOverloading.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReferencePass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReferenceReturn.java" beforeDir="false" afterPath="$PROJECT_DIR$/ReferenceReturn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReferenceStatic.java" beforeDir="false" afterPath="$PROJECT_DIR$/ReferenceStatic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReferenceStaticVariable.java" beforeDir="false" afterPath="$PROJECT_DIR$/ReferenceStaticVariable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReferenceString.java" beforeDir="false" afterPath="$PROJECT_DIR$/ReferenceString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SalaryManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StaticBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StaticBlockCheck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Student.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VariableTypes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/b/array/ArrayMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/annotation/AnnotationDeprecated.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/annotation/AnnotationSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/annotation/UserAnnotation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/annotation/UserAnnotationCheck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/annotation/UserAnnotationSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/exception/practice/Calculator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/impl/list/AbstractList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/impl/list/List.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inheritance/Animal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inheritance/Cat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inheritance/Dog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inner/AnonymousSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inner/EventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inner/InnerSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inner/MagicButton.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inner/NestedSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inner/NestedValueReference.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inner/OuterOfInner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inner/OuterOfStatic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inner/ReferenceAtNested.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inner/practice/InputBox.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inner/practice/KeyEventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/inner/practice/MyPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/javapackage/Package.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/javapackage/PublicClass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/javapackage/sub/Sub.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/string/StringSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/c/string/practice/UseStringMethods.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/d/collection/StackSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/d/collection/practice/ManageHeight.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/d/generic/CastingDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/d/generic/CastingGenericDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/d/generic/GenericSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/d/generic/WildcardGeneric.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/d/generic/WildcardSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/d/generic/practice/MaxFinder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/d/lang/JavaLangNumber.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/d/lang/JavaLangSystem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/d/lang/practice/NumberObjects.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GodOfJava/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GodOfJava/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GodOfJava/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GodOfJava/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GodOfJava/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GodOfJava/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GodOfJava/GodOfJava.iml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2VyK4C3VKtGOTVkEu2H7aNxxT6M" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9ad41d2d-fd67-4b35-8796-8c25b429dc15" name="Changes" comment="" />
+      <created>1695802688458</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695802688458</updated>
+      <workItem from="1695802689579" duration="3631000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
