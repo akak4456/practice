@@ -5,48 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ad41d2d-fd67-4b35-8796-8c25b429dc15" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/IntegerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/enums/OverTimeManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/enums/OverTimeValues.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/enums/OverTimeValues2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/exception/ExceptionSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/exception/ExceptionVariable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/exception/FinallySample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/exception/MultiCatchSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/exception/MyRuntimeException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/exception/ThrowSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/Child.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/ChildArg.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/ChildCasting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/ChildOther.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/ChildOverriding.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/ChildOverridingPrivate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/ChildParent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/Equals.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/InheritanceCasting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/InheritanceObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/InheritanceOverriding.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/InheritanceOverridingPrivate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/InheritanceParent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/InheritancePoly.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/MemberDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/Parent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/ParentArg.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/ParentCasting.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/ParentOverriding.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/ParentOverridingPrivate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inheritance/ToString.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/javapackage/Package.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/javapackage/PackageStatic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/javapackage/sub/Sub.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/javapackage/sub/SubStatic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/model/MemberDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/service/MemberManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/service/MemberManagerAbstract.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/service/MemberManagerImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/service/MemberManagerImpl2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/util/FinalClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/inner/AnonymousSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/inner/EventListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/inner/InnerSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/inner/MagicButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/inner/NestedSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/inner/NestedValueReference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/inner/OuterOfInner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/inner/OuterOfStatic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/inner/ReferenceAtNested.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/string/StringCompare.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/string/StringEquals.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/string/StringSample.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GodOfJava/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GodOfJava/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,8 +28,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -103,11 +75,23 @@
       <updated>1695802688458</updated>
       <workItem from="1695802689579" duration="5436000" />
       <workItem from="1695860526537" duration="548000" />
-      <workItem from="1695877213767" duration="11279000" />
+      <workItem from="1695877213767" duration="11371000" />
+      <workItem from="1695963159990" duration="4552000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/c/string/StringCompare.java</url>
+          <line>4</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
