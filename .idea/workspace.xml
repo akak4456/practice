@@ -5,20 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ad41d2d-fd67-4b35-8796-8c25b429dc15" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/c/inner/AnonymousSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inner/EventListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inner/InnerSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inner/MagicButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inner/NestedSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inner/NestedValueReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inner/OuterOfInner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inner/OuterOfStatic.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/inner/ReferenceAtNested.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/string/StringCompare.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/string/StringEquals.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/string/StringSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/annotation/UserAnnotation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/annotation/UserAnnotationCheck.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/c/annotation/UserAnnotationSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/collection/ListSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/collection/MapSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/collection/PropertiesSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/collection/QueueSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/collection/SetSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/collection/TreeMapSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/generic/Bus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/generic/Car.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/generic/CarWildcardSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/generic/CastingDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/generic/CastingGenericDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/generic/GenericSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/generic/GenericWildcardSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/generic/WildcardGeneric.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/generic/WildcardSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/lang/InvokeDynamicExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/lang/JavaLangNumber.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/lang/JavaLangSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d/lang/JavaLangSystemPrint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GodOfJava/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GodOfJava/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +39,7 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
+        <option value="AnnotationType" />
         <option value="Class" />
       </list>
     </option>
@@ -76,7 +86,8 @@
       <workItem from="1695802689579" duration="5436000" />
       <workItem from="1695860526537" duration="548000" />
       <workItem from="1695877213767" duration="11371000" />
-      <workItem from="1695963159990" duration="4552000" />
+      <workItem from="1695963159990" duration="4629000" />
+      <workItem from="1696050400253" duration="19620000" />
     </task>
     <servers />
   </component>
@@ -90,6 +101,20 @@
           <url>file://$PROJECT_DIR$/c/string/StringCompare.java</url>
           <line>4</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../Program Files/Java/jdk-17.0.1/lib/src.zip!/java.base/java/util/HashMap.java</url>
+          <line>624</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>jar://$PROJECT_DIR$/../Program Files/Java/jdk-17.0.1/lib/src.zip!/java.base/java/util/LinkedHashMap.java</url>
+          <line>297</line>
+          <properties class="java.util.LinkedHashMap" method="afterNodeInsertion">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
