@@ -5,43 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ad41d2d-fd67-4b35-8796-8c25b429dc15" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/io/FileFilterSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/io/FileManageClass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/io/FileSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/io/JPGFileFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/io/JPGFilenameFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/io/ManageTextFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/io/object/ManageObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/io/object/SerialDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/io/practice/FileSizeSummary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/network/GreetClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/network/GreetServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/network/NioDetailSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/network/NioSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/network/SocketClientSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/network/SocketServerSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/DaemonThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/EndlessThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/NameThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/RunDaemonThreads.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/RunEndlessThreads.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/RunMultiThreads.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/RunThreads.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/RunnableSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/ThreadSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/group/RunGroupThreads.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/object/RunObjectThreads.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/object/StateThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/practice/TimerMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/practice/TimerThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/support/RunSupportThreads.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/support/SleepThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/sync/CommonCalculate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/sync/ModifyAmountThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/e/thread/sync/RunSync.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/text/a.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/text/b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f/forkjoin/ForkJoinSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f/forkjoin/GetSum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f/niosecond/FilesManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f/niosecond/PathsAndFiles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f/niosecond/WatcherSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f/number/JDK7Numbers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/f/switchcase/JDK7Switch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lambda/Calculate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lambda/CalculateSample.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,8 +25,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="AnnotationType" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -106,7 +78,8 @@
       <workItem from="1695877213767" duration="11371000" />
       <workItem from="1695963159990" duration="4629000" />
       <workItem from="1696050400253" duration="19759000" />
-      <workItem from="1696131374889" duration="17239000" />
+      <workItem from="1696131374889" duration="17914000" />
+      <workItem from="1696206282332" duration="5315000" />
     </task>
     <servers />
   </component>
