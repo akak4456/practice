@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ad41d2d-fd67-4b35-8796-8c25b429dc15" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/f/forkjoin/ForkJoinSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/f/forkjoin/GetSum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/f/niosecond/FilesManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/f/niosecond/PathsAndFiles.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/f/niosecond/WatcherSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/f/number/JDK7Numbers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/f/switchcase/JDK7Switch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lambda/Calculate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lambda/CalculateSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/beyond/HelloWorldJNI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/beyond/StringSample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/beyond_HelloWorldJNI.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,22 +36,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/OpenJDK11Original",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\GodOfJava" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\GodOfJava\text" />
     </key>
@@ -79,7 +77,8 @@
       <workItem from="1695963159990" duration="4629000" />
       <workItem from="1696050400253" duration="19759000" />
       <workItem from="1696131374889" duration="17914000" />
-      <workItem from="1696206282332" duration="5315000" />
+      <workItem from="1696206282332" duration="6075000" />
+      <workItem from="1696373466441" duration="5766000" />
     </task>
     <servers />
   </component>
