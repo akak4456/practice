@@ -18,7 +18,5 @@ public class ClassLoaderSample {
 
         System.out.println("Classloader of ArrayList:"
                 + ArrayList.class.getClassLoader());
-
-        ClassLoader.getSystemClassLoader().loadClass()
     }
 }
