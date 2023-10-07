@@ -17,7 +17,7 @@ public class SetSample {
     public int getCarKinds(String[] cars){
         if(cars == null) return 0;
         if(cars.length == 1) return 1;
-        Set<String> carSet = new TreeSet<>();
+        Set<String> carSet = new HashSet<>();
         for(String car: cars) {
             carSet.add(car);
         }

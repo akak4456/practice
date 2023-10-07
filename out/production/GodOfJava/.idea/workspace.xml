@@ -5,29 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ad41d2d-fd67-4b35-8796-8c25b429dc15" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/c/annotation/UserAnnotation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/annotation/UserAnnotationCheck.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c/annotation/UserAnnotationSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/collection/ListSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/collection/MapSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/collection/PropertiesSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/collection/QueueSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/collection/SetSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/collection/TreeMapSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/generic/Bus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/generic/Car.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/generic/CarWildcardSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/generic/CastingDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/generic/CastingGenericDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/generic/GenericSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/generic/GenericWildcardSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/generic/WildcardGeneric.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/generic/WildcardSample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/lang/InvokeDynamicExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/lang/JavaLangNumber.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/lang/JavaLangSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d/lang/JavaLangSystemPrint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/beyond/StringSample.class" beforeDir="false" afterPath="$PROJECT_DIR$/beyond/StringSample.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/beyond/StringSample.java" beforeDir="false" afterPath="$PROJECT_DIR$/beyond/StringSample.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +18,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="AnnotationType" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -55,22 +35,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/GodOfJava",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\GodOfJava" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\GodOfJava\text" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="c.model" />
     </key>
@@ -87,7 +74,13 @@
       <workItem from="1695860526537" duration="548000" />
       <workItem from="1695877213767" duration="11371000" />
       <workItem from="1695963159990" duration="4629000" />
-      <workItem from="1696050400253" duration="19009000" />
+      <workItem from="1696050400253" duration="19759000" />
+      <workItem from="1696131374889" duration="17914000" />
+      <workItem from="1696206282332" duration="6075000" />
+      <workItem from="1696373466441" duration="6178000" />
+      <workItem from="1696459233956" duration="3007000" />
+      <workItem from="1696592659342" duration="2362000" />
+      <workItem from="1696638466828" duration="3046000" />
     </task>
     <servers />
   </component>
@@ -101,6 +94,11 @@
           <url>file://$PROJECT_DIR$/c/string/StringCompare.java</url>
           <line>4</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$PROJECT_DIR$/../Program Files/Java/jdk-17.0.1/lib/src.zip!/java.base/java/util/HashMap.java</url>
+          <line>624</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>jar://$PROJECT_DIR$/../Program Files/Java/jdk-17.0.1/lib/src.zip!/java.base/java/util/LinkedHashMap.java</url>

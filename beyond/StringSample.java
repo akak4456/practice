@@ -14,5 +14,16 @@ public class StringSample {
         System.out.println("str2.hashCode = "+System.identityHashCode(str2));
         System.out.println("str3.hashCode = "+System.identityHashCode(str3));
         System.out.println("str4.hashCode = "+System.identityHashCode(str4));
+
+        String str5 = new String();
+        for(byte b : str5.getBytes()) {
+            System.out.println("byte = "+b);
+        }
+
+        byte[] bArray = new byte[5];
+        String str6 = new String(bArray);
+
+        StringBuffer buffer = new StringBuffer();
+        StringBuilder builder = new StringBuilder();
     }
 }
