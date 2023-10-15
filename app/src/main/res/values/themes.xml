@@ -6,4 +6,7 @@
     </style>
 
     <style name="Theme.Practice" parent="Base.Theme.Practice" />
+    <style name="MainActivityThem" parent="Theme.Practice">
+        <item name="android:windowIsFloating">true</item>
+    </style>
 </resources>
