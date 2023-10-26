@@ -1,0 +1,20 @@
+body{
+  background: url(https://www.travelanddestinations.com/wp-content/uploads/2019/11/Beach-Destinations-in-Asia.jpg);
+  background-repeat: repeat-x;
+}
+
+div{
+  background: blue;
+  border-color: orange;
+  border-width: 5px;
+  border-style: double;
+}
+
+p{
+  color: yellow;
+}
+
+span{
+  background: red;
+  color:black;
+}

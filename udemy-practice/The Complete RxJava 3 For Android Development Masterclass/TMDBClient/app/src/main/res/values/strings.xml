@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TMDBClient</string>
+    <string name="api_key">384cf9a7199fe30fe80ee45bc6d79742</string>
+
+</resources>
