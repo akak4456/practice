@@ -1,0 +1,1 @@
+﻿Writing your first Django app, part5 완료
