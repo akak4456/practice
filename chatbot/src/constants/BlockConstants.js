@@ -1,0 +1,2 @@
+export const TO_ADD_BLOCK_TYPE = 'TO_ADD_BLOCK_TYPE';
+export const TO_ADD_ID_BLOCK_TYPE = 'TO_ADD_ID_BLOCK_TYPE';
