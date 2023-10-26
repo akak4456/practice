@@ -1,0 +1,114 @@
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
+
+fun CoroutineScope.produceNumbers() = produce<Int> {
+    var x = 1
+    while(true) {
+        send(x++)
+        delay(100L)
+    }
+}
+
+fun CoroutineScope.processNumber(id: Int, channel: ReceiveChannel<Int>) = launch {
+    channel.consumeEach {
+        println("${id}가 ${it}을 받았습니다.")
+    }
+}
+
+fun main() = runBlocking<Unit> {
+    val producer = produceNumbers()
+    repeat(5) {
+        processNumber(it, producer)
+    }
+    delay(1000L)
+    producer.cancel()
+}
+
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
+
+suspend fun produceNumbers(channel: SendChannel<Int>, from: Int, interval: Long) {
+    var x = from
+    while(true) {
+        channel.send(x)
+        x += 2
+        delay(interval)
+    }
+}
+
+fun CoroutineScope.processNumber(channel: ReceiveChannel<Int>) = launch {
+    channel.consumeEach {
+        println("${it}을 받았습니다.")
+    }
+}
+
+fun main() = runBlocking<Unit> {
+    val channel = Channel<Int>()
+    launch {
+        produceNumbers(channel, 1, 100L)
+    }
+    launch {
+        produceNumbers(channel, 2, 150L)
+    }
+    processNumber(channel)
+    delay(1000L)
+    coroutineContext.cancelChildren()
+}
+
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
+
+suspend fun someone(channel: Channel<String>, name: String) {
+    for (comment in channel) {
+        println("${name}: ${comment}")
+        channel.send(comment.drop(1) + comment.first())
+        delay(100L)
+    }
+}
+
+fun main() = runBlocking<Unit> {
+    val channel = Channel<String>()
+    launch {
+        someone(channel, "민준")
+    }
+    launch {
+        someone(channel, "서연")
+    }
+    channel.send("패스트 캠퍼스")
+    delay(1000L)
+    coroutineContext.cancelChildren()
+}
+
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.*
+import kotlinx.coroutines.selects.*
+
+fun CoroutineScope.sayFast() = produce<String> {
+    while(true) {
+        delay(100L)
+        send("패스트")
+    }
+}
+
+fun CoroutineScope.sayCampus() = produce<String> {
+    while(true){
+        delay(150L)
+        send("캠퍼스")
+    }
+}
+
+fun main() = runBlocking<Unit> {
+    val fasts = sayFast()
+    val campuses = sayCampus()
+    repeat(5) {
+        select<Unit> {
+            fasts.onReceive {
+                println("fast: $it")
+            }
+            campuses.onReceive {
+                println("campus: $it")
+            }
+        }
+    }
+    coroutineContext.cancelChildren()
+}
