@@ -1,0 +1,70 @@
+@value mainColor,mainHover,Lgrey1,Lgrey2,Lgrey3,Lgrey4,Dgrey1,Dgrey2,Dgrey3,Dgrey4,lineGrey,fontGrey,fontHover,hoverGrey,vWhite,vBlack,vTrans from '/src/common/colors.css';
+
+.userModal::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+}
+.userModal {
+  z-index: 10;
+  position: absolute;
+  top: 5em;
+  right: 0;
+  background-color: Dgrey1;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.userFlex {
+  display: flex;
+  padding: 1em;
+  flex-flow: column;
+  align-items: flex-end;
+  color: rgb(250, 250, 250);
+  font-size: 1rem;
+}
+.userFlex span {
+  margin-top: 0.5em;
+}
+.userFlex2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+}
+.logOut {
+  cursor: pointer;
+  color: fontGrey;
+  border-radius: 10px;
+}
+.logOut.dark {
+  background-color: mainColor;
+}
+.logOut.light {
+  background-color: vWhite;
+}
+.logOut:hover {
+  background-color: mainColor;
+}
+.triangle {
+  position: absolute;
+  top: -20px;
+  right: 12px;
+  background-color: transparent;
+  border-top: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid rgb(88, 88, 88);
+}
+.triangle.dark {
+  border-bottom-color: Dgrey1;
+}
+.triangle.light {
+  border-bottom-color: Dgrey1;
+}
+
+.userImg {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+}

@@ -1,0 +1,69 @@
+@value mainColor,mainHover,Lgrey1,Lgrey2,Lgrey3,Lgrey4,Dgrey1,Dgrey2,Dgrey3,Dgrey4,lineGrey,fontGrey,fontHover,hoverGrey,vWhite,vBlack,vTrans from '/src/common/colors.css';
+
+.sampleTab,
+.myTab {
+  display: flex;
+}
+.tab {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.home {
+  max-width: 1200px;
+  width: 88vw;
+  min-height: 90vh;
+  padding-bottom: 180px;
+  margin: auto;
+  margin-top: 1em;
+  transition: ease-in 180ms;
+  /* transform: translateY(-25%) scale(0.5); */
+}
+.plusPage,
+.editPage {
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 10px;
+  margin-left: 6px;
+  border-radius: 14px;
+  transition: ease-in 180ms;
+}
+.plusPage.dark,
+.editPage.dark {
+  background-color: Dgrey1;
+  color: vWhite;
+}
+.plusPage.light,
+.editPage.light {
+  background-color: Dgrey1;
+  color: vWhite;
+}
+.editPage.dark.editOn,
+.editPage.light.editOn {
+  background-color: mainColor;
+}
+.editPage i {
+  position: relative;
+  top: -1px;
+  right: -1px;
+}
+.hv {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(250, 250, 250);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: ease-in 180ms;
+}
+
+.editPage:hover .hv,
+.plusPage:hover .hv {
+  opacity: 0.4;
+}

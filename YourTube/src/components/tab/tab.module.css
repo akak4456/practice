@@ -1,0 +1,73 @@
+@value mainColor,mainHover,Lgrey1,Lgrey2,Lgrey3,Lgrey4,Dgrey1,Dgrey2,Dgrey3,Dgrey4,lineGrey,fontGrey,fontHover,hoverGrey,vWhite,vBlack,vTrans from '/src/common/colors.css';
+
+.tab {
+  cursor: pointer;
+  position: relative;
+  font-size: 0.9em;
+  height: 32px;
+  padding: 0px 14px;
+  background-color: Lgrey2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  transition: ease-in 180ms;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  margin-right: 6px;
+  opacity: 1;
+}
+.hv {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 12px;
+  opacity: 0;
+  z-index: 1;
+  transition: ease-in 180ms;
+}
+.tab:hover .hv {
+  opacity: 0.4;
+}
+.tab span {
+  z-index: 2;
+}
+.edit {
+  opacity: 1;
+  display: inline-block;
+  width: 0;
+  transform: scaleX(0) translateX(-100%);
+  transition: ease-in 180ms;
+}
+.edit i {
+  opacity: 0.6;
+  transition: ease-in 180ms;
+  margin-left: 0.3em;
+  display: inline-block;
+}
+.edit i:hover {
+  color: tomato;
+  opacity: 1;
+  transform: scale(1.2);
+}
+.editOn .edit {
+  /* margin-right: 0; */
+  animation: editFadeIn 250ms ease-in forwards;
+}
+@keyframes editFadeIn {
+  0% {
+    transform: scaleX(0) translateX(200%);
+    width: 0;
+  }
+  100% {
+    transform: scaleX(1);
+    width: auto;
+  }
+}
+
+.form {
+  display: inline;
+  z-index: 2;
+}

@@ -1,0 +1,18 @@
+.container i {
+  color: rgb(116, 107, 95);
+  background-color: snow;
+  font-size: 1.3em;
+  padding: 0.2em;
+  border-radius: 50%;
+  margin: 0.1em;
+  cursor: pointer;
+  transition: ease-in 180ms;
+}
+.google:hover {
+  color: tomato;
+  transform: scale(1.1);
+}
+.github:hover {
+  color: mediumpurple;
+  transform: scale(1.1);
+}

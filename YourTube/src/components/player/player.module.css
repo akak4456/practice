@@ -1,0 +1,153 @@
+@value mainColor,mainHover,Lgrey1,Lgrey2,Lgrey3,Lgrey4,Dgrey1,Dgrey2,Dgrey3,Dgrey4,lineGrey,fontGrey,fontHover,hoverGrey,vWhite,vBlack,vTrans from '/src/common/colors.css';
+
+.playerClose {
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(36, 36, 36, 0.85);
+}
+.playerClose:hover {
+  background-color: rgb(88, 88, 88, 0.85);
+}
+.close {
+  z-index: 101;
+  cursor: pointer;
+  position: absolute;
+  top: 0.6em;
+  right: 0.6em;
+  background-color: tomato;
+  border-radius: 50%;
+  color: rgb(250, 250, 250);
+  color: tomato;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9em;
+  transition: ease-in 100ms;
+}
+.close:hover {
+  /* color: tomato; */
+  background-color: rgb(124, 124, 124);
+  color: goldenrod;
+}
+.left,
+.right {
+  cursor: pointer;
+  z-index: 100;
+  position: fixed;
+  top: 50%;
+  font-size: 1.5em;
+  background-color: transparent;
+  color: rgb(250, 250, 250);
+  transition: ease-in 180ms;
+}
+.left:hover,
+.right:hover {
+  transform: scale(1.2);
+  color: tomato;
+}
+.left {
+  left: 3%;
+}
+.right {
+  right: 3%;
+}
+.wrap {
+  visibility: visible;
+  backface-visibility: hidden;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  max-width: 1200px;
+  width: 86vw;
+  height: 95vh;
+  margin: 2.5vh 0;
+  transform: translateX(-51%);
+  overflow-x: hidden;
+  overflow-y: hidden;
+  border-radius: 0.5em;
+}
+.player {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  transition-property: all;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0, 1.5);
+}
+
+.slider {
+  display: flex;
+  position: absolute;
+  transition: all 1s cubic-bezier(0.21, 0.01, 0.15, 1);
+}
+.wrapReverse {
+  animation: rotateWrapReverse 500ms forwards;
+}
+.threeReverse {
+  animation: rotateModalReverse 500ms forwards cubic-bezier(0.4, 0, 0, 1.5);
+}
+.rotateWrap {
+  animation: rotateWrap 500ms forwards;
+}
+.rotate3D {
+  animation: rotateModal 500ms forwards cubic-bezier(0.4, 0, 0, 1.5);
+}
+@keyframes rotateWrap {
+  0% {
+    visibility: visible;
+    perspective: 600px;
+    opacity: 0;
+  }
+  50% {
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes rotateWrapReverse {
+  0% {
+    perspective: 600px;
+    opacity: 1;
+  }
+  50% {
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+@keyframes rotateModal {
+  0% {
+    transform: translateZ(0) translateX(-30%) rotateY(90deg);
+    transform-style: preserve-3d;
+
+    opacity: 0;
+  }
+  70% {
+    transform: translateZ(0) translateX(0%) rotateY(0deg);
+    transform-origin: 0 100%;
+    opacity: 1;
+  }
+  100% {
+  }
+}
+@keyframes rotateModalReverse {
+  0% {
+    transform: translateZ(0) translateX(0%) rotateY(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateZ(0) translateX(-30%) rotateY(90deg);
+    transform-style: preserve-3d;
+    transform-origin: 0 100%;
+    opacity: 0;
+  }
+}

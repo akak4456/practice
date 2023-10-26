@@ -1,0 +1,20 @@
+.stars1 {
+  animation: animStar 80s linear infinite;
+}
+
+.stars2 {
+  animation: animStar 100s linear infinite;
+}
+
+.stars3 {
+  animation: animStar 120s linear infinite;
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0vh);
+  }
+  to {
+    transform: translateY(-100vh);
+  }
+}

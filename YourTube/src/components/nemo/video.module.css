@@ -1,0 +1,158 @@
+@value mainColor,mainHover,Lgrey1,Lgrey2,Lgrey3,Lgrey4,Dgrey1,Dgrey2,Dgrey3,Dgrey4,lineGrey,fontGrey,fontHover,hoverGrey,vWhite,vBlack,vTrans from '/src/common/colors.css';
+
+.container {
+  position: relative;
+  width: 100%;
+  /* height: 0;
+  padding-top: 56%; */
+
+  /* object-fit */
+  height: 50%;
+  flex-grow: 1;
+  overflow: hidden;
+  transition: ease-in 180ms;
+  border-radius: 4px;
+}
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* position: absolute;
+  top: 0;
+  width: 100%; */
+  transition: ease-in 180ms;
+}
+.title {
+  padding-top: 0.3em;
+  font-size: 0.8em;
+  color: rgb(144, 144, 144);
+  height: 2.5em;
+  transition: ease-in 180ms;
+  font-weight: bold;
+  overflow: hidden;
+  line-height: 1.1;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.container:hover .img {
+  transform: scale(1.03);
+}
+
+.over {
+  z-index: 10;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(48, 48, 48);
+  transition: ease-in 180ms;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+  padding: 0.6em;
+}
+.over .title {
+  color: rgb(250, 250, 250);
+}
+.container:hover .over {
+  opacity: 0.7;
+}
+.container:hover .closePlay {
+  opacity: 1;
+}
+
+.overIcon {
+  display: flex;
+  justify-content: space-evenly;
+  z-index: 30;
+}
+.over i {
+  cursor: pointer;
+  font-size: 1.5em;
+  transition: ease-in 180ms;
+  color: rgb(250, 250, 250);
+}
+.over i:hover {
+  transform: scale(1.1);
+  color: mainColor;
+}
+.iconFlex {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.iconFlex span {
+  font-size: 0.5em;
+  margin-top: 0.5em;
+  color: rgb(250, 250, 250);
+}
+.videoPlayer {
+  z-index: 11;
+  font-size: 0.5em;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(48, 48, 48);
+  transition: ease-in 180ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.closePlay {
+  opacity: 0;
+  z-index: 12;
+  position: absolute;
+  font-size: 1.2em;
+  cursor: pointer;
+  top: 4px;
+  right: 4px;
+  color: rgb(250, 250, 250);
+  background-color: transparent;
+  border-radius: 4px;
+  transition: ease-in 180ms;
+}
+.closePlay:hover {
+  color: mainColor;
+  background-color: rgb(48, 48, 48);
+}
+.container:hover .volume {
+  opacity: 1;
+}
+.volume {
+  opacity: 0;
+  transition: ease-in 180ms;
+  z-index: 12;
+  position: absolute;
+  /* cursor: pointer; */
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 3px;
+
+  appearance: none;
+  overflow: hidden;
+  background: transparent;
+  cursor: pointer;
+  background: #e5e4e3;
+  border-radius: 0; /* iOS */
+}
+.volume:hover {
+  transform: translateX(-50%) scaleY(2.5);
+}
+.volume::-webkit-slider-thumb {
+  appearance: none;
+  height: 5px;
+  width: 5px;
+  cursor: pointer;
+  border-radius: 0%;
+  background: mainColor;
+  box-shadow: -100vw 0 0 100vw mainColor;
+}
