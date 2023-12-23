@@ -8,7 +8,7 @@ class FragmentA : BaseFragment<FragmentABinding>(R.layout.fragment_a) {
     val vm: ViewModel by activityViewModels()
     override fun initView() {
         vm.test {
-            (requireActivity() as MainActivity).replaceFragment(FragmentB())
+            (activity as? MainActivity)?.replaceFragment(FragmentB())
         }
     }
 

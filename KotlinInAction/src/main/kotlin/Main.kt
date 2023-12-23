@@ -1,7 +1,9 @@
 import geometry.shapes.createRandomRectangle
+import string.lastChar
 
 fun main(args: Array<String>) {
-    println(evalWithLogging(Sum(Sum(Num(1), Num(2)), Num(4))))
+    // println(evalWithLogging(Sum(Sum(Num(1), Num(2)), Num(4))))
+    println("Kotlin".lastChar())
 }
 
 enum class Color(
