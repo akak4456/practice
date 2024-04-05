@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2024-04-04-3197번-백조의 호수.cpp">
+    <ClCompile Include="2024-04-05-3049번-다각형의 대각선.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
