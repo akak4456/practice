@@ -1,12 +1,37 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\MyWorkspace\\Practice\\Algorithm\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B3214D0A-EC3A-4301-AC68-A6D4B9919AB1}|Algorithm\\Algorithm.vcxproj|C:\\MyWorkspace\\Practice\\Algorithm\\Algorithm\\2024-04-08-19236\uBC88-\uCCAD\uC18C\uB144 \uC0C1\uC5B4.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B3214D0A-EC3A-4301-AC68-A6D4B9919AB1}|Algorithm\\Algorithm.vcxproj|solutionrelative:Algorithm\\2024-04-08-19236\uBC88-\uCCAD\uC18C\uB144 \uC0C1\uC5B4.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "2024-04-08-19236\uBC88-\uCCAD\uC18C\uB144 \uC0C1\uC5B4.cpp",
+              "DocumentMoniker": "C:\\MyWorkspace\\Practice\\Algorithm\\Algorithm\\2024-04-08-19236\uBC88-\uCCAD\uC18C\uB144 \uC0C1\uC5B4.cpp",
+              "RelativeDocumentMoniker": "Algorithm\\2024-04-08-19236\uBC88-\uCCAD\uC18C\uB144 \uC0C1\uC5B4.cpp",
+              "ToolTip": "C:\\MyWorkspace\\Practice\\Algorithm\\Algorithm\\2024-04-08-19236\uBC88-\uCCAD\uC18C\uB144 \uC0C1\uC5B4.cpp",
+              "RelativeToolTip": "Algorithm\\2024-04-08-19236\uBC88-\uCCAD\uC18C\uB144 \uC0C1\uC5B4.cpp",
+              "ViewState": "AQIAAFsAAAAAAAAAAAAcwG4AAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-04-07T17:14:41.684Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
