@@ -1,4 +1,12 @@
-﻿  2024-04-12-12970번-AB.cpp
-C:\MyWorkspace\Practice\Algorithm\Algorithm\2024-04-12-12970번-AB.cpp(55,18): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\MyWorkspace\Practice\Algorithm\Algorithm\2024-04-12-12970번-AB.cpp(83,14): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  2024-04-15-16936번-나3곱2.cpp
+C:\MyWorkspace\Practice\Algorithm\Algorithm\2024-04-15-16936번-나3곱2.cpp(20,24): warning C4244: '인수': 'unsigned __int64'에서 '_Ty'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\MyWorkspace\Practice\Algorithm\Algorithm\2024-04-15-16936번-나3곱2.cpp(20,24): warning C4244:         with
+C:\MyWorkspace\Practice\Algorithm\Algorithm\2024-04-15-16936번-나3곱2.cpp(20,24): warning C4244:         [
+C:\MyWorkspace\Practice\Algorithm\Algorithm\2024-04-15-16936번-나3곱2.cpp(20,24): warning C4244:             _Ty=int
+C:\MyWorkspace\Practice\Algorithm\Algorithm\2024-04-15-16936번-나3곱2.cpp(20,24): warning C4244:         ]
+C:\MyWorkspace\Practice\Algorithm\Algorithm\2024-04-15-16936번-나3곱2.cpp(45,24): warning C4244: '인수': 'unsigned __int64'에서 '_Ty'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\MyWorkspace\Practice\Algorithm\Algorithm\2024-04-15-16936번-나3곱2.cpp(45,24): warning C4244:         with
+C:\MyWorkspace\Practice\Algorithm\Algorithm\2024-04-15-16936번-나3곱2.cpp(45,24): warning C4244:         [
+C:\MyWorkspace\Practice\Algorithm\Algorithm\2024-04-15-16936번-나3곱2.cpp(45,24): warning C4244:             _Ty=int
+C:\MyWorkspace\Practice\Algorithm\Algorithm\2024-04-15-16936번-나3곱2.cpp(45,24): warning C4244:         ]
   Algorithm.vcxproj -> C:\MyWorkspace\Practice\Algorithm\x64\Debug\Algorithm.exe
