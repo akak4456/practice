@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2024-04-24-20921번-그렇고 그런 사이.cpp">
+    <ClCompile Include="2024-04-29-17214번-다항 함수의 적분.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
