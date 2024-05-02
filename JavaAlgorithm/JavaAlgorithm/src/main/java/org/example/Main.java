@@ -18,5 +18,6 @@ public class Main {
             targetArray[i] = Integer.parseInt(st.nextToken());
         }
          */
+        Boolean b = Boolean.FALSE;
     }
 }
