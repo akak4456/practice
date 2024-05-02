@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2024-05-02-3020번-개똥벌레.cpp">
+    <ClCompile Include="2024-05-03-12907번-동물원.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
