@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="2024-05-06-16928번-뱀과 사다리 게임.cpp" />
+    <ClCompile Include="2024-05-10-7662번-이중 우선순위 큐.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
