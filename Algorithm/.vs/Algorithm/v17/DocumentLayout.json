@@ -3,14 +3,14 @@
   "WorkspaceRootPath": "C:\\MyWorkspace\\Practice\\Algorithm\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B3214D0A-EC3A-4301-AC68-A6D4B9919AB1}|Algorithm\\Algorithm.vcxproj|C:\\MyWorkspace\\Practice\\Algorithm\\Algorithm\\2024-05-10-7662\uBC88-\uC774\uC911 \uC6B0\uC120\uC21C\uC704 \uD050.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B3214D0A-EC3A-4301-AC68-A6D4B9919AB1}|Algorithm\\Algorithm.vcxproj|solutionrelative:Algorithm\\2024-05-10-7662\uBC88-\uC774\uC911 \uC6B0\uC120\uC21C\uC704 \uD050.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{B3214D0A-EC3A-4301-AC68-A6D4B9919AB1}|Algorithm\\Algorithm.vcxproj|C:\\MyWorkspace\\Practice\\Algorithm\\Algorithm\\2024-05-11-11660\uBC88-\uAD6C\uAC04 \uD569 \uAD6C\uD558\uAE30 5.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B3214D0A-EC3A-4301-AC68-A6D4B9919AB1}|Algorithm\\Algorithm.vcxproj|solutionrelative:Algorithm\\2024-05-11-11660\uBC88-\uAD6C\uAC04 \uD569 \uAD6C\uD558\uAE30 5.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B3214D0A-EC3A-4301-AC68-A6D4B9919AB1}|Algorithm\\Algorithm.vcxproj|C:\\PROGRAM FILES\\MICROSOFT VISUAL STUDIO\\2022\\COMMUNITY\\VC\\TOOLS\\MSVC\\14.39.33519\\INCLUDE\\VECTOR||{3B902123-F8A7-4915-9F01-361F908088D0}|"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\queue||{3B902123-F8A7-4915-9F01-361F908088D0}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B3214D0A-EC3A-4301-AC68-A6D4B9919AB1}|Algorithm\\Algorithm.vcxproj|C:\\PROGRAM FILES\\MICROSOFT VISUAL STUDIO\\2022\\COMMUNITY\\VC\\TOOLS\\MSVC\\14.39.33519\\INCLUDE\\QUEUE||{3B902123-F8A7-4915-9F01-361F908088D0}|"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\vector||{3B902123-F8A7-4915-9F01-361F908088D0}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -20,11 +20,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "2024-05-11-11660\uBC88-\uAD6C\uAC04 \uD569 \uAD6C\uD558\uAE30 5.cpp",
+              "DocumentMoniker": "C:\\MyWorkspace\\Practice\\Algorithm\\Algorithm\\2024-05-11-11660\uBC88-\uAD6C\uAC04 \uD569 \uAD6C\uD558\uAE30 5.cpp",
+              "RelativeDocumentMoniker": "Algorithm\\2024-05-11-11660\uBC88-\uAD6C\uAC04 \uD569 \uAD6C\uD558\uAE30 5.cpp",
+              "ToolTip": "C:\\MyWorkspace\\Practice\\Algorithm\\Algorithm\\2024-05-11-11660\uBC88-\uAD6C\uAC04 \uD569 \uAD6C\uD558\uAE30 5.cpp",
+              "RelativeToolTip": "Algorithm\\2024-05-11-11660\uBC88-\uAD6C\uAC04 \uD569 \uAD6C\uD558\uAE30 5.cpp",
+              "ViewState": "AQIAACUAAAAAAAAAAAAiwDgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-11T07:02:19.228Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "queue",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\queue",
               "RelativeDocumentMoniker": "..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\queue",
@@ -32,12 +45,11 @@
               "RelativeToolTip": "..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\queue",
               "ViewState": "AQIAAGkBAAAAAAAAAAAlwHEBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-05-10T12:26:30.353Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-10T12:26:30.353Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "vector",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\vector",
               "RelativeDocumentMoniker": "..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\vector",
@@ -45,21 +57,7 @@
               "RelativeToolTip": "..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.39.33519\\include\\vector",
               "ViewState": "AQIAAIsHAAAAAAAAAAAlwJMHAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-05-10T10:25:40.281Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "2024-05-10-7662\uBC88-\uC774\uC911 \uC6B0\uC120\uC21C\uC704 \uD050.cpp",
-              "DocumentMoniker": "C:\\MyWorkspace\\Practice\\Algorithm\\Algorithm\\2024-05-10-7662\uBC88-\uC774\uC911 \uC6B0\uC120\uC21C\uC704 \uD050.cpp",
-              "RelativeDocumentMoniker": "Algorithm\\2024-05-10-7662\uBC88-\uC774\uC911 \uC6B0\uC120\uC21C\uC704 \uD050.cpp",
-              "ToolTip": "C:\\MyWorkspace\\Practice\\Algorithm\\Algorithm\\2024-05-10-7662\uBC88-\uC774\uC911 \uC6B0\uC120\uC21C\uC704 \uD050.cpp",
-              "RelativeToolTip": "Algorithm\\2024-05-10-7662\uBC88-\uC774\uC911 \uC6B0\uC120\uC21C\uC704 \uD050.cpp",
-              "ViewState": "AQIAADUAAAAAAAAAAAAiwD0AAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-10T09:47:29.266Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-10T10:25:40.281Z"
             }
           ]
         }
